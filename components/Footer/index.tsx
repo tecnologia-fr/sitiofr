@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primario relative overflow-hidden">
+    <footer className="bg-primario relative overflow-hidden bg-[url('/footer.jpg')] bg-cover bg-center">
       {/* Background building overlay */}
       <div
         className="absolute right-0 top-0 w-1/3 h-full opacity-10"
@@ -13,9 +13,9 @@ const Footer: React.FC = () => {
       />
 
       <div className="container mx-auto px-4 py-12 relative z-10 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-12">
           {/* Left Section - Office Information */}
-          <div className="text-white">
+          <div className="text-white lg:flex-1">
             <h3 className="text-2xl font-bold mb-8">Nuestras Oficinas</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -63,8 +63,8 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Right Section - Call to Action */}
-          <div className="text-white">
-            <div className="text-right lg:text-left">
+          <div className="text-white lg:flex-shrink-0">
+            <div className="text-left">
               <p className="text-destacado font-bold text-sm mb-4">FR GROUP</p>
               <h2 className="text-3xl font-bold mb-2">¿Tienes dudas?</h2>
               <h1 className="text-5xl font-black mb-6">contáctanos</h1>

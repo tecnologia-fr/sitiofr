@@ -64,7 +64,7 @@ const CTASection = (props: CTASectionT) => {
         >
           <RenderIf condition={props.title && props.isHero}>
             <h1
-              className={`text-7xl  lg:text-8xl text-center lg:text-left mb-6 font-light`}
+              className={`text-6xl  lg:text-8xl text-center lg:text-left mb-6 font-light`}
             >
               {textHighlighter(props.title || "")}
             </h1>

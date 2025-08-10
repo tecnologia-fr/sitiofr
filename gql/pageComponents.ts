@@ -23,6 +23,12 @@ export const pageComponentsFragment = `
         id
       }
     }
+    fragment carouselFields on Carousel {
+      __typename
+      sys {
+        id
+      }
+    }
 `;
 
 export const GQL_PAGE_COMPONENTS_QUERY = () => {
@@ -38,6 +44,7 @@ export const GQL_PAGE_COMPONENTS_QUERY = () => {
             ...bannerFields
             ...columnFields
             ...accordionFields
+            ...carouselFields
           }
         }
       }

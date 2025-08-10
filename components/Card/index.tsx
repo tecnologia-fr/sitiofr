@@ -24,8 +24,10 @@ const Card = (props: CardT) => {
               <ImageComponent
                 src={props.image.url}
                 alt={props.image.description}
-                className={` ${
-                  props.isImageFull ? "object-cover" : "object-contain"
+                className={`  ${
+                  props.isImageFull
+                    ? "object-cover w-sm h-64"
+                    : "object-contain"
                 } ${props.imageRound}`}
                 width={400}
                 height={400}
@@ -40,7 +42,7 @@ const Card = (props: CardT) => {
                 alt={props.image?.description || ""}
                 className={`${
                   props.isImageFull
-                    ? "max-w-full h-auto place-items-center"
+                    ? "max-w-full h-auto place-items-center w-sm h-64"
                     : ` ${
                         props.isImageFull ? "object-cover" : "object-contain"
                       }`

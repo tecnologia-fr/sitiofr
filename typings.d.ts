@@ -96,9 +96,17 @@ const BannerSchema = z.object({
   textAlign: z.string(),
 });
 
+const CarouselCTASchema = z.object({
+  name: z.string(),
+  itemsCollection: z.object({
+    items: z.array(CTASectionSchema),
+  }),
+});
+
 export type CTASectionT = z.infer<typeof CTASectionSchema>;
 export type BannerT = z.infer<typeof BannerSchema>;
 export type ColumnSectionT = z.infer<typeof ColumnSectionSchema>;
 export type CardT = z.infer<typeof CardSchema>;
 export type PageComponent = { id: string; __typename: string };
 export type AccordionSectionT = z.infer<typeof AccordionSectionSchema>;
+export type CarouselCTASchemaT = z.infer<typeof CarouselCTASchema>;

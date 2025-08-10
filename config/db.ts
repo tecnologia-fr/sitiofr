@@ -5,6 +5,7 @@ import { GQL_METATAGS_QUERY } from "@/gql/metaTags";
 import { GQL_PAGE_COMPONENTS_QUERY } from "@/gql/pageComponents";
 import { GQL_COLUMN_SECTION_QUERY } from "@/gql/columnSection";
 import { GQL_ACCORDION_SECTION_QUERY } from "@/gql/accordionSection";
+import { GQL_CAROUSEL_CTA_QUERY } from "@/gql/carousel";
 
 const fetchPageComponents = async (pathname: string) => {
   const query = GQL_PAGE_COMPONENTS_QUERY();
@@ -127,6 +128,20 @@ const fetchAccordionSectionById = async (id: string) => {
   }
 };
 
+const fetchCarouselCTAById = async (id: string) => {
+  const query = GQL_CAROUSEL_CTA_QUERY();
+  const variables = { id };
+
+  const res = await fetchContentful(query, variables);
+  if (!res.ok) {
+    throw new Error("Failed to fetch carousel");
+  }
+
+  const { data } = await res.json();
+  const carousel = data.carousel;
+  return carousel;
+};
+
 export {
   fetchCTASectionById,
   fetchBannerById,
@@ -134,4 +149,5 @@ export {
   fetchPageComponents,
   fetchColumnSectionById,
   fetchAccordionSectionById,
+  fetchCarouselCTAById,
 };
