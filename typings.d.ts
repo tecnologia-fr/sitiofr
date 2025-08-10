@@ -48,6 +48,15 @@ const ColumnSectionSchema = z.object({
   columns: z.array(CardSchema),
 });
 
+const AccordionSectionSchema = z.object({
+  name: z.string(),
+  title: z.string(),
+  desc: z.string().optional(),
+  bgColor: z.string().optional(),
+  textColor: z.string().optional(),
+  items: z.array(z.any()),
+});
+
 const CardSchema = z.object({
   name: z.string(),
   title: z.string(),
@@ -62,6 +71,14 @@ const CardSchema = z.object({
   btnTextColor: z.string().optional(),
   btnText: z.string().min(5).max(30).optional(),
   btnLink: z.string().optional(),
+});
+
+const AccordionItemSchema = z.object({
+  name: z.string(),
+  title: z.string(),
+  textColor: z.string().optional(),
+  bgColor: z.string().optional(),
+  content: z.string(),
 });
 
 const BannerSchema = z.object({
@@ -84,3 +101,4 @@ export type BannerT = z.infer<typeof BannerSchema>;
 export type ColumnSectionT = z.infer<typeof ColumnSectionSchema>;
 export type CardT = z.infer<typeof CardSchema>;
 export type PageComponent = { id: string; __typename: string };
+export type AccordionSectionT = z.infer<typeof AccordionSectionSchema>;

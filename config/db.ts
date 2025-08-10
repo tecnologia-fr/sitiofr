@@ -4,6 +4,7 @@ import { GQL_BANNER_QUERY } from "@/gql/banner";
 import { GQL_METATAGS_QUERY } from "@/gql/metaTags";
 import { GQL_PAGE_COMPONENTS_QUERY } from "@/gql/pageComponents";
 import { GQL_COLUMN_SECTION_QUERY } from "@/gql/columnSection";
+import { GQL_ACCORDION_SECTION_QUERY } from "@/gql/accordionSection";
 
 const fetchPageComponents = async (pathname: string) => {
   const query = GQL_PAGE_COMPONENTS_QUERY();
@@ -110,10 +111,27 @@ const fetchColumnSectionById = async (id: string) => {
   }
 };
 
+const fetchAccordionSectionById = async (id: string) => {
+  const query = GQL_ACCORDION_SECTION_QUERY();
+  const variables = { id };
+
+  try {
+    const res = await fetchContentful(query, variables);
+    const { data } = await res.json();
+    let accordionSection = data.accordionSection;
+    accordionSection.items = accordionSection.itemsCollection.items;
+    return accordionSection;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};
+
 export {
   fetchCTASectionById,
   fetchBannerById,
   fetchMetaTagsFromContentful,
   fetchPageComponents,
   fetchColumnSectionById,
+  fetchAccordionSectionById,
 };

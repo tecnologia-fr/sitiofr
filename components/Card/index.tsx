@@ -84,7 +84,7 @@ const Card = (props: CardT) => {
                 size="sm"
                 className={`text-lg ${props.btnBgColor && props.btnBgColor} ${
                   props.btnTextColor && props.btnTextColor
-                } p-0 my-2 btn-light text-lg lg:text-base py-6 px-8 rounded-full font-bold w-32 hover:cursor-pointer`}
+                } p-0 my-2 btn-light text-lg lg:text-base py-6 px-8 rounded-full font-bold w-fit hover:cursor-pointer`}
               >
                 {props.btnText}
               </Button>

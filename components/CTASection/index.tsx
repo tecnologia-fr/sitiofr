@@ -97,7 +97,7 @@ const CTASection = (props: CTASectionT) => {
                 size="lg"
                 className={`text-lg ${props.btnBgColor && props.btnBgColor} ${
                   props.btnTextColor && "text-" + props.btnTextColor
-                } p-0 my-2 btn-light text-lg lg:text-base py-6 pl-8 pr-0 rounded-full font-bold `}
+                } p-0 my-2 btn-light text-lg lg:text-base py-6 pl-8 pr-0 rounded-full font-bold hover:text-white  w-fit`}
               >
                 <Link href={props.btnLink || ""}>{props.btnText}</Link>
               </Button>

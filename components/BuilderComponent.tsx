@@ -1,13 +1,21 @@
 import React from "react";
-import { CTASectionT, BannerT, PageComponent, ColumnSectionT } from "@/typings";
+import {
+  CTASectionT,
+  BannerT,
+  PageComponent,
+  ColumnSectionT,
+  AccordionSectionT,
+} from "@/typings";
 import {
   fetchCTASectionById,
   fetchBannerById,
   fetchColumnSectionById,
+  fetchAccordionSectionById,
 } from "@/config/db";
 import CTASection from "@/components/CTASection";
 import Banner from "@/components/Banner";
 import ColumnSection from "@/components/ColumnSection";
+import AccordionSection from "./AccordionSection";
 
 type BuilderComponentProps = {
   components: PageComponent[];
@@ -45,6 +53,11 @@ const fetchComponent = async (type: string, id: string, pathname?: string) => {
     case "ColumnSection":
       let columnSectionProps: ColumnSectionT = await fetchColumnSectionById(id);
       return <ColumnSection {...columnSectionProps}></ColumnSection>;
+
+    case "AccordionSection":
+      let accordionSectionProps: AccordionSectionT =
+        await fetchAccordionSectionById(id);
+      return <AccordionSection {...accordionSectionProps}></AccordionSection>;
 
     default:
       return null;

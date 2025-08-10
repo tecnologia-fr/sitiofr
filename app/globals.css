@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 @source inline("bg-{primario,secundario,suave,blanco,destacado}"); /* Safelist the underline class */
 @source inline("text-{primario,secundario,suave,blanco,destacado}"); /* Safelist the underline class */
-@source inline("brightness-{100,90,80,70}"); /* Safelist the underline class */
+@source inline("brightness-{100,90,80,70,60,50}"); /* Safelist the underline class */
 @source inline("grid-cols-{1,2,3,4,5,6}"); /* Safelist grid columns */
 @source inline("lg:grid-cols-{1,2,3,4,5,6}"); /* Safelist responsive grid columns */
 @source inline("rounded-{md,lg,full}"); /* Safelist the underline class */

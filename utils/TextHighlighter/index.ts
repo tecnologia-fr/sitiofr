@@ -54,6 +54,5 @@ export function textHighlighter(text: string): React.ReactNode {
     return text;
   }
 
-  console.log(parts);
   return parts;
 }

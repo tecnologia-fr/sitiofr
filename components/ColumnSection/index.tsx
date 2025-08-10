@@ -10,7 +10,7 @@ const ColumnSection = (props: ColumnSectionT) => {
       className={`${props.bgColor} text-${props.textColor} py-12 px-4 `}
       id={props.name}
     >
-      <div className=" flex flex-col flex-wrap justify-center items-center text-primario w-full">
+      <div className=" flex flex-col flex-wrap justify-center items-center w-full">
         <div className="w-full container">
           <RenderIf condition={props.title}>
             <h2 className="text-left text-4xl w-full">

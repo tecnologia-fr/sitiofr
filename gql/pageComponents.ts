@@ -17,6 +17,12 @@ export const pageComponentsFragment = `
         id
       }
     }
+    fragment accordionFields on AccordionSection {
+      __typename
+      sys {
+        id
+      }
+    }
 `;
 
 export const GQL_PAGE_COMPONENTS_QUERY = () => {
@@ -31,6 +37,7 @@ export const GQL_PAGE_COMPONENTS_QUERY = () => {
             ...ctaFields
             ...bannerFields
             ...columnFields
+            ...accordionFields
           }
         }
       }
