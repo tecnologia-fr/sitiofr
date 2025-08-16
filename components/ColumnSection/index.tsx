@@ -18,7 +18,7 @@ const ColumnSection = (props: ColumnSectionT) => {
       id={props.name}
     >
       <div className=" flex flex-col flex-wrap justify-center items-center w-full">
-        <div className="w-full container">
+        <div className="w-full container mx-auto">
           <RenderIf condition={props.title}>
             <h2 className="text-left text-4xl w-full">
               {textHighlighter(props.title || "")}
@@ -37,12 +37,12 @@ const ColumnSection = (props: ColumnSectionT) => {
               className="w-full container mx-auto p-0 mb-8 relative"
             >
               <div className={` mt-12 w-full `}>
-                <CarouselContent>
+                <CarouselContent className="m-0 p-0 ">
                   {props.columns.map((col, index) => {
                     return (
                       <CarouselItem
                         key={index}
-                        className=" md:basis-1/2 lg:basis-1/4"
+                        className="p-0 m-0 lg:ml-4 md:basis-1/2 lg:basis-1/4"
                       >
                         <Card {...col} key={index}></Card>
                       </CarouselItem>

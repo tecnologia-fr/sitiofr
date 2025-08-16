@@ -85,7 +85,7 @@ const Card = (props: CardT) => {
                   alt={props.image?.description || ""}
                   className={`${
                     props.isImageFull
-                      ? "max-w-full h-auto place-items-center w-sm h-64"
+                      ? "max-w-full  place-items-center w-sm h-64"
                       : ` ${
                           props.isImageFull ? "object-cover" : "object-contain"
                         }`
