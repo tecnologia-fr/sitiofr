@@ -40,32 +40,25 @@ const menuItems: MenuItem[] = [
         description: "Todos nuestros servicios de seguros",
       },
       {
-        title: "Empresas",
-        href: "/corredores-de-seguros/seguros-para-empresas",
+        title: "Seguros Empresas",
+        href: "/corredores-de-seguros/seguros-empresas",
       },
       {
-        title: "Sector Público",
-        href: "/corredores-de-seguros/seguros-sector-publico",
-      },
-      {
-        title: "Personales",
+        title: "Seguros Personales",
         href: "/corredores-de-seguros/seguros-personales",
+      },
+      {
+        title: "",
+        href: "",
       },
       {
         title: "Contacto",
         href: "/corredores-de-seguros/contacto",
       },
-      {
-        title: "Nosotros",
-        href: "/corredores-de-seguros/nosotros",
-      },
+
       {
         title: "Equipo",
         href: "/corredores-de-seguros/equipo",
-      },
-      {
-        title: "Trabaja con Nosotros",
-        href: "/investment/trabaja-con-nosotros",
       },
     ],
   },
@@ -267,7 +260,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-4 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-3 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}
