@@ -14,7 +14,7 @@ import {
 const ColumnSection = (props: ColumnSectionT) => {
   return (
     <section
-      className={`${props.bgColor} text-${props.textColor} py-8 px-4 `}
+      className={`${props.bgColor} text-${props.textColor} py-8 px-4  flex  justify-center items-center`}
       id={props.name}
     >
       <div className=" flex flex-col flex-wrap justify-center items-center w-full">
@@ -34,7 +34,7 @@ const ColumnSection = (props: ColumnSectionT) => {
               opts={{
                 align: "start",
               }}
-              className="w-full container mx-auto p-0 mb-8 relative"
+              className="w-full container mx-auto p-0 mb-8 relative justify-center items-center"
             >
               <div className={` mt-12 w-full `}>
                 <CarouselContent className="m-0 p-0 ">
@@ -42,7 +42,7 @@ const ColumnSection = (props: ColumnSectionT) => {
                     return (
                       <CarouselItem
                         key={index}
-                        className="p-0 m-0 lg:ml-4 md:basis-1/2 lg:basis-1/4"
+                        className="p-0 m-0 lg:ml-4 md:basis-1/2 lg:basis-1/4 place-items-center"
                       >
                         <Card {...col} key={index}></Card>
                       </CarouselItem>
@@ -56,7 +56,7 @@ const ColumnSection = (props: ColumnSectionT) => {
           </RenderIf>
           <RenderIf condition={!props.isCarousel}>
             <div
-              className={`grid grid-cols-1 lg:${props.gridCols} gap-4 mt-12 w-full container`}
+              className={`grid grid-cols-1 lg:${props.gridCols} gap-4 mt-12 w-full container place-items-center`}
             >
               {props.columns.map((col, index) => {
                 return <Card {...col} key={index}></Card>;
