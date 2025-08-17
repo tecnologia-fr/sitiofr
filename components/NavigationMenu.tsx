@@ -78,11 +78,11 @@ const menuItems: MenuItem[] = [
       },
       {
         title: "Reestructuración de Pasivos",
-        href: "/investment/reestructuracion-de-pasivos",
+        href: "/investment/reestructuracion-pasivos",
       },
       {
-        title: "Re-financiamiento",
-        href: "/investment/re-financiamiento",
+        title: "Financiamiento",
+        href: "/investment/financiamiento",
       },
       {
         title: "Contacto",
