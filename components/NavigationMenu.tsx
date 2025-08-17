@@ -85,20 +85,13 @@ const menuItems: MenuItem[] = [
         href: "/investment/re-financiamiento",
       },
       {
-        title: "",
-        href: "#",
+        title: "Contacto",
+        href: "/investment/contacto",
       },
+
       {
         title: "Nosotros",
         href: "/investment/nosotros",
-      },
-      {
-        title: "Equipo",
-        href: "/investment/equipo",
-      },
-      {
-        title: "Trabaja con Nosotros",
-        href: "/investment/trabaja-con-nosotros",
       },
     ],
   },
