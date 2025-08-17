@@ -57,8 +57,8 @@ const menuItems: MenuItem[] = [
       },
 
       {
-        title: "Equipo",
-        href: "/corredores-de-seguros/equipo",
+        title: "Nosotros",
+        href: "/corredores-de-seguros/nosotros",
       },
     ],
   },

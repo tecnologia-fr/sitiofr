@@ -37,12 +37,14 @@ const ColumnSection = (props: ColumnSectionT) => {
               className="w-full container mx-auto p-0 mb-8 relative justify-center items-center"
             >
               <div className={` mt-12 w-full `}>
-                <CarouselContent className="m-0 p-0 ">
+                <CarouselContent className="m-0 p-0 lg:px-2 ">
                   {props.columns.map((col, index) => {
                     return (
                       <CarouselItem
                         key={index}
-                        className="p-0 m-0 lg:ml-4 md:basis-1/2 lg:basis-1/4 place-items-center"
+                        className={`p-0 m-0 ${
+                          index !== 0 && "lg:ml-1"
+                        } md:basis-1/2 lg:basis-1/4 place-items-center`}
                       >
                         <Card {...col} key={index}></Card>
                       </CarouselItem>
@@ -50,8 +52,8 @@ const ColumnSection = (props: ColumnSectionT) => {
                   })}
                 </CarouselContent>
               </div>
-              <CarouselPrevious className="bg-destacado text-white mt-6 md:mt-0 top-full lg:top-8 left-1/3 lg:left-11/12 w-10 h-10 rounded-full cursor-pointer" />
-              <CarouselNext className="bg-destacado text-white  mt-6 md:mt-0 top-full  lg:top-8 right-1/3 lg:right-2 w-10 h-10 rounded-full cursor-pointer" />
+              <CarouselPrevious className="bg-destacado active:bg-destacado active:text-white text-white mt-6 md:mt-0 top-full lg:top-8 left-1/3 lg:left-11/12 w-10 h-10 rounded-full cursor-pointer" />
+              <CarouselNext className="bg-destacado active:bg-destacado active:text-white text-white  mt-6 md:mt-0 top-full  lg:top-8 right-1/3 lg:right-2 w-10 h-10 rounded-full cursor-pointer" />
             </Carousel>
           </RenderIf>
           <RenderIf condition={!props.isCarousel}>
