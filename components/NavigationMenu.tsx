@@ -25,9 +25,9 @@ interface MenuItem {
 // Sample menu data - you can customize this
 const menuItems: MenuItem[] = [
   {
-    title: "Home FRGroup",
+    title: "Inicio",
     href: "/",
-    description: "Home de FRGroup",
+    description: "Inicio",
   },
   {
     title: "Corredores de Seguros",
@@ -46,10 +46,6 @@ const menuItems: MenuItem[] = [
       {
         title: "Seguros Personales",
         href: "/corredores-de-seguros/seguros-personales",
-      },
-      {
-        title: "",
-        href: "",
       },
       {
         title: "Contacto",
@@ -117,20 +113,8 @@ const menuItems: MenuItem[] = [
         href: "/activos",
       },
       {
-        title: "",
-        href: "#",
-      },
-      {
         title: "Nosotros",
         href: "/activos/nosotros",
-      },
-      {
-        title: "Equipo",
-        href: "/activos/equipo",
-      },
-      {
-        title: "Trabaja con Nosotros",
-        href: "/activos/trabaja-con-nosotros",
       },
     ],
   },
@@ -176,6 +160,27 @@ interface NavigationMenuProps {
 // Mobile menu component
 function MobileMenu({ items = menuItems }: NavigationMenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
+    new Set()
+  );
+
+  const toggleExpanded = (itemTitle: string) => {
+    const newExpandedItems = new Set(expandedItems);
+    if (newExpandedItems.has(itemTitle)) {
+      newExpandedItems.delete(itemTitle);
+    } else {
+      newExpandedItems.add(itemTitle);
+    }
+    setExpandedItems(newExpandedItems);
+  };
+
+  const handleItemClick = (item: MenuItem) => {
+    if (item.children) {
+      toggleExpanded(item.title);
+    } else {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <div className="md:hidden">
@@ -190,32 +195,44 @@ function MobileMenu({ items = menuItems }: NavigationMenuProps) {
       {isOpen && (
         <div
           className={
-            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5"
+            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-[100vh]"
           }
         >
           <nav className="text-white">
             <ul className="space-y-4">
               {items.map((item, index) => (
-                <li key={index}>
+                <li key={index} className="text-md py-4">
                   {item.children ? (
                     <div>
-                      <div className="text-white font-medium text-lg mb-2">
+                      <button
+                        onClick={() => handleItemClick(item)}
+                        className="text-white font-medium text-lg mb-2 flex items-center justify-between w-full text-left hover:text-gray-300 transition-colors"
+                      >
                         {item.title}
-                      </div>
+                        <span
+                          className={`transition-transform duration-200 text-xs ${
+                            expandedItems.has(item.title) ? "rotate-90" : ""
+                          }`}
+                        >
+                          ►
+                        </span>
+                      </button>
 
-                      <ul className="ml-4 space-y-2">
-                        {item.children.map((child, childIndex) => (
-                          <li key={childIndex}>
-                            <Link
-                              href={child.href || "#"}
-                              className="text-white/80 hover:text-white transition-colors block py-1"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {child.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                      {expandedItems.has(item.title) && (
+                        <ul className="ml-4 space-y-2">
+                          {item.children.map((child, childIndex) => (
+                            <li key={childIndex}>
+                              <Link
+                                href={child.href || "#"}
+                                className="text-white/80 hover:text-white transition-colors block py-1"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {child.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   ) : (
                     <Link
@@ -253,7 +270,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-3 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-6 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}
@@ -270,7 +287,7 @@ export function MainNavigationMenu({
                 <NavigationMenuLink asChild>
                   <Link
                     href={item.href || "#"}
-                    className="text-white bg-transparent hover:bg-transparent focus:bg-transparent transition-colors px-4 py-2 rounded-md  hover:text-destacado"
+                    className="text-white bg-transparent hover:bg-transparent focus:bg-transparent transition-colors px-4 py-2 rounded-md  hover:text-destacado "
                   >
                     {item.title}
                   </Link>

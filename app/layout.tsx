@@ -5,6 +5,8 @@ import { ResponsiveNavigationMenu } from "@/components/NavigationMenu";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import GTM from "@/config/tracking/gtm";
+import { Suspense } from "react";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -24,6 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.className}  `}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <GTM />
+        </Suspense>
         <header className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16">
           <nav className="container mx-auto px-4 py-4 ">
             <Link href="/">

@@ -65,6 +65,7 @@ const CardSchema = z.object({
   bgColor: z.string().optional(),
   textColor: z.string().optional(),
   image: ImageSchema.nullish(),
+  icon: ImageSchema.nullish(),
   bgImage: ImageSchema.nullish().optional(),
   isImageFull: z.boolean().optional(),
   imageRound: z.boolean().optional(),

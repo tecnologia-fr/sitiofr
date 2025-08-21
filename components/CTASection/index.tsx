@@ -85,7 +85,7 @@ const CTASection = (props: CTASectionT) => {
                   props.isHero ? `text-center` : `text-left`
                 }`}
               >
-                {props.desc}
+                {textHighlighter(props.desc || "")}
               </p>
             </RenderIf>
           </div>

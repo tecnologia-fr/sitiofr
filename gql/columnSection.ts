@@ -17,6 +17,16 @@ export const GQL_COLUMN_SECTION_QUERY = () => {
           desc
           bgColor
           textColor
+        icon {
+            title
+            url
+            description
+            width
+            height
+            sys {
+              id
+            }
+          }
           image {
             title
             url

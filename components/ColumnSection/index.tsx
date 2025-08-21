@@ -14,7 +14,7 @@ import {
 const ColumnSection = (props: ColumnSectionT) => {
   return (
     <section
-      className={`${props.bgColor} text-${props.textColor} py-8 px-4  flex  justify-center items-center`}
+      className={`${props.bgColor} text-${props.textColor} py-12 px-4  flex  justify-center items-center`}
       id={props.name}
     >
       <div className=" flex flex-col flex-wrap justify-center items-center w-full">
@@ -52,13 +52,13 @@ const ColumnSection = (props: ColumnSectionT) => {
                   })}
                 </CarouselContent>
               </div>
-              <CarouselPrevious className="bg-destacado active:bg-destacado active:text-white text-white mt-6 md:mt-0 top-full lg:top-8 left-1/3 lg:left-11/12 w-10 h-10 rounded-full cursor-pointer" />
-              <CarouselNext className="bg-destacado active:bg-destacado active:text-white text-white  mt-6 md:mt-0 top-full  lg:top-8 right-1/3 lg:right-2 w-10 h-10 rounded-full cursor-pointer" />
+              <CarouselPrevious className="bg-destacado active:bg-destacado active:text-white text-white mt-8 lg:mt-0  top-full lg:top-0 left-1/3 lg:left-11/12 w-10 h-10 rounded-full cursor-pointer" />
+              <CarouselNext className="bg-destacado active:bg-destacado active:text-white text-white  mt-8  lg:mt-0 top-full  lg:top-0 right-1/3 lg:right-2 w-10 h-10 rounded-full cursor-pointer" />
             </Carousel>
           </RenderIf>
           <RenderIf condition={!props.isCarousel}>
             <div
-              className={`grid grid-cols-1 lg:${props.gridCols} gap-4 mt-12 w-full container place-items-center`}
+              className={`grid grid-cols-1 md:grid-cols-2 lg:${props.gridCols} gap-2 mt-12 w-full container place-items-center`}
             >
               {props.columns.map((col, index) => {
                 return <Card {...col} key={index}></Card>;
