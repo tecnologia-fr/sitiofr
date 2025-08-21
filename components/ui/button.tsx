@@ -60,7 +60,7 @@ function Button({
       {showArrow && (
         <div className="flex items-center gap-1">
           <Image
-            src="/icons/right-arrow.svg"
+            src="/icons/diagonal-white.svg"
             alt="Right arrow"
             width={12}
             height={12}

@@ -10,7 +10,7 @@ import { textHighlighter } from "@/utils/TextHighlighter";
 const Card = (props: CardT) => {
   return (
     <div
-      className={`w-full max-w-xs flex flex-col items-center relative ${
+      className={`w-full max-w-sm  flex flex-col items-center relative ${
         props.bgColor
       } text-${props.textColor} p-0 m-0 text-center  ${
         props.bgImage?.url &&

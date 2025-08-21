@@ -44,7 +44,11 @@ const ColumnSection = (props: ColumnSectionT) => {
                         key={index}
                         className={`p-0 m-0 ${
                           index !== 0 && "lg:ml-1"
-                        } md:basis-1/2 lg:basis-1/4 place-items-center`}
+                        } md:basis-1/2 ${
+                          props.gridCols === "grid-cols-3" && "lg:basis-1/3"
+                        } ${
+                          props.gridCols === "grid-cols-4" && "lg:basis-1/4"
+                        } place-items-center`}
                       >
                         <Card {...col} key={index}></Card>
                       </CarouselItem>
@@ -52,7 +56,7 @@ const ColumnSection = (props: ColumnSectionT) => {
                   })}
                 </CarouselContent>
               </div>
-              <CarouselPrevious className="bg-destacado active:bg-destacado active:text-white text-white mt-8 lg:mt-0  top-full lg:top-0 left-1/3 lg:left-11/12 w-10 h-10 rounded-full cursor-pointer" />
+              <CarouselPrevious className="bg-destacado active:bg-destacado active:text-white text-white mt-8 lg:mt-0  top-full lg:top-0 left-1/3 lg:left-9/10 w-10 h-10 rounded-full cursor-pointer" />
               <CarouselNext className="bg-destacado active:bg-destacado active:text-white text-white  mt-8  lg:mt-0 top-full  lg:top-0 right-1/3 lg:right-2 w-10 h-10 rounded-full cursor-pointer" />
             </Carousel>
           </RenderIf>
