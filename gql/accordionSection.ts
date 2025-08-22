@@ -13,6 +13,8 @@ export const GQL_ACCORDION_SECTION_QUERY = () => {
           name
           title
           content
+          bgColor
+          textColor
         }
       }
     }

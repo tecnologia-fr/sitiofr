@@ -37,7 +37,7 @@
 @theme {
   --color-primario: oklch(21.05% 0.073 260.97);
   --color-secundario: oklch(29.59% 0.077 254.42);
-  --color-suave: oklch(79.86% 0.005 214.33);
+  --color-suave: oklch(93.82% 0.007 247.9); /* oklch(79.86% 0.005 214.33); */
   --color-blanco: oklch(100% 0 0);
   --color-destacado: oklch(66.67% 0.147 237.8);
 

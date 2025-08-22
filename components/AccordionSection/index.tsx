@@ -33,9 +33,11 @@ const AccordionSection = (props: AccordionSectionT) => {
                   <AccordionItem
                     key={index}
                     value={item.name}
-                    className={`py-4 text-${props.textColor}`}
+                    className={`py-4 px-8 text-${props.textColor} ${
+                      item.bgColor && item.bgColor
+                    } rounded-3xl mt-4 border-0 cursor-pointer `}
                   >
-                    <AccordionTrigger className="text-left text-2xl w-full font-light">
+                    <AccordionTrigger className="text-left text-xl lg:text-2xl w-full font-bold hover:no-underline cursor-pointer">
                       {item.title}
                     </AccordionTrigger>
                     <AccordionContent className="text-left text-lg font-light w-full">
