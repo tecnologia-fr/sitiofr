@@ -22,181 +22,216 @@ async function createLeadCorredora(formData: FormData) {
 
 export function ContactFormCorredora() {
   return (
-    <div className="min-h-screen bg-secundario pt-20">
-      {/* Header Section */}
-      <div className="text-center mb-12 px-4">
-        <p className="text-destacado  text-sm font-medium mb-2">
-          ESTAMOS AQUÍ PARA AYUDARTE
-        </p>
-        <h1 className="text-white text-2xl font-normal mb-2">
-          ¿Necesitas más información?
-        </h1>
-        <h2 className="text-white text-4xl font-bold">
-          No dudes en escribirnos
-        </h2>
-      </div>
+    <div className="min-h-screen">
+      {/* Hero Section with Background Image */}
+      <div
+        className="relative min-h-screen"
+        style={{
+          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/contacto.jpg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          minHeight: "100vh",
+        }}
+      >
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-44">
+          <h1 className="text-white text-5xl md:text-6xl font-bold mb-4">
+            Contáctanos
+          </h1>
+          <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
+            Estamos listos para ofrecerte la mejor solución acorde a{" "}
+            <span className="underline decoration-destacado decoration-4 underline-offset-8 font-bold">
+              tus necesidades
+            </span>
+          </p>
+        </div>
 
-      {/* Form Container */}
-      <div className="max-w-2xl mx-auto px-4 mb-12">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <form className="space-y-6 " action={createLeadCorredora}>
-            {/* Name Field */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-800 font-bold mb-2"
-              >
-                Nombre
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Jane Smith"
-                required
-                className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Email Field */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-gray-800 font-bold mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="janesmith@gmail.com"
-                required
-                className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Product Field */}
-            <div>
-              <label
-                htmlFor="product"
-                className="block text-gray-800 font-bold mb-2"
-              >
-                Producto
-              </label>
-              <input
-                type="product"
-                id="product"
-                name="product"
-                placeholder="janesmith@gmail.com"
-                required
-                className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Phone Field */}
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-gray-800 font-bold mb-2"
-              >
-                Teléfono
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="+569 1234 5678"
-                required
-                className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Message Field */}
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-gray-800 font-bold mb-2"
-              >
-                Mensaje
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                placeholder="Escribe tu mensaje..."
-                required
-                className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <div className="text-center pt-4">
-              <Button
-                type="submit"
-                className="bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-8 py-3 rounded-lg flex items-center gap-2 mx-auto"
-              >
-                Enviar Mensaje
-                <div className="w-6 h-6 bg-white rounded-full border border-blue-500 flex items-center justify-center">
-                  <svg
-                    className="w-3 h-3 text-blue-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 17l9.2-9.2M17 17V7H7"
-                    />
-                  </svg>
+        {/* Floating Contact Form Card */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-6xl px-4">
+          <div className="bg-white rounded-xl shadow-2xl p-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left Panel - Information */}
+              <div className="space-y-6 mt-12">
+                <div>
+                  <p className="text-destacado text-sm font-bold uppercase tracking-wide mb-2">
+                    ESTAMOS AQUÍ PARA AYUDARTE
+                  </p>
+                  <h2 className="text-primary lg:text-4xl text-2xl font-light mb-2">
+                    ¿Necesitas más información?
+                  </h2>
+                  <p className="text-gray-600 text-xl lg:text-4xl font-normal ">
+                    No dudes en
+                    <span className="font-bold"> escribirnos</span>
+                  </p>
                 </div>
-              </Button>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <svg
+                      className="w-16 h-16 text-destacado flex-shrink-0"
+                      fill="currentColor"
+                      stroke="white"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span className="text-gray-700">
+                      Email<br></br>{" "}
+                      <span className="font-bold">contacto@frgroup.cl</span>
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <svg
+                      className="w-16 h-16 text-destacado flex-shrink-0"
+                      fill="currentColor"
+                      stroke="white"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
+                    </svg>
+                    <span className="text-gray-700">
+                      Telefono: <br></br>
+                      <span className="font-bold">+569 123 44 56</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Panel - Contact Form */}
+              <div>
+                <form className="space-y-6" action={createLeadCorredora}>
+                  {/* Name Field */}
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Jane Smith"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="janesmith@gmail.com"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Product Field */}
+                  <div>
+                    <label
+                      htmlFor="product"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Área
+                    </label>
+                    <select
+                      id="product"
+                      name="product"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Seleccionar...</option>
+                      <option value="seguros-personales">
+                        Seguros Personales
+                      </option>
+                      <option value="seguros-empresas">Seguros Empresas</option>
+                      <option value="seguros-transportes">
+                        Seguros Transportes
+                      </option>
+                      <option value="otros">Otros</option>
+                    </select>
+                  </div>
+
+                  {/* Phone Field */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-primarui font-bold mb-2"
+                    >
+                      Teléfono
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+569 1234 5678"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Message Field */}
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Mensaje
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      placeholder="Escribe tu mensaje..."
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="text-center pt-4">
+                    <Button
+                      type="submit"
+                      showArrow={true}
+                      size="lg"
+                      className={`cursor-pointer text-lg bg-destacado text-white p-0 my-2 btn-light  lg:text-base py-6 pl-8 pr-0 rounded-full font-bold hover:text-white  w-fit`}
+                    >
+                      Enviar Mensaje
+                    </Button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
 
-      {/* Footer Contact Information */}
-      <div className="max-w-2xl mx-auto px-4 mt-4 pb-12 ">
-        <div className="flex flex-col lg:flex-row justify-between items-center text-white">
-          <div className="flex items-center gap-2 mb-4">
-            <svg
-              className="w-5 h-5 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-            <span className="font-medium">Email:</span>
-            <span>contacto@frgroup.cl</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-            <span className="font-medium">Telefono:</span>
-            <span>+569 123 44 56</span>
-          </div>
-        </div>
+      {/* Bottom Section to provide space for the floating form */}
+      <div className="bg-white pt-32 pb-16 h-[38rem]">
+        {/* Additional content can go here */}
       </div>
     </div>
   );
