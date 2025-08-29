@@ -35,13 +35,57 @@ const menuItems: MenuItem[] = [
     description: "Learn more about our company",
   },
   {
-    title: "Investment",
-    href: "/investment",
+    title: "Productos y Servicios",
+    href: "#",
     description: "Learn more about our company",
+    children: [
+      {
+        title: "Negocios Corporativos",
+        href: "/corredores-de-seguros/negocios-corporativos",
+      },
+      {
+        title: "Mercado Público",
+        href: "/corredores-de-seguros/mercado-publico",
+      },
+      {
+        title: "Vida y Salud",
+        href: "/corredores-de-seguros/vida-y-salud",
+      },
+      {
+        title: "Movilidad y Electromovilidad",
+        href: "/corredores-de-seguros/movilidad-y-electromovilidad",
+      },
+      {
+        title: "Riesgos Financieros",
+        href: "/corredores-de-seguros/riesgos-financieros",
+      },
+
+      {
+        title: "Seguro Affinity",
+        href: "/corredores-de-seguros/seguros-affinity",
+      },
+      {
+        title: "Reaseguros",
+        href: "/corredores-de-seguros/reaseguros",
+      },
+      {
+        title: "Siniestros",
+        href: "/corredores-de-seguros/seguros-siniestros",
+      },
+      {
+        title: "Consultoría y Análisis de Riesgos",
+        href: "/corredores-de-seguros/consultoria-y-analisis-de-riesgos",
+      },
+    ],
+  },
+
+  {
+    title: "Sobre Nosotros",
+    href: "/corredores-de-seguros/nosotros",
   },
   {
-    title: "Activos",
-    href: "/activos",
+    title: "Contacto",
+    href: "/corredores-de-seguros/contacto",
   },
 ];
 
@@ -195,7 +239,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-6 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-9 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}

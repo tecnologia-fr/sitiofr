@@ -30,18 +30,34 @@ const menuItems: MenuItem[] = [
     description: "Inicio",
   },
   {
-    title: "Corredores de Seguros",
-    href: "/corredores-de-seguros",
-    description: "Learn more about our company",
-  },
-  {
     title: "Investment",
     href: "/investment",
-    description: "Learn more about our company",
   },
   {
-    title: "Activos",
-    href: "/activos",
+    title: "Productos y Servicios",
+    href: "#",
+    children: [
+      {
+        title: "Asesoría Financiera",
+        href: "/investment",
+      },
+      {
+        title: "Reestructuración de Pasivos",
+        href: "/investment/asesoria-financiera",
+      },
+      {
+        title: "Financiamiento",
+        href: "/investment/reestructuracion-pasivos",
+      },
+    ],
+  },
+  {
+    title: "Sobre Nosotros",
+    href: "/investment/nosotros",
+  },
+  {
+    title: "Contacto",
+    href: "/investment/contacto",
   },
 ];
 
@@ -195,7 +211,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-6 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-3 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}

@@ -119,14 +119,29 @@ export function ContactFormCorredora() {
                       htmlFor="name"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre
+                      Nombre*
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Jane Smith"
+                      placeholder="Inserta tu nombre"
                       required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Nombre de la empresa
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Ej: Falabella"
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -137,13 +152,13 @@ export function ContactFormCorredora() {
                       htmlFor="email"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Email
+                      Email*
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="janesmith@gmail.com"
+                      placeholder="Ej: juan.rodriguez@falabella.com"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -155,7 +170,7 @@ export function ContactFormCorredora() {
                       htmlFor="product"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Área
+                      Motivo del contacto
                     </label>
                     <select
                       id="product"
@@ -164,14 +179,23 @@ export function ContactFormCorredora() {
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Seleccionar...</option>
-                      <option value="seguros-personales">
-                        Seguros Personales
+                      <option value="Consulta sobre Productos/Servicios">
+                        Consulta sobre Productos/Servicios
                       </option>
-                      <option value="seguros-empresas">Seguros Empresas</option>
-                      <option value="seguros-transportes">
-                        Seguros Transportes
+                      <option value="Consulta sobre Producto/Servicio Contratado">
+                        Consulta sobre Producto/Servicio Contratado
                       </option>
-                      <option value="otros">Otros</option>
+                      <option
+                        value="Solicitud de Cotización
+"
+                      >
+                        Solicitud de Cotización
+                      </option>
+                      <option value="Solicitud sobre Producto/Servicio Contratado">
+                        Solicitud sobre Producto/Servicio Contratado
+                      </option>
+                      <option value="Reclamo">Reclamo</option>
+                      <option value="Felicitaciones">Felicitaciones</option>
                     </select>
                   </div>
 
