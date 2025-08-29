@@ -11,7 +11,7 @@ const Banner = (props: BannerT) => {
     <section
       className={`${props.bgColor && props.bgColor} text-${
         props.textColor
-      } py-8 relative`}
+      } py-8 relative min-h-64`}
       id={props.name}
     >
       {props.bgImage && (
@@ -26,7 +26,9 @@ const Banner = (props: BannerT) => {
       <div
         className={`container py-8 px-4 mx-auto w-full relative z-10 text-${props.textColor} `}
       >
-        <div className={`flex lg:items-end items-center flex-col w-full `}>
+        <div
+          className={`flex lg:items-end items-center justify-center flex-col w-full min-h-48`}
+        >
           <RenderIf condition={props.title}>
             <h2 className={` text-3xl lg:text-4xl  font-light   mb-4`}>
               {textHighlighter(props.title || "")}

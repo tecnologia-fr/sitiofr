@@ -3,13 +3,13 @@ import { fetchMetaTagsFromContentful, fetchPageComponents } from "@/config/db";
 import BuilderComponent from "@/components/BuilderComponent";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pathname = "/corredores-de-seguros/seguros-personales";
+  const pathname = "/corredores-de-seguros/consultoria-y-analisis-de-riesgos";
   return await fetchMetaTagsFromContentful(pathname);
 }
 
 export default async function Home() {
   const components = await fetchPageComponents(
-    "/corredores-de-seguros/seguros-personales"
+    "/corredores-de-seguros/consultoria-y-analisis-de-riesgos"
   );
   return <BuilderComponent components={components}></BuilderComponent>;
 }
