@@ -6,15 +6,16 @@ async function createLeadCorredora(formData: FormData) {
   "use server";
 
   const name = formData.get("name") as string;
+  const company = formData.get("company") as string;
   const email = formData.get("email") as string;
-  const product = formData.get("product") as string;
+  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
-  console.log("Form submitted:", { name, email, product, phone, message });
-  createLeadInSupabase(
-    { name, email, product, phone, message },
+
+  await createLeadInSupabase(
+    { name, company, email, motive, phone, message },
     "leads-corredora"
   );
   // You could send to an API endpoint, database, or email service
@@ -132,15 +133,15 @@ export function ContactFormCorredora() {
                   </div>
                   <div>
                     <label
-                      htmlFor="name"
+                      htmlFor="company"
                       className="block text-gray-800 font-bold mb-2"
                     >
                       Nombre de la empresa
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
+                      id="company"
+                      name="company"
                       placeholder="Ej: Falabella"
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -164,17 +165,17 @@ export function ContactFormCorredora() {
                     />
                   </div>
 
-                  {/* Product Field */}
+                  {/* Motive Field */}
                   <div>
                     <label
-                      htmlFor="product"
+                      htmlFor="motive"
                       className="block text-gray-800 font-bold mb-2"
                     >
                       Motivo del contacto
                     </label>
                     <select
-                      id="product"
-                      name="product"
+                      id="motive"
+                      name="motive"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
@@ -230,7 +231,6 @@ export function ContactFormCorredora() {
                       name="message"
                       rows={4}
                       placeholder="Escribe tu mensaje..."
-                      required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     />
                   </div>

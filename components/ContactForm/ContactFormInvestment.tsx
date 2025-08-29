@@ -6,16 +6,17 @@ async function createLeadCorredora(formData: FormData) {
   "use server";
 
   const name = formData.get("name") as string;
+  const company = formData.get("company") as string;
   const email = formData.get("email") as string;
-  const product = formData.get("product") as string;
+  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
-  console.log("Form submitted:", { name, email, product, phone, message });
-  createLeadInSupabase(
-    { name, email, product, phone, message },
-    "leads-corredora"
+
+  await createLeadInSupabase(
+    { name, company, email, motive, phone, message },
+    "leads-investment"
   );
   // You could send to an API endpoint, database, or email service
 }
@@ -119,7 +120,7 @@ export function ContactFormInvestment() {
                       htmlFor="name"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre
+                      Nombre*
                     </label>
                     <input
                       type="text"
@@ -130,14 +131,28 @@ export function ContactFormInvestment() {
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
-
+                  <div>
+                    <label
+                      htmlFor="company"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Nombre de la empresa
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      placeholder="Ej: Falabella"
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
                   {/* Email Field */}
                   <div>
                     <label
                       htmlFor="email"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Email
+                      Email*
                     </label>
                     <input
                       type="email"
@@ -149,29 +164,38 @@ export function ContactFormInvestment() {
                     />
                   </div>
 
-                  {/* Product Field */}
+                  {/* Motive Field */}
                   <div>
                     <label
-                      htmlFor="product"
+                      htmlFor="motive"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Área
+                      Motivo del contacto*
                     </label>
                     <select
-                      id="product"
-                      name="product"
+                      id="motive"
+                      name="motive"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Seleccionar...</option>
-                      <option value="seguros-personales">
-                        Seguros Personales
+                      <option value="Consulta sobre Productos/Servicios">
+                        Consulta sobre Productos/Servicios
                       </option>
-                      <option value="seguros-empresas">Seguros Empresas</option>
-                      <option value="seguros-transportes">
-                        Seguros Transportes
+                      <option value="Consulta sobre Producto/Servicio Contratado">
+                        Consulta sobre Producto/Servicio Contratado
                       </option>
-                      <option value="otros">Otros</option>
+                      <option
+                        value="Solicitud de Cotización
+"
+                      >
+                        Solicitud de Cotización
+                      </option>
+                      <option value="Solicitud sobre Producto/Servicio Contratado">
+                        Solicitud sobre Producto/Servicio Contratado
+                      </option>
+                      <option value="Reclamo">Reclamo</option>
+                      <option value="Felicitaciones">Felicitaciones</option>
                     </select>
                   </div>
 
@@ -181,7 +205,7 @@ export function ContactFormInvestment() {
                       htmlFor="phone"
                       className="block text-primarui font-bold mb-2"
                     >
-                      Teléfono
+                      Teléfono*
                     </label>
                     <input
                       type="tel"
@@ -206,7 +230,6 @@ export function ContactFormInvestment() {
                       name="message"
                       rows={4}
                       placeholder="Escribe tu mensaje..."
-                      required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     />
                   </div>

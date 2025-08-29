@@ -3,8 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 const createLeadInSupabase = async (
   lead: {
     name: string;
+    company: string;
     email: string;
-    product: string;
+    motive: string;
     phone: string;
     message: string;
   },
@@ -21,8 +22,9 @@ const createLeadInSupabase = async (
       .insert([
         {
           name: lead.name,
+          company: lead.company,
           email: lead.email,
-          product: lead.product,
+          motive: lead.motive,
           phone: lead.phone,
           message: lead.message,
         },
