@@ -6,6 +6,7 @@ import {
   ColumnSectionT,
   AccordionSectionT,
   CarouselCTASchemaT,
+  PropertyT,
 } from "@/typings";
 import {
   fetchCTASectionById,
@@ -13,12 +14,14 @@ import {
   fetchColumnSectionById,
   fetchAccordionSectionById,
   fetchCarouselCTAById,
+  fetchProperties,
 } from "@/config/db";
 import CTASection from "@/components/CTASection";
 import Banner from "@/components/Banner";
 import ColumnSection from "@/components/ColumnSection";
 import AccordionSection from "./AccordionSection";
 import CarouselCTA from "./Carousel/page";
+import PropertyGrid from "./PropertyGrid";
 
 type BuilderComponentProps = {
   components: PageComponent[];
@@ -65,6 +68,10 @@ const fetchComponent = async (type: string, id: string, pathname?: string) => {
     case "Carousel":
       let carouselCTAProps: CarouselCTASchemaT = await fetchCarouselCTAById(id);
       return <CarouselCTA {...carouselCTAProps}></CarouselCTA>;
+
+    case "PropertyGrid":
+      let properties: PropertyT[] = await fetchProperties();
+      return <PropertyGrid properties={properties}></PropertyGrid>;
     default:
       return null;
   }

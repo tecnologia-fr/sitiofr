@@ -6,6 +6,8 @@ import { GQL_PAGE_COMPONENTS_QUERY } from "@/gql/pageComponents";
 import { GQL_COLUMN_SECTION_QUERY } from "@/gql/columnSection";
 import { GQL_ACCORDION_SECTION_QUERY } from "@/gql/accordionSection";
 import { GQL_CAROUSEL_CTA_QUERY } from "@/gql/carousel";
+import { GQL_PROPERTIES_QUERY } from "@/gql/properties";
+import { PropertyT } from "@/typings";
 
 const fetchPageComponents = async (pathname: string) => {
   const query = GQL_PAGE_COMPONENTS_QUERY();
@@ -142,6 +144,14 @@ const fetchCarouselCTAById = async (id: string) => {
   return carousel;
 };
 
+const fetchProperties = async () => {
+  const query = GQL_PROPERTIES_QUERY();
+  const res = await fetchContentful(query);
+  const { data } = await res.json();
+  const properties = data.propertyCollection.items;
+  return properties;
+};
+
 export {
   fetchCTASectionById,
   fetchBannerById,
@@ -150,4 +160,5 @@ export {
   fetchColumnSectionById,
   fetchAccordionSectionById,
   fetchCarouselCTAById,
+  fetchProperties,
 };

@@ -31,8 +31,8 @@ const CarouselCTA = (props: CarouselCTASchemaT) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="bg-destacado text-white  top-11/12  lg:inline-flex left-4" />
-      <CarouselNext className="bg-destacado text-white top-11/12  lg:inline-flex right-4" />
+      <CarouselPrevious className="bg-destacado text-white  top-11/12  lg:inline-flex left-4 cursor-pointer" />
+      <CarouselNext className="bg-destacado text-white top-11/12  lg:inline-flex right-4 cursor-pointer" />
     </Carousel>
   );
 };

@@ -34,6 +34,7 @@ const CTASectionSchema = z.object({
   mobileReverse: z.boolean(),
   brightness: z.string().optional(),
   imageRounded: z.string().optional(),
+  form: z.boolean().optional(),
   //   bgVideo: z.any().optional(), //! FIX ANY
   //   video: ImageSchema.nullish().optional(),
 });
@@ -106,6 +107,25 @@ const CarouselCTASchema = z.object({
   }),
 });
 
+const PropertySchema = z.object({
+  id: z.string(),
+  imagesCollection: z.object({
+    items: z.array(ImageSchema),
+  }),
+  destacado: z.boolean(),
+  propertyType: z.string(), // casa, apartamento, local, terreno
+  transactionType: z.string(), // venta, arriendo
+  comuna: z.string(),
+  address: z.string(),
+  price: z.string(),
+  priceCurrency: z.string(), // UF, $
+  description: z.string().optional(),
+  totalArea: z.number(),
+  usableArea: z.number(),
+  bedrooms: z.number(),
+  bathrooms: z.number(),
+});
+
 export type CTASectionT = z.infer<typeof CTASectionSchema>;
 export type BannerT = z.infer<typeof BannerSchema>;
 export type ColumnSectionT = z.infer<typeof ColumnSectionSchema>;
@@ -113,3 +133,4 @@ export type CardT = z.infer<typeof CardSchema>;
 export type PageComponent = { id: string; __typename: string };
 export type AccordionSectionT = z.infer<typeof AccordionSectionSchema>;
 export type CarouselCTASchemaT = z.infer<typeof CarouselCTASchema>;
+export type PropertyT = z.infer<typeof PropertySchema>;

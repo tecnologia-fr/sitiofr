@@ -1,0 +1,31 @@
+export const GQL_PROPERTIES_QUERY = () => {
+  return `
+query{
+  propertyCollection{
+    items{
+      id
+      imagesCollection{
+        items{
+          description
+          height
+          width
+          title
+          url
+        }
+      }
+      destacado
+      propertyType
+      transactionType
+      comuna
+      address
+      price
+      priceCurrency
+      totalArea
+      usableArea
+      bedrooms
+      bathrooms
+      description
+    }
+  }
+}`;
+};
