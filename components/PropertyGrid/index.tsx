@@ -123,7 +123,10 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
 
               {/* Price */}
               <p className="text-xl font-bold text-destacado mb-2">
-                {property.priceCurrency} {property.price}
+                {property.priceCurrency}{" "}
+                {property.price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
 
               {/* Promotion or Description */}

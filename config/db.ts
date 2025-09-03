@@ -6,7 +6,10 @@ import { GQL_PAGE_COMPONENTS_QUERY } from "@/gql/pageComponents";
 import { GQL_COLUMN_SECTION_QUERY } from "@/gql/columnSection";
 import { GQL_ACCORDION_SECTION_QUERY } from "@/gql/accordionSection";
 import { GQL_CAROUSEL_CTA_QUERY } from "@/gql/carousel";
-import { GQL_PROPERTIES_QUERY } from "@/gql/properties";
+import {
+  GQL_PROPERTIES_QUERY,
+  GQL_PROPERTIES_QUERY_BY_FILTERS,
+} from "@/gql/properties";
 import { PropertyT } from "@/typings";
 
 const fetchPageComponents = async (pathname: string) => {
@@ -152,6 +155,24 @@ const fetchProperties = async () => {
   return properties;
 };
 
+const fetchPropertiesByFilters = async (
+  transactionType: string,
+  propertyType: string,
+  comuna?: string
+) => {
+  const query = GQL_PROPERTIES_QUERY_BY_FILTERS();
+  const variables = {
+    transactionType: transactionType,
+    propertyType: propertyType,
+    comuna: comuna,
+  };
+
+  if (!variables.comuna) delete variables.comuna;
+  const res = await fetchContentful(query, variables);
+  const { data } = await res.json();
+  const properties = data.propertyCollection.items;
+  return properties;
+};
 export {
   fetchCTASectionById,
   fetchBannerById,
@@ -161,4 +182,5 @@ export {
   fetchAccordionSectionById,
   fetchCarouselCTAById,
   fetchProperties,
+  fetchPropertiesByFilters,
 };
