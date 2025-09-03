@@ -26,18 +26,15 @@ const Footer: React.FC = () => {
                     Santiago (Casa Matriz)
                   </h4>
                   <p className="text-sm mb-1">
-                    La Concepción 141, Piso 8, Oficina 801, Providencia.
+                    La Concepción 191, Piso 8, Of. 801, Providencia
                   </p>
-                  <p className="text-sm">Teléfono: 2 2484 0000</p>
+                  <p className="text-sm">Tel.: 2 2482 1500 </p>
                 </div>
 
                 <div>
                   <h4 className="font-bold text-lg mb-2">Viña del Mar</h4>
-                  <p className="text-sm mb-1">
-                    7 Norte N° 645, Piso 9, Of. N° 914, Edificio Centro
-                    Libertad.
-                  </p>
-                  <p className="text-sm">Teléfono: 32 2235 320 / 32 2353010</p>
+                  <p className="text-sm mb-1">7 Norte 645, Piso 9, Of. 914</p>
+                  <p className="text-sm">Tel.: 32 2235 320 / 32 2353 010</p>
                 </div>
               </div>
 
@@ -45,18 +42,16 @@ const Footer: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <h4 className="font-bold text-lg mb-2">Antofagasta</h4>
-                  <p className="text-sm mb-1">
-                    Uribe 636, Piso 8, Of, N° 802, Edificio Centro de Negocios.
-                  </p>
-                  <p className="text-sm">Teléfono: 55 2466 2208</p>
+                  <p className="text-sm mb-1">Uribe 636, Piso 8, Of. 802</p>
+                  <p className="text-sm">Tel.: 55 2466 220</p>
                 </div>
 
                 <div>
                   <h4 className="font-bold text-lg mb-2">Concepción</h4>
                   <p className="text-sm mb-1">
-                    Av. Arturo Prat 199, Torre B. Piso 9, Of. Nº 905.
+                    Av. Arturo Prat 199, Torre B, Piso 9, Of. 905
                   </p>
-                  <p className="text-sm">Teléfono: 41 3800080</p>
+                  <p className="text-sm">Tel.: 41 3800 080</p>
                 </div>
               </div>
             </div>
