@@ -3,7 +3,7 @@ export const GQL_PROPERTIES_QUERY = () => {
 query{
   propertyCollection{
     items{
-      id
+      propertyId
       imagesCollection{
         items{
           description
@@ -45,7 +45,7 @@ query Properties(
     }
   ) {
     items {
-      id
+      propertyId
       imagesCollection {
         items {
           description
@@ -66,6 +66,45 @@ query Properties(
       usableArea
       bedrooms
       bathrooms
+      description
+    }
+  }
+}`;
+};
+
+export const GQL_PROPERTIES_QUERY_BY_PROPERTY_ID = () => {
+  return `
+query PropertiesByPropertyId(
+  $propertyId: String!
+) {
+  propertyCollection(
+    where: {
+      propertyId: $propertyId
+    }
+  ) {
+    items {
+      propertyId
+      imagesCollection {
+        items {
+          description
+          height
+          width
+          title
+          url
+        }
+      }
+      destacado
+      propertyType
+      transactionType
+      comuna
+      address
+      price
+      priceCurrency
+      totalArea
+      usableArea
+      bedrooms
+      bathrooms
+      description
     }
   }
 }`;

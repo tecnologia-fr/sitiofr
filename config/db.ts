@@ -9,6 +9,7 @@ import { GQL_CAROUSEL_CTA_QUERY } from "@/gql/carousel";
 import {
   GQL_PROPERTIES_QUERY,
   GQL_PROPERTIES_QUERY_BY_FILTERS,
+  GQL_PROPERTIES_QUERY_BY_PROPERTY_ID,
 } from "@/gql/properties";
 import { PropertyT } from "@/typings";
 
@@ -173,6 +174,24 @@ const fetchPropertiesByFilters = async (
   const properties = data.propertyCollection.items;
   return properties;
 };
+
+const fetchPropertyByPropertyId = async (propertyId: string) => {
+  const query = GQL_PROPERTIES_QUERY_BY_PROPERTY_ID();
+  const variables = {
+    propertyId: propertyId,
+  };
+
+  const res = await fetchContentful(query, variables);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch property");
+  }
+
+  const { data } = await res.json();
+  console.log(data);
+  const property = data.propertyCollection.items[0];
+  return property;
+};
 export {
   fetchCTASectionById,
   fetchBannerById,
@@ -183,4 +202,5 @@ export {
   fetchCarouselCTAById,
   fetchProperties,
   fetchPropertiesByFilters,
+  fetchPropertyByPropertyId,
 };

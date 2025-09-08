@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { PropertyT } from "@/typings";
+import { comunas } from "@/config/comunas";
 
 interface PropertyGridProps {
   properties: PropertyT[];
@@ -27,7 +28,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((property) => (
           <div
-            key={property.id}
+            key={property.propertyId}
             className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             {/* Property Image */}
@@ -89,10 +90,13 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
 
             {/* Property Content */}
             <Link
-              href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
-                property.id
-              }`}
-              className="block p-4 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+              href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                comunas.comunas.find(
+                  (comuna) =>
+                    comuna.name.toLowerCase() === property.comuna.toLowerCase()
+                )?.slug || property.comuna.toLowerCase()
+              }/${property.propertyId}`}
+              className="block p-4 cursor-pointer hover:bg-gray-50 transition-colors duration-200 h-full"
             >
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-3">

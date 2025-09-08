@@ -30,7 +30,7 @@ const menuItems: MenuItem[] = [
     description: "Inicio",
   },
   {
-    title: "Buscar Propiedades",
+    title: "Activos",
     href: "/administracion-de-activos",
     description: "Learn more about our company",
   },

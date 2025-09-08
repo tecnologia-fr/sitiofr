@@ -108,7 +108,7 @@ const CarouselCTASchema = z.object({
 });
 
 const PropertySchema = z.object({
-  id: z.string(),
+  propertyId: z.string(),
   imagesCollection: z.object({
     items: z.array(ImageSchema),
   }),

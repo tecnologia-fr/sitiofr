@@ -12,7 +12,7 @@ export default async function AdministracionDeActivos() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PropertySearchFormHorizontal />
-      <PropertyGrid properties={properties} title="Todas las propiedades" />
+      <PropertyGrid properties={properties} title="Departamentos en Arriendo" />
     </div>
   );
 }

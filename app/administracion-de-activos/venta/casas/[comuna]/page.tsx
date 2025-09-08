@@ -32,7 +32,7 @@ export default async function AdministracionDeActivos({ params }: PageProps) {
       <PropertySearchFormHorizontal />
       <PropertyGrid
         properties={properties}
-        title={`Propiedades en ${comunaName}`}
+        title={`Venta de Casas en ${comunaName}`}
       />
     </div>
   );
