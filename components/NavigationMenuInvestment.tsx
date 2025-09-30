@@ -39,15 +39,15 @@ const menuItems: MenuItem[] = [
     children: [
       {
         title: "Asesoría Financiera",
-        href: "/investment",
-      },
-      {
-        title: "Reestructuración de Pasivos",
         href: "/investment/asesoria-financiera",
       },
       {
-        title: "Financiamiento",
+        title: "Reestructuración de Pasivos",
         href: "/investment/reestructuracion-pasivos",
+      },
+      {
+        title: "Financiamiento",
+        href: "/investment/financiamiento",
       },
     ],
   },
