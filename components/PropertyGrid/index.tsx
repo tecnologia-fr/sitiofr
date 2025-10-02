@@ -137,9 +137,9 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
               <p className="font-light ">
                 {property.propertyType} en {property.transactionType}
               </p>
-              {/* Address */}
+              {/* Name */}
               <h3 className="text-xl font-extrabold text-primario mb-2 h-18">
-                {property.address},{" "}
+                {property.name},{" "}
                 <span className="text-primario capitalize">
                   {property.comuna}
                 </span>

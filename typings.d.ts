@@ -109,6 +109,7 @@ const CarouselCTASchema = z.object({
 
 const PropertySchema = z.object({
   propertyId: z.string(),
+  name: z.string(),
   imagesCollection: z.object({
     items: z.array(ImageSchema),
   }),
@@ -124,6 +125,7 @@ const PropertySchema = z.object({
   usableArea: z.number(),
   bedrooms: z.number(),
   bathrooms: z.number(),
+  mapa: ImageSchema.optional(),
 });
 
 export type CTASectionT = z.infer<typeof CTASectionSchema>;

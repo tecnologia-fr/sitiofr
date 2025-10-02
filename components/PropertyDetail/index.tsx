@@ -163,7 +163,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {property.propertyType} en {property.transactionType}
               </p>
               <h1 className="text-3xl font-extrabold text-primario mb-2">
-                {property.address},{" "}
+                {property.name},{" "}
                 <span className="text-primario capitalize">
                   {property.comuna}
                 </span>
@@ -176,12 +176,12 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {property.priceCurrency}{" "}
                 {property.price
                   .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-              </p>
-              <p className="text-sm text-destacado mt-1 font-light">
-                {property.transactionType === "arriendo"
-                  ? "*Mensual"
-                  : "*Precio de venta"}
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                <span className="text-lg text-destacado  font-light">
+                  {property.transactionType === "arriendo"
+                    ? "*Mensual"
+                    : "*Precio de venta"}
+                </span>
               </p>
             </div>
 
@@ -190,14 +190,75 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
               <h3 className="text-xl font-semibold text-primario mb-4">
                 Características
               </h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
+                {/* Bedrooms */}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                    <img
+                      src="/logo-dormitorio.svg"
+                      alt="Bedrooms"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  <div className="flex text-primario font-normal">
+                    <p className=" mr-1">{property.bedrooms}</p>
+                    <p>dormitorios</p>
+                  </div>
+                </div>
+
+                {/* Bathrooms */}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                    <img
+                      src="/logo-bano.svg"
+                      alt="Bathrooms"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  <div className="flex text-primario font-normal">
+                    <p className=" mr-1">{property.bathrooms}</p>
+                    <p>baños</p>
+                  </div>
+                </div>
+                {/* Bathrooms */}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                    <img
+                      src="/logo-estacionamiento.svg"
+                      alt="Bathrooms"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  <div className="flex text-primario font-normal">
+                    <p className=" mr-1">{property.bathrooms}</p>
+                    <p>estacionamiento</p>
+                  </div>
+                </div>
+                {/* Bathrooms */}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                    <img
+                      src="/logo-bodega.svg"
+                      alt="Bathrooms"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  <div className="flex text-primario font-normal">
+                    <p className=" mr-1">{property.bathrooms}</p>
+
+                    <p>bodega</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-4 ">
                 {/* Total Area */}
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
                     <img
                       src="/logo-total-area.svg"
                       alt="Total Area"
-                      className="w-4 h-4"
+                      className="w-10 h-10"
                     />
                   </div>
                   <div>
@@ -210,51 +271,17 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
 
                 {/* Usable Area */}
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
                     <img
                       src="/logo-util-area.svg"
                       alt="Usable Area"
-                      className="w-4 h-4"
+                      className="w-10 h-10"
                     />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Área Útil</p>
                     <p className="font-semibold text-primario">
                       {property.usableArea} m²
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bedrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-dormitorio.svg"
-                      alt="Bedrooms"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Dormitorios</p>
-                    <p className="font-semibold text-primario">
-                      {property.bedrooms}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bathrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-bano.svg"
-                      alt="Bathrooms"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Baños</p>
-                    <p className="font-semibold text-primario">
-                      {property.bathrooms}
                     </p>
                   </div>
                 </div>
@@ -276,19 +303,33 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 Cotizar
               </Button>
             </div>
-            {/* Description */}
-            <RenderIf condition={property.description}>
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-xl font-semibold text-primario mb-4">
-                  Descripción
-                </h3>
-                <p className="text-gray-700 leading-relaxed">
-                  {property.description}
-                </p>
-              </div>
-            </RenderIf>
           </div>
         </div>
+        {/* Ubicación */}
+        <RenderIf condition={property.mapa}>
+          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12  text-primario">
+            <h3 className="text-2xl font-semibold mb-4">Ubicación</h3>
+            <p className=" leading-relaxed mb-4">{property.address}</p>
+            <ImageComponent
+              src={property?.mapa?.url || ""}
+              alt={property?.mapa?.description || ""}
+              className="w-full h-full lg:h-96 object-cover text-center mx-auto"
+              width={600}
+              height={400}
+            />
+          </div>
+        </RenderIf>
+        {/* Description */}
+        <RenderIf condition={property.description}>
+          <div className="bg-white py-6   border-t-2 border-0 w-full mt-12">
+            <h3 className="text-2xl font-semibold text-primario mb-4">
+              Descripción
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              {property.description}
+            </p>
+          </div>
+        </RenderIf>
       </div>
     </div>
   );

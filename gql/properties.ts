@@ -4,6 +4,7 @@ query{
   propertyCollection{
     items{
       propertyId
+      name
       imagesCollection{
         items{
           description
@@ -46,6 +47,7 @@ query Properties(
   ) {
     items {
       propertyId
+      name
       imagesCollection {
         items {
           description
@@ -84,6 +86,7 @@ query PropertiesByPropertyId(
   ) {
     items {
       propertyId
+      name
       imagesCollection {
         items {
           description
@@ -105,6 +108,13 @@ query PropertiesByPropertyId(
       bedrooms
       bathrooms
       description
+      mapa {
+        description
+        height
+        width
+        title
+        url
+      }
     }
   }
 }`;
