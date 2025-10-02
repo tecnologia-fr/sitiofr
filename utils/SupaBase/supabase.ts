@@ -5,7 +5,7 @@ const createLeadInSupabase = async (
     name: string;
     company: string;
     email: string;
-    motive: string;
+    motive?: string;
     phone: string;
     message: string;
   },

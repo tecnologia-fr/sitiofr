@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel";
 import RenderIf from "@/utils/RenderIf/";
 import { comunas } from "@/config/comunas";
+import { Button } from "@/components/ui/button";
 
 interface PropertyDetailProps {
   property: PropertyT;
@@ -140,49 +141,52 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
           </div>
 
           {/* Property Information */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:ml-12">
             {/* Tags */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-2">
               <RenderIf condition={property.destacado}>
                 <span className="px-3 py-1 text-sm font-medium rounded-full bg-destacado text-white">
                   Destacado
                 </span>
               </RenderIf>
-              <span className="px-3 py-1 text-sm font-medium rounded-full bg-suave text-primario">
-                {property.propertyType.charAt(0).toUpperCase() +
-                  property.propertyType.slice(1)}
+              <span className="px-3 py-1 text-sm font-medium rounded-full bg-suave text-primario capitalize">
+                {property.propertyType}
               </span>
-              <span className="px-3 py-1 text-sm font-medium rounded-full bg-suave text-primario">
-                {property.transactionType.charAt(0).toUpperCase() +
-                  property.transactionType.slice(1)}
+              <span className="px-3 py-1 text-sm font-medium rounded-full bg-suave text-primario capitalize">
+                {property.transactionType}
               </span>
             </div>
 
             {/* Location */}
             <div>
-              <p className="text-sm text-secundario mb-1">{property.comuna}</p>
-              <h1 className="text-3xl font-bold text-primario mb-2">
-                {property.address}
+              <p className="font-light text-xl my-2">
+                {property.propertyType} en {property.transactionType}
+              </p>
+              <h1 className="text-3xl font-extrabold text-primario mb-2">
+                {property.address},{" "}
+                <span className="text-primario capitalize">
+                  {property.comuna}
+                </span>
               </h1>
             </div>
 
             {/* Price */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <p className="text-4xl font-bold text-destacado">
+            <div className=" ">
+              <p className="text-5xl font-black text-destacado">
                 {property.priceCurrency}{" "}
                 {property.price
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-destacado mt-1 font-light">
                 {property.transactionType === "arriendo"
-                  ? "Mensual"
-                  : "Precio de venta"}
+                  ? "*Mensual"
+                  : "*Precio de venta"}
               </p>
             </div>
 
             {/* Property Details */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
               <h3 className="text-xl font-semibold text-primario mb-4">
                 Características
               </h3>
@@ -190,17 +194,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {/* Total Area */}
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-destacado"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 114 0 2 2 0 01-4 0zm6 0a2 2 0 114 0 2 2 0 01-4 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <img
+                      src="/logo-total-area.svg"
+                      alt="Total Area"
+                      className="w-4 h-4"
+                    />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Área Total</p>
@@ -213,17 +211,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {/* Usable Area */}
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-destacado"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <img
+                      src="/logo-util-area.svg"
+                      alt="Usable Area"
+                      className="w-4 h-4"
+                    />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Área Útil</p>
@@ -236,17 +228,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {/* Bedrooms */}
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-destacado"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <img
+                      src="/logo-dormitorio.svg"
+                      alt="Bedrooms"
+                      className="w-4 h-4"
+                    />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Dormitorios</p>
@@ -259,17 +245,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 {/* Bathrooms */}
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-destacado/10 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-destacado"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <img
+                      src="/logo-bano.svg"
+                      alt="Bathrooms"
+                      className="w-4 h-4"
+                    />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Baños</p>
@@ -280,7 +260,22 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 </div>
               </div>
             </div>
-
+            {/* Contact CTA */}
+            <div className="bg-primario p-6 rounded-lg text-white text-center">
+              <h3 className="text-2xl font-semibold mb-2 ">
+                ¿Te interesa esta propiedad?
+              </h3>
+              <p className="mb-4">
+                Contáctanos para más información o agendar una visita.
+              </p>
+              <Button
+                size="lg"
+                showArrow={true}
+                className={`text-lg bg-destacado text-white  mt-8 mb-4 btn-light cursor-pointer lg:text-base py-6 pl-8 pr-2 rounded-full font-bold hover:text-white hover:bg-destacado w-fit `}
+              >
+                Cotizar
+              </Button>
+            </div>
             {/* Description */}
             <RenderIf condition={property.description}>
               <div className="bg-white p-6 rounded-lg shadow-sm border">
@@ -292,19 +287,6 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 </p>
               </div>
             </RenderIf>
-
-            {/* Contact CTA */}
-            <div className="bg-destacado p-6 rounded-lg text-white">
-              <h3 className="text-xl font-semibold mb-2">
-                ¿Te interesa esta propiedad?
-              </h3>
-              <p className="mb-4">
-                Contáctanos para más información o agendar una visita.
-              </p>
-              <button className="bg-white text-destacado px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
-                Contactar
-              </button>
-            </div>
           </div>
         </div>
       </div>

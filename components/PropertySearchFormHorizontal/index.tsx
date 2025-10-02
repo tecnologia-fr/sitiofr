@@ -148,7 +148,7 @@ const PropertySearchFormHorizontal = () => {
   return (
     <section
       className={`relative py-8 px-4 flex flex-col items-center justify-center pt-20justify-center
-      min-h-[44rem] w-full  overflow-hidden bg-primario  `}
+      min-h-[44rem] w-full  overflow-hidden bg-primario bg-cover bg-center bg-no-repeat bg-[url('/hero-activos.jpg')]`}
     >
       <div>
         <h1 className="text-white text-5xl font-light mb-12">

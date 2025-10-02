@@ -27,7 +27,7 @@ const Banner = (props: BannerT) => {
         className={`container py-8 px-4 mx-auto w-full relative z-10 text-${props.textColor} `}
       >
         <div
-          className={`flex lg:items-end items-center justify-center flex-col w-full min-h-48`}
+          className={`flex lg:${props.textAlign} items-center justify-center flex-col w-full min-h-48`}
         >
           <RenderIf condition={props.title}>
             <h2 className={` text-3xl lg:text-4xl  font-light   mb-4`}>
@@ -44,7 +44,7 @@ const Banner = (props: BannerT) => {
               size="lg"
               className={`text-lg ${props.btnBgColor && props.btnBgColor} ${
                 props.btnTextColor && props.btnTextColor
-              }  mt-8 mb-4 btn-light text-lg lg:text-base py-6 px-8 rounded-full font-bold `}
+              }  p-0 my-8 btn-light text-lg lg:text-base py-6 px-8  cursor-pointer rounded-full font-bold hover:text-white hover:bg-destacado w-fit `}
             >
               <Link href={props.btnLink || ""}>{props.btnText}</Link>
             </Button>

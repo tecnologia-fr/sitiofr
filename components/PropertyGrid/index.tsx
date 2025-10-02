@@ -29,10 +29,10 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
         {properties.map((property) => (
           <div
             key={property.propertyId}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             {/* Property Image */}
-            <div className="relative h-48 overflow-hidden group">
+            <div className="relative h-64 overflow-hidden group">
               <RenderIf condition={property.imagesCollection.items.length > 1}>
                 <Carousel
                   className="w-full h-full"
@@ -43,14 +43,24 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
                 >
                   <CarouselContent className="-ml-0">
                     {property.imagesCollection.items.map((image, index) => (
-                      <CarouselItem key={index} className="pl-0 w-full h-48">
-                        <ImageComponent
-                          src={image.url}
-                          alt={`${property.address} - Imagen ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          width={400}
-                          height={300}
-                        />
+                      <CarouselItem key={index} className="pl-0 w-full h-64">
+                        <Link
+                          href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                            comunas.comunas.find(
+                              (comuna) =>
+                                comuna.name.toLowerCase() ===
+                                property.comuna.toLowerCase()
+                            )?.slug || property.comuna.toLowerCase()
+                          }/${property.propertyId}`}
+                        >
+                          <ImageComponent
+                            src={image.url}
+                            alt={`${property.address} - Imagen ${index + 1}`}
+                            className="w-full h-full object-cover"
+                            width={400}
+                            height={300}
+                          />
+                        </Link>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
@@ -62,19 +72,29 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
               <RenderIf
                 condition={property.imagesCollection.items.length === 1}
               >
-                <ImageComponent
-                  src={property.imagesCollection.items[0].url}
-                  alt={property.address}
-                  className="w-full h-full object-cover"
-                  width={400}
-                  height={300}
-                />
+                <Link
+                  href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                    comunas.comunas.find(
+                      (comuna) =>
+                        comuna.name.toLowerCase() ===
+                        property.comuna.toLowerCase()
+                    )?.slug || property.comuna.toLowerCase()
+                  }/${property.propertyId}`}
+                >
+                  <ImageComponent
+                    src={property.imagesCollection.items[0].url}
+                    alt={property.address}
+                    className="w-full h-full object-cover"
+                    width={400}
+                    height={300}
+                  />
+                </Link>
               </RenderIf>
 
               {/* Image Count Badge */}
               <div className="absolute top-3 right-3 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
                 <svg
-                  className="w-4 h-4"
+                  className="w-6 h-6"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -107,99 +127,54 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
                     Destacado
                   </span>
                 </RenderIf>
-                <span className="px-2 py-1 text-xs font-medium rounded-full bg-suave text-primario">
-                  {property.propertyType.charAt(0).toUpperCase() +
-                    property.propertyType.slice(1)}
+                <span className="px-2 py-1 text-xs font-medium rounded-full bg-suave text-primario capitalize">
+                  {property.propertyType}
                 </span>
-                <span className="px-2 py-1 text-xs font-medium rounded-full bg-suave text-primario">
-                  {property.transactionType.charAt(0).toUpperCase() +
-                    property.transactionType.slice(1)}
+                <span className="px-2 py-1 text-xs font-medium rounded-full bg-suave text-primario capitalize">
+                  {property.transactionType}
                 </span>
               </div>
-
-              {/* Comuna */}
-              <p className="text-sm text-secundario mb-1">{property.comuna}</p>
-
+              <p className="font-light ">
+                {property.propertyType} en {property.transactionType}
+              </p>
               {/* Address */}
-              <h3 className="text-lg font-semibold text-primario mb-2">
-                {property.address}
+              <h3 className="text-xl font-extrabold text-primario mb-2 h-18">
+                {property.address},{" "}
+                <span className="text-primario capitalize">
+                  {property.comuna}
+                </span>
               </h3>
 
               {/* Price */}
-              <p className="text-xl font-bold text-destacado mb-2">
-                {property.priceCurrency}{" "}
+              <p className="text-2xl font-black text-destacado mb-2">
+                {property.priceCurrency}
                 {property.price
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
-
-              {/* Promotion or Description */}
-
-              <p className="text-sm text-gray-700 mb-3">
-                {property.description}
+              <p className="font-normal my-4">
+                {" "}
+                {property.bedrooms} dormitorios | {property.bathrooms} baños
               </p>
-
               {/* Property Details */}
-              <div className="flex items-center justify-between text-sm text-secundario">
+              <div className="flex items-center justify-between text-sm text-secundario mt-6 mb-0  mx-auto">
                 {/* Total Area */}
                 <div className="flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <img
+                    src="/logo-total-area.svg"
+                    alt="Total Area"
+                    className="w-10 h-10"
+                  />
                   <span>{property.totalArea} m² totales</span>
                 </div>
                 {/* Usable Area */}
                 <div className="flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <img
+                    src="/logo-util-area.svg"
+                    alt="Usable Area"
+                    className="w-10 h-10"
+                  />
                   <span>{property.usableArea} m² útiles</span>
-                </div>
-                {/* Bedrooms */}
-                <div className="flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>{property.bedrooms}</span>
-                </div>
-                {/* Bathrooms */}
-                <div className="flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span>{property.bathrooms}</span>
                 </div>
               </div>
             </Link>
