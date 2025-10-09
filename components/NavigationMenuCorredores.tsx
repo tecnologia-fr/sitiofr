@@ -64,10 +64,7 @@ const menuItems: MenuItem[] = [
         title: "Seguro Affinity",
         href: "/corredores-de-seguros/seguros-affinity",
       },
-      {
-        title: "Reaseguros",
-        href: "/corredores-de-seguros/reaseguros",
-      },
+
       {
         title: "Siniestros",
         href: "/corredores-de-seguros/seguros-siniestros",
