@@ -6,6 +6,7 @@ import ImageComponent from "@/components/ImageComponent";
 import RenderIf from "@/utils/RenderIf";
 import { textHighlighter } from "@/utils/TextHighlighter";
 
+// this is a cta section component
 const CTASection = (props: CTASectionT) => {
   const bgImageStyle = props.mobileBgImage
     ? `hidden !absolute z-0 h-full w-full lg:block object-cover ${props.brightness}`
