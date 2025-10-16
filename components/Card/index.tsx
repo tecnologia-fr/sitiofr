@@ -33,7 +33,7 @@ const Card = (props: CardT) => {
             <RenderIf condition={props.icon}>
               <div className="h-full"></div>
             </RenderIf>
-            <div className={`${props.icon ? "h-full" : " h-24"}`}>
+            <div className={`${props.icon ? "h-full" : " h-30"}`}>
               <RenderIf condition={props.icon}>
                 <div className="flex justify-center items-center">
                   <ImageComponent
@@ -45,7 +45,7 @@ const Card = (props: CardT) => {
                   />
                 </div>
               </RenderIf>
-              <div className=" p-2 pb-4 text-white">
+              <div className=" px-2 py-4 pb-4 text-white">
                 <RenderIf condition={props.title}>
                   <h4 className="text-2xl font-semibold text-center ">
                     {textHighlighter(props.title || "")}
@@ -53,7 +53,7 @@ const Card = (props: CardT) => {
                 </RenderIf>
                 <RenderIf condition={props.desc}>
                   <span className="h-8 ">
-                    <p className="text-sm text-center ">
+                    <p className="py-2 text-sm text-center ">
                       {textHighlighter(props.desc || "")}
                     </p>
                   </span>
