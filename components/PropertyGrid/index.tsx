@@ -154,7 +154,14 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
               </p>
               <p className="font-normal my-4">
                 {" "}
-                {property.bedrooms} dormitorios | {property.bathrooms} baños
+                {property.bedrooms + " dormitorio"}
+                {property.bedrooms > 1 && "s"}
+                {" | " + property.bathrooms + " baño"}
+                {property.bathrooms > 1 && "s"}
+                {property.parking > 0 &&
+                  " | " + property.parking + " estacionamiento"}
+                {property.storeroom > 0 &&
+                  " | " + property.storeroom + " bodega"}
               </p>
               {/* Property Details */}
               <div className="flex items-center justify-between text-sm text-secundario mt-6 mb-0  mx-auto">

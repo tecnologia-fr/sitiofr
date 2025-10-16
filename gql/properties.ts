@@ -25,6 +25,9 @@ query{
       usableArea
       bedrooms
       bathrooms
+      parking
+      storeroom
+      orientation
       description
     }
   }
@@ -68,6 +71,9 @@ query Properties(
       usableArea
       bedrooms
       bathrooms
+      parking
+      storeroom
+      orientation
       description
     }
   }
@@ -107,6 +113,9 @@ query PropertiesByPropertyId(
       usableArea
       bedrooms
       bathrooms
+      parking
+      storeroom
+      orientation
       description
       mapa {
         description
@@ -115,6 +124,8 @@ query PropertiesByPropertyId(
         title
         url
       }
+      highlights
+      requirements
     }
   }
 }`;

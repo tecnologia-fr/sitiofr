@@ -125,7 +125,12 @@ const PropertySchema = z.object({
   usableArea: z.number(),
   bedrooms: z.number(),
   bathrooms: z.number(),
+  parking: z.number(),
+  storeroom: z.number(),
+  orientation: z.string(),
   mapa: ImageSchema.optional(),
+  highlights: z.array(z.string()),
+  requirements: z.array(z.string()),
 });
 
 export type CTASectionT = z.infer<typeof CTASectionSchema>;

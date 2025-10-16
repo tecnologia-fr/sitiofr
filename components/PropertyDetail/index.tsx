@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ImageComponent from "../ImageComponent";
 import { PropertyT } from "@/typings";
@@ -19,6 +19,92 @@ interface PropertyDetailProps {
 }
 
 const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
+  const [isTheaterMode, setIsTheaterMode] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Check if device is desktop
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isTheaterMode) return;
+
+      switch (event.key) {
+        case "Escape":
+          setIsTheaterMode(false);
+          break;
+        case "ArrowLeft":
+          event.preventDefault();
+          setCurrentImageIndex((prev) =>
+            prev === 0 ? property.imagesCollection.items.length - 1 : prev - 1
+          );
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          setCurrentImageIndex((prev) =>
+            prev === property.imagesCollection.items.length - 1 ? 0 : prev + 1
+          );
+          break;
+      }
+    };
+
+    if (isTheaterMode) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [isTheaterMode, property.imagesCollection.items.length]);
+
+  const openTheaterMode = (imageIndex: number, event?: React.MouseEvent) => {
+    if (isDesktop) {
+      // Check if the click was on a carousel arrow button
+      if (event) {
+        const target = event.target as HTMLElement;
+        const isCarouselArrow =
+          target.closest('[data-slot="carousel-previous"]') ||
+          target.closest('[data-slot="carousel-next"]');
+        if (isCarouselArrow) {
+          return; // Don't open theater mode if clicking on carousel arrows
+        }
+      }
+      setCurrentImageIndex(imageIndex);
+      setIsTheaterMode(true);
+    }
+  };
+
+  const closeTheaterMode = () => {
+    setIsTheaterMode(false);
+  };
+
+  const navigateImage = (direction: "prev" | "next") => {
+    if (direction === "prev") {
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? property.imagesCollection.items.length - 1 : prev - 1
+      );
+    } else {
+      setCurrentImageIndex((prev) =>
+        prev === property.imagesCollection.items.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white mt-12">
       <div className="fixed top-0 left-0 w-full h-18 bg-primario z-40" />
@@ -83,30 +169,40 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                   <CarouselContent className="-ml-0">
                     {property.imagesCollection.items.map((image, index) => (
                       <CarouselItem key={index} className="pl-0 w-full h-96">
-                        <ImageComponent
-                          src={image.url}
-                          alt={`${property.address} - Imagen ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          width={600}
-                          height={400}
-                        />
+                        <div
+                          className="w-full h-full cursor-pointer"
+                          onClick={(e) => openTheaterMode(index, e)}
+                        >
+                          <ImageComponent
+                            src={image.url}
+                            alt={`${property.address} - Imagen ${index + 1}`}
+                            className="w-full h-full object-cover"
+                            width={600}
+                            height={400}
+                          />
+                        </div>
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 bg-destacado/50 text-white border-0 opacity-100 hover:opacity-80 transition-opacity duration-200 flex items-center justify-center place-items-center cursor-pointer" />
-                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 bg-destacado/50 text-white border-0 opacity-100 hover:opacity-80 transition-opacity duration-200 flex items-center justify-center place-items-center cursor-pointer" />
+                  <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 bg-destacado/50 text-white border-0 opacity-100 hover:opacity-80 transition-opacity duration-200 flex items-center justify-center place-items-center cursor-pointer z-10" />
+                  <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 bg-destacado/50 text-white border-0 opacity-100 hover:opacity-80 transition-opacity duration-200 flex items-center justify-center place-items-center cursor-pointer z-10" />
                 </Carousel>
               </RenderIf>
               <RenderIf
                 condition={property.imagesCollection.items.length === 1}
               >
-                <ImageComponent
-                  src={property.imagesCollection.items[0].url}
-                  alt={`${property.address} - Imagen principal`}
-                  className="w-full h-full object-cover"
-                  width={600}
-                  height={400}
-                />
+                <div
+                  className="w-full h-full cursor-pointer"
+                  onClick={(e) => openTheaterMode(0, e)}
+                >
+                  <ImageComponent
+                    src={property.imagesCollection.items[0].url}
+                    alt={`${property.address} - Imagen principal`}
+                    className="w-full h-full object-cover"
+                    width={600}
+                    height={400}
+                  />
+                </div>
               </RenderIf>
             </div>
 
@@ -114,11 +210,12 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             <RenderIf condition={property.imagesCollection.items.length > 1}>
               <div className="grid grid-cols-4 gap-2">
                 {property.imagesCollection.items
-                  .slice(0, 4)
+                  .slice(0, 16)
                   .map((image, index) => (
                     <div
                       key={index}
                       className="relative h-20 overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                      onClick={() => openTheaterMode(index)}
                     >
                       <ImageComponent
                         src={image.url}
@@ -129,7 +226,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                       />
                     </div>
                   ))}
-                {property.imagesCollection.items.length > 4 && (
+                {property.imagesCollection.items.length > 16 && (
                   <div className="relative h-20 overflow-hidden rounded-lg bg-gray-200 flex items-center justify-center">
                     <span className="text-sm font-medium text-gray-600">
                       +{property.imagesCollection.items.length - 4}
@@ -191,66 +288,88 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 Características
               </h3>
               <div className="grid grid-cols-1 gap-4">
-                {/* Bedrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-dormitorio.svg"
-                      alt="Bedrooms"
-                      className="w-6 h-6"
-                    />
+                <RenderIf condition={property.bedrooms}>
+                  {/* Bedrooms */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                      <img
+                        src="/logo-dormitorio.svg"
+                        alt="Bedrooms"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <div className="flex text-primario font-normal">
+                      <p className=" mr-1">{property.bedrooms}</p>
+                      <p>dormitorios</p>
+                    </div>
                   </div>
-                  <div className="flex text-primario font-normal">
-                    <p className=" mr-1">{property.bedrooms}</p>
-                    <p>dormitorios</p>
-                  </div>
-                </div>
+                </RenderIf>
 
                 {/* Bathrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-bano.svg"
-                      alt="Bathrooms"
-                      className="w-6 h-6"
-                    />
+                <RenderIf condition={property.bathrooms}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                      <img
+                        src="/logo-bano.svg"
+                        alt="Bathrooms"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <div className="flex text-primario font-normal">
+                      <p className=" mr-1">{property.bathrooms}</p>
+                      <p>baños</p>
+                    </div>
                   </div>
-                  <div className="flex text-primario font-normal">
-                    <p className=" mr-1">{property.bathrooms}</p>
-                    <p>baños</p>
+                </RenderIf>
+                {/* Parking */}
+                <RenderIf condition={property.parking}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                      <img
+                        src="/logo-estacionamiento.svg"
+                        alt="Parking"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <div className="flex text-primario font-normal">
+                      <p className=" mr-1">{property.parking}</p>
+                      <p>estacionamiento</p>
+                    </div>
                   </div>
-                </div>
-                {/* Bathrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-estacionamiento.svg"
-                      alt="Bathrooms"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                  <div className="flex text-primario font-normal">
-                    <p className=" mr-1">{property.bathrooms}</p>
-                    <p>estacionamiento</p>
-                  </div>
-                </div>
-                {/* Bathrooms */}
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8  rounded-full flex items-center justify-center">
-                    <img
-                      src="/logo-bodega.svg"
-                      alt="Bathrooms"
-                      className="w-6 h-6"
-                    />
-                  </div>
-                  <div className="flex text-primario font-normal">
-                    <p className=" mr-1">{property.bathrooms}</p>
+                </RenderIf>
+                {/* Storeroom */}
+                <RenderIf condition={property.storeroom}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                      <img
+                        src="/logo-bodega.svg"
+                        alt="Storeroom"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <div className="flex text-primario font-normal">
+                      <p className=" mr-1">{property.storeroom}</p>
 
-                    <p>bodega</p>
+                      <p>bodega</p>
+                    </div>
                   </div>
-                </div>
+                </RenderIf>
+                {/* Orientation */}
+                <RenderIf condition={property.orientation}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8  rounded-full flex items-center justify-center">
+                      <img
+                        src="/logo-orientacion.svg"
+                        alt="Orientation"
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <div className="flex text-primario font-normal">
+                      <p>orientación {property.orientation}</p>
+                    </div>
+                  </div>
+                </RenderIf>
               </div>
-
               <div className="grid grid-cols-2 gap-4 mt-4 ">
                 {/* Total Area */}
                 <div className="flex items-center gap-3">
@@ -305,6 +424,45 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             </div>
           </div>
         </div>
+        {/* Requirements */}
+        <RenderIf
+          condition={
+            property.requirements &&
+            property.requirements.length > 0 &&
+            property.transactionType !== "venta"
+          }
+        >
+          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12 text-primario">
+            <h2 className="text-2xl font-semibold mb-6">Requisitos</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {property.requirements?.map((requirement, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="w-6 h-6 flex-shrink-0">
+                    <img
+                      src="/bullet-point.svg"
+                      alt="Bullet point"
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <span className="text-primario font-normal">
+                    {requirement}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </RenderIf>
+        {/* Description */}
+        <RenderIf condition={property.description}>
+          <div className="bg-white py-6   border-t-2 border-0 w-full mt-12">
+            <h3 className="text-2xl font-semibold text-primario mb-4">
+              Descripción
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              {property.description}
+            </p>
+          </div>
+        </RenderIf>
         {/* Ubicación */}
         <RenderIf condition={property.mapa}>
           <div className="bg-white py-6 border-t-2 border-0 w-full mt-12  text-primario">
@@ -319,18 +477,137 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             />
           </div>
         </RenderIf>
-        {/* Description */}
-        <RenderIf condition={property.description}>
-          <div className="bg-white py-6   border-t-2 border-0 w-full mt-12">
-            <h3 className="text-2xl font-semibold text-primario mb-4">
-              Descripción
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              {property.description}
-            </p>
+
+        {/* Comodidades y equipamientos */}
+        <RenderIf
+          condition={property.highlights && property.highlights.length > 0}
+        >
+          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12 text-primario">
+            <h2 className="text-2xl font-semibold mb-6">
+              Comodidades y equipamientos
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {property.highlights?.map((highlight, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="w-6 h-6 flex-shrink-0">
+                    <img
+                      src="/bullet-point.svg"
+                      alt="Bullet point"
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <span className="text-primario font-normal">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </RenderIf>
+        {/* Requirements */}
+        <RenderIf
+          condition={
+            property.requirements &&
+            property.requirements.length > 0 &&
+            property.transactionType === "venta"
+          }
+        >
+          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12 text-primario">
+            <h2 className="text-2xl font-semibold mb-6">Requisitos</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {property.requirements?.map((requirement, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="w-6 h-6 flex-shrink-0">
+                    <img
+                      src="/bullet-point.svg"
+                      alt="Bullet point"
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <span className="text-primario font-normal">
+                    {requirement}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </RenderIf>
       </div>
+
+      {/* Theater Mode Overlay */}
+      {isTheaterMode && (
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
+          {/* Close Button */}
+          <button
+            onClick={closeTheaterMode}
+            className="absolute top-4 right-4 text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+            aria-label="Cerrar vista de teatro"
+          >
+            ✕
+          </button>
+
+          {/* Navigation Arrows */}
+          {property.imagesCollection.items.length > 1 && (
+            <>
+              <button
+                onClick={() => navigateImage("prev")}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+                aria-label="Imagen anterior"
+              >
+                ‹
+              </button>
+              <button
+                onClick={() => navigateImage("next")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+                aria-label="Imagen siguiente"
+              >
+                ›
+              </button>
+            </>
+          )}
+
+          {/* Main Image */}
+          <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center p-8">
+            <ImageComponent
+              src={property.imagesCollection.items[currentImageIndex].url}
+              alt={`${property.address} - Imagen ${currentImageIndex + 1}`}
+              className="max-w-full max-h-full object-contain"
+              width={1200}
+              height={800}
+            />
+          </div>
+
+          {/* Image Counter */}
+          {property.imagesCollection.items.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded-full">
+              {currentImageIndex + 1} / {property.imagesCollection.items.length}
+            </div>
+          )}
+
+          {/* Thumbnail Strip */}
+          {property.imagesCollection.items.length > 1 && (
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-4">
+              {property.imagesCollection.items.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`relative w-16 h-12 overflow-hidden rounded-lg flex-shrink-0 transition-opacity duration-200 ${
+                    index === currentImageIndex
+                      ? "opacity-100 ring-2 ring-white"
+                      : "opacity-60 hover:opacity-80"
+                  }`}
+                >
+                  <ImageComponent
+                    src={image.url}
+                    alt={`${property.address} - Thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    width={64}
+                    height={48}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
