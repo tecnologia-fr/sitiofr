@@ -45,7 +45,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
                     {property.imagesCollection.items.map((image, index) => (
                       <CarouselItem key={index} className="pl-0 w-full h-64">
                         <Link
-                          href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                          href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
                             comunas.comunas.find(
                               (comuna) =>
                                 comuna.name.toLowerCase() ===
@@ -73,7 +73,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
                 condition={property.imagesCollection.items.length === 1}
               >
                 <Link
-                  href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                  href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
                     comunas.comunas.find(
                       (comuna) =>
                         comuna.name.toLowerCase() ===
@@ -110,7 +110,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
 
             {/* Property Content */}
             <Link
-              href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+              href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
                 comunas.comunas.find(
                   (comuna) =>
                     comuna.name.toLowerCase() === property.comuna.toLowerCase()
@@ -154,9 +154,9 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
               </p>
               <p className="font-normal my-4">
                 {" "}
-                {property.bedrooms + " dormitorio"}
+                {property.bedrooms > 0 && property.bedrooms + " dormitorio"}
                 {property.bedrooms > 1 && "s"}
-                {" | " + property.bathrooms + " baño"}
+                {property.bathrooms > 0 && " | " + property.bathrooms + " baño"}
                 {property.bathrooms > 1 && "s"}
                 {property.parking > 0 &&
                   " | " + property.parking + " estacionamiento"}

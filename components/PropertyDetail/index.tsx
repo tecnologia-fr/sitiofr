@@ -128,18 +128,17 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             <li>/</li>
             <li>
               <Link
-                href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s`}
+                href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}`}
                 className="hover:text-destacado"
               >
                 {property.propertyType.charAt(0).toUpperCase() +
                   property.propertyType.slice(1)}
-                s
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link
-                href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}s/${
+                href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
                   comunas.comunas.find(
                     (comuna) =>
                       comuna.name.toLowerCase() ===

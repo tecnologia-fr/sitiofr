@@ -7,7 +7,7 @@ import { comunas } from "@/config/comunas";
 const PropertySearchFormHorizontal = () => {
   const router = useRouter();
   const [transactionType, setTransactionType] = useState("venta");
-  const [propertyType, setPropertyType] = useState("departamentos");
+  const [propertyType, setPropertyType] = useState("departamento");
   const [searchLocation, setSearchLocation] = useState("");
   const [selectedComuna, setSelectedComuna] = useState<{
     slug: string;
@@ -27,10 +27,10 @@ const PropertySearchFormHorizontal = () => {
   ];
 
   const propertyTypes = [
-    { value: "departamentos", label: "Departamentos" },
-    { value: "casas", label: "Casas" },
-    { value: "locales", label: "Locales" },
-    { value: "terrenos", label: "Terrenos" },
+    { value: "departamento", label: "Departamento" },
+    { value: "casa", label: "Casa" },
+    { value: "local", label: "Local" },
+    { value: "terreno", label: "Terreno" },
   ];
 
   const handleSearch = () => {
