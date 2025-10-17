@@ -538,7 +538,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
           {/* Close Button */}
           <button
             onClick={closeTheaterMode}
-            className="absolute top-4 right-4 text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+            className="cursor-pointer absolute top-4 right-4 text-white text-3xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
             aria-label="Cerrar vista de teatro"
           >
             ✕
@@ -549,14 +549,14 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             <>
               <button
                 onClick={() => navigateImage("prev")}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+                className="bg-destacado flex place-items-center justify-center pb-2 m-0  rounded-full cursor-pointer w-10 h-10 absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
                 aria-label="Imagen anterior"
               >
                 ‹
               </button>
               <button
                 onClick={() => navigateImage("next")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
+                className="bg-destacado flex place-items-center justify-center pb-2 m-0 rounded-full cursor-pointer w-10 h-10 absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-300 transition-colors duration-200 z-10"
                 aria-label="Imagen siguiente"
               >
                 ›
