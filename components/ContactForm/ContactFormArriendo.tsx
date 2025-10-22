@@ -2,25 +2,26 @@ import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 
 // Server Action
-async function createLeadCorredora(formData: FormData) {
+async function createLeadArriendo(formData: FormData) {
   "use server";
 
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
+  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
 
   await createLeadInSupabase(
-    { name, company, email, phone, message },
-    "leads-investment"
+    { name, company, email, motive, phone, message },
+    "leads-arriendo"
   );
   // You could send to an API endpoint, database, or email service
 }
 
-export function ContactFormInvestment() {
+export function ContactFormArriendo() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
@@ -38,13 +39,10 @@ export function ContactFormInvestment() {
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-20 lg:pt-44">
           <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
-            Contáctanos
+            ¿Quiéres arrendar tu propiedad?
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
-            Estamos listos para ofrecerte la mejor solución acorde a{" "}
-            <span className="underline decoration-destacado decoration-4 underline-offset-8 font-bold">
-              tus necesidades
-            </span>
+            Completa el formulario y te contactaremos.
           </p>
         </div>
 
@@ -104,7 +102,7 @@ export function ContactFormInvestment() {
                     </svg>
                     <span className="text-gray-700">
                       Telefono: <br></br>
-                      <span className="font-bold">+569 123 44 56</span>
+                      <span className="font-bold">+56 2 2484 0000</span>
                     </span>
                   </div>
                 </div>
@@ -112,7 +110,7 @@ export function ContactFormInvestment() {
 
               {/* Right Panel - Contact Form */}
               <div>
-                <form className="space-y-6" action={createLeadCorredora}>
+                <form className="space-y-6" action={createLeadArriendo}>
                   {/* Name Field */}
                   <div>
                     <label
@@ -125,23 +123,41 @@ export function ContactFormInvestment() {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Jane Smith"
+                      placeholder="Inserta tu nombre"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <div>
                     <label
-                      htmlFor="company"
+                      htmlFor="rut"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre de la empresa
+                      RUT*
                     </label>
                     <input
                       type="text"
-                      id="company"
-                      name="company"
-                      placeholder="Ej: Falabella"
+                      id="rut"
+                      name="rut"
+                      placeholder="Ej: 12345678-9"
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Phone Field */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-primarui font-bold mb-2"
+                    >
+                      Teléfono
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+569 1234 5678"
+                      required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -157,44 +173,27 @@ export function ContactFormInvestment() {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="janesmith@gmail.com"
+                      placeholder="Ej: juan.rodriguez@falabella.com"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
 
-                  {/* Phone Field */}
+                  {/* Name Field */}
                   <div>
                     <label
-                      htmlFor="phone"
-                      className="block text-primarui font-bold mb-2"
-                    >
-                      Teléfono*
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="+569 1234 5678"
-                      required
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Message Field */}
-                  <div>
-                    <label
-                      htmlFor="message"
+                      htmlFor="comuna"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Mensaje
+                      Comuna*
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      placeholder="Escribe tu mensaje..."
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    <input
+                      type="text"
+                      id="comuna"
+                      name="comuna"
+                      placeholder="Providencia"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
 

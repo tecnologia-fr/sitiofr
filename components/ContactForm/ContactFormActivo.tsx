@@ -8,19 +8,20 @@ async function createLeadCorredora(formData: FormData) {
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
+  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
 
   await createLeadInSupabase(
-    { name, company, email, phone, message },
-    "leads-investment"
+    { name, company, email, motive, phone, message },
+    "leads-corredora"
   );
   // You could send to an API endpoint, database, or email service
 }
 
-export function ContactFormInvestment() {
+export function ContactFormCorredora() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
@@ -36,8 +37,8 @@ export function ContactFormInvestment() {
         }}
       >
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-20 lg:pt-44">
-          <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
+        <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-44">
+          <h1 className="text-white text-5xl md:text-6xl font-bold mb-4">
             Contáctanos
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
@@ -49,11 +50,11 @@ export function ContactFormInvestment() {
         </div>
 
         {/* Floating Contact Form Card */}
-        <div className="absolute lg:bottom-0 -bottom-16 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-6xl px-4">
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-6xl px-4">
           <div className="bg-white rounded-xl shadow-2xl p-8">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Panel - Information */}
-              <div className="space-y-6 lg:mt-12 mt-4">
+              <div className="space-y-6 mt-12">
                 <div>
                   <p className="text-destacado text-sm font-bold uppercase tracking-wide mb-2">
                     ESTAMOS AQUÍ PARA AYUDARTE
@@ -104,7 +105,7 @@ export function ContactFormInvestment() {
                     </svg>
                     <span className="text-gray-700">
                       Telefono: <br></br>
-                      <span className="font-bold">+569 123 44 56</span>
+                      <span className="font-bold">+56 2 2484 0000</span>
                     </span>
                   </div>
                 </div>
@@ -125,7 +126,7 @@ export function ContactFormInvestment() {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Jane Smith"
+                      placeholder="Inserta tu nombre"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -145,6 +146,7 @@ export function ContactFormInvestment() {
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
+
                   {/* Email Field */}
                   <div>
                     <label
@@ -157,10 +159,45 @@ export function ContactFormInvestment() {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="janesmith@gmail.com"
+                      placeholder="Ej: juan.rodriguez@falabella.com"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
+                  </div>
+
+                  {/* Motive Field */}
+                  <div>
+                    <label
+                      htmlFor="motive"
+                      className="block text-gray-800 font-bold mb-2"
+                    >
+                      Motivo del contacto
+                    </label>
+                    <select
+                      id="motive"
+                      name="motive"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Seleccionar...</option>
+                      <option value="Consulta sobre Productos/Servicios">
+                        Consulta sobre Productos/Servicios
+                      </option>
+                      <option value="Consulta sobre Producto/Servicio Contratado">
+                        Consulta sobre Producto/Servicio Contratado
+                      </option>
+                      <option
+                        value="Solicitud de Cotización
+"
+                      >
+                        Solicitud de Cotización
+                      </option>
+                      <option value="Solicitud sobre Producto/Servicio Contratado">
+                        Solicitud sobre Producto/Servicio Contratado
+                      </option>
+                      <option value="Reclamo">Reclamo</option>
+                      <option value="Felicitaciones">Felicitaciones</option>
+                    </select>
                   </div>
 
                   {/* Phone Field */}
@@ -169,7 +206,7 @@ export function ContactFormInvestment() {
                       htmlFor="phone"
                       className="block text-primarui font-bold mb-2"
                     >
-                      Teléfono*
+                      Teléfono
                     </label>
                     <input
                       type="tel"

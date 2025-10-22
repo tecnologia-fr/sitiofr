@@ -41,7 +41,7 @@ const AccordionSection = (props: AccordionSectionT) => {
                       {item.title}
                     </AccordionTrigger>
                     <AccordionContent className="text-left text-lg font-light w-full">
-                      {item.content}
+                      {textHighlighter(item.content || "")}
                     </AccordionContent>
                   </AccordionItem>
                 );

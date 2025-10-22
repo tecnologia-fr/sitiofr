@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { comunas } from "@/config/comunas";
 
 const PropertySearchFormHorizontal = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [transactionType, setTransactionType] = useState("venta");
   const [propertyType, setPropertyType] = useState("departamento");
   const [searchLocation, setSearchLocation] = useState("");
@@ -25,6 +26,23 @@ const PropertySearchFormHorizontal = () => {
     { value: "venta", label: "Venta" },
     { value: "arriendo", label: "Arriendo" },
   ];
+
+  // Function to extract transaction type from URL path
+  const getTransactionTypeFromPath = (path: string): string => {
+    // URL pattern: /administracion-de-activos/{transactionType}/{propertyType}/...
+    const pathSegments = path.split("/").filter((segment) => segment);
+
+    // Check if we're in the administracion-de-activos section
+    if (pathSegments[0] === "administracion-de-activos" && pathSegments[1]) {
+      const extractedType = pathSegments[1];
+      // Validate that it's a valid transaction type
+      if (transactionTypes.some((type) => type.value === extractedType)) {
+        return extractedType;
+      }
+    }
+
+    return "venta"; // Default fallback
+  };
 
   const propertyTypes = [
     { value: "departamento", label: "Departamento" },
@@ -144,6 +162,12 @@ const PropertySearchFormHorizontal = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Set transaction type based on current URL path
+  useEffect(() => {
+    const extractedTransactionType = getTransactionTypeFromPath(pathname);
+    setTransactionType(extractedTransactionType);
+  }, [pathname]);
 
   return (
     <section

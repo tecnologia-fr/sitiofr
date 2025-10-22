@@ -12,7 +12,7 @@ export default async function AdministracionDeActivos() {
   const ctaProps: CTASectionT = {
     title: "{Publica tu}\n {{propiedad}}\n \n ¡y llega a\n miles de usuarios!",
     btnText: "Publica",
-    btnLink: "/contacto",
+    btnLink: "/administracion-de-activos/propietario-arriendo/contacto",
     name: "administracion-de-activos-banner",
 
     bgColor: "bg-primario",
