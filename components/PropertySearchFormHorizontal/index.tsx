@@ -44,6 +44,23 @@ const PropertySearchFormHorizontal = () => {
     return "venta"; // Default fallback
   };
 
+  // Function to extract property type from URL path
+  const getPropertyTypeFromPath = (path: string): string => {
+    // URL pattern: /administracion-de-activos/{transactionType}/{propertyType}/...
+    const pathSegments = path.split("/").filter((segment) => segment);
+
+    // Check if we're in the administracion-de-activos section
+    if (pathSegments[0] === "administracion-de-activos" && pathSegments[2]) {
+      const extractedType = pathSegments[2];
+      // Validate that it's a valid property type
+      if (propertyTypes.some((type) => type.value === extractedType)) {
+        return extractedType;
+      }
+    }
+
+    return "departamento"; // Default fallback
+  };
+
   const propertyTypes = [
     { value: "departamento", label: "Departamento" },
     { value: "casa", label: "Casa" },
@@ -167,6 +184,12 @@ const PropertySearchFormHorizontal = () => {
   useEffect(() => {
     const extractedTransactionType = getTransactionTypeFromPath(pathname);
     setTransactionType(extractedTransactionType);
+  }, [pathname]);
+
+  // Set property type based on current URL path
+  useEffect(() => {
+    const extractedPropertyType = getPropertyTypeFromPath(pathname);
+    setPropertyType(extractedPropertyType);
   }, [pathname]);
 
   return (
