@@ -13,6 +13,7 @@ import {
 import RenderIf from "@/utils/RenderIf/";
 import { comunas } from "@/config/comunas";
 import { Button } from "@/components/ui/button";
+import { textHighlighter } from "@/utils/TextHighlighter";
 
 interface PropertyDetailProps {
   property: PropertyT;
@@ -176,8 +177,8 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                             src={image.url}
                             alt={`${property.address} - Imagen ${index + 1}`}
                             className="w-full h-full object-cover"
-                            width={600}
-                            height={400}
+                            width={1200}
+                            height={800}
                           />
                         </div>
                       </CarouselItem>
@@ -458,7 +459,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
               Descripción
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              {property.description}
+              {textHighlighter(property.description || "")}
             </p>
           </div>
         </RenderIf>
