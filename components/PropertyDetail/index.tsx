@@ -471,9 +471,9 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             <ImageComponent
               src={property?.mapa?.url || ""}
               alt={property?.mapa?.description || ""}
-              className="w-full h-full lg:h-96 object-cover text-center mx-auto"
-              width={600}
-              height={400}
+              className="w-full lg:w-4/5   h-full object-cover text-center mx-auto"
+              width={1200}
+              height={800}
             />
           </div>
         </RenderIf>

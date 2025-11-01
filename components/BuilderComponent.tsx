@@ -70,8 +70,9 @@ const fetchComponent = async (type: string, id: string, pathname?: string) => {
       return <CarouselCTA {...carouselCTAProps}></CarouselCTA>;
 
     case "PropertyGrid":
-      let properties: PropertyT[] = await fetchProperties();
-      return <PropertyGrid properties={properties}></PropertyGrid>;
+      let { properties, total } = await fetchProperties();
+      let PropertyGridTotalPages = Math.ceil(total / 21);
+      return <PropertyGrid properties={properties} currentPage={1} totalPages={PropertyGridTotalPages}></PropertyGrid>;
     default:
       return null;
   }

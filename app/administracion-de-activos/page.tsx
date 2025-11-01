@@ -7,8 +7,15 @@ import PropertySearchFormHorizontal from "@/components/PropertySearchFormHorizon
 import CTASection from "@/components/CTASection";
 import { CTASectionT } from "@/typings";
 
-export default async function AdministracionDeActivos() {
-  const properties: PropertyT[] = await fetchProperties();
+interface PageProps {
+  searchParams: Promise<{ page?: string }>;
+}
+
+export default async function AdministracionDeActivos({ searchParams }: PageProps) {
+  const { page } = await searchParams;
+  const currentPage = page ? parseInt(page, 10) : 1;
+  const { properties, total } = await fetchProperties(currentPage);
+  const totalPages = Math.ceil(total / 21);
   const ctaProps: CTASectionT = {
     title: "{Publica tu}\n {{propiedad}}\n \n ¡y llega a\n miles de usuarios!",
     btnText: "Publica",
@@ -31,7 +38,13 @@ export default async function AdministracionDeActivos() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PropertySearchFormHorizontal />
-      <PropertyGrid properties={properties} title="Todas las propiedades" />
+      <PropertyGrid 
+        properties={properties} 
+        title="Todas las propiedades"
+        currentPage={currentPage}
+        totalPages={totalPages}
+        basePath="/administracion-de-activos"
+      />
       <CTASection {...ctaProps} />
     </div>
   );

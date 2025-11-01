@@ -9,15 +9,93 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { PropertyT } from "@/typings";
 import { comunas } from "@/config/comunas";
 
 interface PropertyGridProps {
   properties: PropertyT[];
   title?: string;
+  currentPage?: number;
+  totalPages?: number;
+  basePath?: string;
 }
 
-const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
+const PropertyGrid: React.FC<PropertyGridProps> = ({
+  properties,
+  title,
+  currentPage,
+  totalPages,
+  basePath,
+}) => {
+  const getPageUrl = (page: number) => {
+    if (!basePath) return "#";
+    return page === 1 ? basePath : `${basePath}?page=${page}`;
+  };
+
+  const renderPageNumbers = () => {
+    if (!currentPage || !totalPages) return null;
+
+    const pages: (number | "ellipsis")[] = [];
+    const maxVisible = 7;
+    const sideItems = 2;
+
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+
+      if (currentPage > sideItems + 2) {
+        pages.push("ellipsis");
+      }
+
+      for (
+        let i = Math.max(2, currentPage - sideItems);
+        i <= Math.min(totalPages - 1, currentPage + sideItems);
+        i++
+      ) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - sideItems - 1) {
+        pages.push("ellipsis");
+      }
+
+      pages.push(totalPages);
+    }
+
+    return pages.map((page, index) => {
+      if (page === "ellipsis") {
+        return (
+          <PaginationItem key={`ellipsis-${index}`}>
+            <PaginationEllipsis />
+          </PaginationItem>
+        );
+      }
+
+      return (
+        <PaginationItem key={page}>
+          <PaginationLink
+            href={getPageUrl(page)}
+            isActive={page === currentPage}
+          >
+            {page}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    });
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
       {title && (
@@ -188,6 +266,23 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, title }) => {
           </div>
         ))}
       </div>
+      {currentPage && totalPages && totalPages > 1 && (
+        <Pagination className="mt-8">
+          <PaginationContent>
+            {currentPage > 1 && (
+              <PaginationItem>
+                <PaginationPrevious href={getPageUrl(currentPage - 1)} />
+              </PaginationItem>
+            )}
+            {renderPageNumbers()}
+            {currentPage < totalPages && (
+              <PaginationItem>
+                <PaginationNext href={getPageUrl(currentPage + 1)} />
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

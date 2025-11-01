@@ -1,7 +1,14 @@
 export const GQL_PROPERTIES_QUERY = () => {
   return `
-query{
-  propertyCollection{
+query Properties(
+  $limit: Int
+  $skip: Int
+) {
+  propertyCollection(
+    limit: $limit
+    skip: $skip
+  ){
+    total
     items{
       propertyId
       name
@@ -40,6 +47,8 @@ query Properties(
   $transactionType: String!
   $propertyType: String
   $comuna: String
+  $limit: Int
+  $skip: Int
 ) {
   propertyCollection(
     where: {
@@ -47,7 +56,10 @@ query Properties(
       propertyType: $propertyType
       comuna: $comuna
     }
+    limit: $limit
+    skip: $skip
   ) {
+    total
     items {
       propertyId
       name

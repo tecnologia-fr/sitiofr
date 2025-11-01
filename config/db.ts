@@ -148,31 +148,51 @@ const fetchCarouselCTAById = async (id: string) => {
   return carousel;
 };
 
-const fetchProperties = async () => {
+const fetchProperties = async (page?: number) => {
   const query = GQL_PROPERTIES_QUERY();
-  const res = await fetchContentful(query);
+  const currentPage = page || 1;
+  const limit = 21;
+  const skip = (currentPage - 1) * limit;
+
+  const variables = {
+    limit,
+    skip,
+  };
+
+  const res = await fetchContentful(query, variables);
   const { data } = await res.json();
   const properties = data.propertyCollection.items;
-  return properties;
+  const total = data.propertyCollection.total;
+  return { properties, total };
 };
 
 const fetchPropertiesByFilters = async (
   transactionType: string,
   propertyType: string,
-  comuna?: string
+  comuna?: string,
+  page?: number
 ) => {
   const query = GQL_PROPERTIES_QUERY_BY_FILTERS();
-  const variables = {
+  const currentPage = page || 1;
+  const limit = 21;
+  const skip = (currentPage - 1) * limit;
+
+  const variables: any = {
     transactionType: transactionType,
     propertyType: propertyType,
-    comuna: comuna,
+    limit,
+    skip,
   };
 
-  if (!variables.comuna) delete variables.comuna;
+  if (comuna) {
+    variables.comuna = comuna;
+  }
+
   const res = await fetchContentful(query, variables);
   const { data } = await res.json();
   const properties = data.propertyCollection.items;
-  return properties;
+  const total = data.propertyCollection.total;
+  return { properties, total };
 };
 
 const fetchPropertyByPropertyId = async (propertyId: string) => {
