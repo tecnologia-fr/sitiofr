@@ -7,6 +7,7 @@ query Properties(
   propertyCollection(
     limit: $limit
     skip: $skip
+    order: [destacado_DESC, sys_publishedAt_DESC]
   ){
     total
     items{
@@ -58,6 +59,7 @@ query Properties(
     }
     limit: $limit
     skip: $skip
+    order: [destacado_DESC, sys_publishedAt_DESC]
   ) {
     total
     items {
