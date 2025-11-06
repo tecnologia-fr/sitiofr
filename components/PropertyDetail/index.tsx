@@ -419,7 +419,18 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 showArrow={true}
                 className={`text-lg bg-destacado text-white  mt-8 mb-4 btn-light cursor-pointer lg:text-base py-6 pl-8 pr-2 rounded-full font-bold hover:text-white hover:bg-destacado w-fit `}
               >
-                Cotizar
+                <Link
+                  href={
+                    "/administracion-de-activos/cotizar?propertyId=" +
+                    property.propertyId +
+                    "&propertyAddress=" +
+                    property.address +
+                    "&propertyComuna=" +
+                    property.comuna
+                  }
+                >
+                  Cotizar
+                </Link>
               </Button>
             </div>
           </div>

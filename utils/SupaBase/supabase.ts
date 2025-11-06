@@ -12,6 +12,9 @@ const createLeadInSupabase = async (
     rut?: string;
     interest_area?: string;
     comuna?: string;
+    propertyId?: string;
+    propertyAddress?: string;
+    propertyComuna?: string;
   },
   table: string
 ) => {
@@ -35,6 +38,11 @@ const createLeadInSupabase = async (
           ...(lead.rut && { rut: lead.rut }),
           ...(lead.interest_area && { interest_area: lead.interest_area }),
           ...(lead.comuna && { comuna: lead.comuna }),
+          ...(lead.propertyId && { property_id: lead.propertyId }),
+          ...(lead.propertyAddress && {
+            property_address: lead.propertyAddress,
+          }),
+          ...(lead.propertyComuna && { property_comuna: lead.propertyComuna }),
         },
       ])
       .select();
