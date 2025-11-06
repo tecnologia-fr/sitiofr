@@ -176,6 +176,7 @@ export function ContactFormCotizar({
                     </label>
                     <input
                       type="text"
+                      required
                       id="rut"
                       name="rut"
                       placeholder="Ej: 12345678-9"
