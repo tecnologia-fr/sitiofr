@@ -1,15 +1,5 @@
-import { Metadata } from "next";
-import { fetchMetaTagsFromContentful, fetchPageComponents } from "@/config/db";
-import BuilderComponent from "@/components/BuilderComponent";
+import { ContactFormTrabajaConNosotros } from "@/components/ContactForm/ContactFormTrabajaConNosotros";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const pathname = "/corredores-de-seguros/trabaja-con-nosotros";
-  return await fetchMetaTagsFromContentful(pathname);
-}
-
-export default async function Home() {
-  const components = await fetchPageComponents(
-    "/corredores-de-seguros/trabaja-con-nosotros"
-  );
-  return <BuilderComponent components={components}></BuilderComponent>;
+export default function ContactPage() {
+  return <ContactFormTrabajaConNosotros />;
 }

@@ -1,23 +1,26 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
+import { redirect } from "next/navigation";
 
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
-
   const name = formData.get("name") as string;
-  const company = formData.get("company") as string;
+  const last_name = formData.get("last_name") as string;
+  const rut = formData.get("rut") as string;
   const email = formData.get("email") as string;
-  const motive = formData.get("motive") as string;
+  const interest_area = formData.get("interest_area") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
+  // const cv = formData.get("cv") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
-
   await createLeadInSupabase(
-    { name, company, email, motive, phone, message },
-    "leads-corredora"
+    { name, last_name, rut, email, interest_area, phone, message },
+    "leads-trabajo"
   );
+  redirect("/corredores-de-seguros/trabaja-con-nosotros/gracias");
+
   // You could send to an API endpoint, database, or email service
 }
 
@@ -81,8 +84,8 @@ export function ContactFormTrabajaConNosotros() {
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
+                      id="last_name"
+                      name="last_name"
                       placeholder="Inserta tu nombre"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -147,8 +150,8 @@ export function ContactFormTrabajaConNosotros() {
                       Área de interés*
                     </label>
                     <select
-                      id="motive"
-                      name="motive"
+                      id="interest_area"
+                      name="interest_area"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
@@ -194,12 +197,12 @@ export function ContactFormTrabajaConNosotros() {
 
                   {/* CV Field */}
 
-                  <div>
+                  {/* <div>
                     <label
                       htmlFor="cv"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Adjuntar CV (PDF o Word)*
+                      Adjuntar CV (PDF o Word Max 1MB)*
                     </label>
                     <input
                       type="file"
@@ -210,9 +213,9 @@ export function ContactFormTrabajaConNosotros() {
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                     <span className="text-gray-500 text-xs block mt-1">
-                      Solo archivos PDF. Tamaño máximo sugerido: 5MB.
+                      Solo archivos PDF. Tamaño máximo : 1MB.
                     </span>
-                  </div>
+                  </div> */}
 
                   {/* Submit Button */}
                   <div className="text-center pt-4">

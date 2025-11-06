@@ -81,6 +81,10 @@ const menuItems: MenuItem[] = [
     href: "/corredores-de-seguros/nosotros",
   },
   {
+    title: "Trabaja con nosotros",
+    href: "/corredores-de-seguros/trabaja-con-nosotros",
+  },
+  {
     title: "Contacto",
     href: "/corredores-de-seguros/contacto",
   },

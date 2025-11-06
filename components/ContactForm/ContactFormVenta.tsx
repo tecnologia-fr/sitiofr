@@ -1,23 +1,24 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
+import { redirect } from "next/navigation";
 
 // Server Action
 async function createLeadVenta(formData: FormData) {
   "use server";
 
   const name = formData.get("name") as string;
-  const company = formData.get("company") as string;
+  const rut = formData.get("rut") as string;
   const email = formData.get("email") as string;
-  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
-  const message = formData.get("message") as string;
+  const comuna = formData.get("comuna") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
 
   await createLeadInSupabase(
-    { name, company, email, motive, phone, message },
+    { name, rut, email, phone, comuna },
     "leads-venta"
   );
+  redirect("/administracion-de-activos/propietario-venta/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
 

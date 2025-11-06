@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
+import { redirect } from "next/navigation";
 
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
-
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
@@ -18,6 +18,7 @@ async function createLeadCorredora(formData: FormData) {
     { name, company, email, motive, phone, message },
     "leads-corredora"
   );
+  redirect("/corredores-de-seguros/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
 
@@ -38,7 +39,7 @@ export function ContactFormCorredora() {
       >
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-20 lg:pt-44">
-          <h1 className="-whitextte text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
+          <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
             Contáctanos
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">

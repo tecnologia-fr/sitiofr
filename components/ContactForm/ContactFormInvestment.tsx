@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
+import { redirect } from "next/navigation";
 
 // Server Action
 async function createLeadCorredora(formData: FormData) {
@@ -17,6 +18,7 @@ async function createLeadCorredora(formData: FormData) {
     { name, company, email, phone, message },
     "leads-investment"
   );
+  redirect("/investment/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
 
