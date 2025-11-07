@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
-
+import { Resend } from "resend";
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
+  const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
@@ -18,6 +19,19 @@ async function createLeadCorredora(formData: FormData) {
     { name, company, email, motive, phone, message },
     "leads-corredora"
   );
+  const { data } = await resend.emails.send({
+    from: "Acme <onboarding@resend.dev>",
+    to: "javier@sumaclientes.com",
+    subject: "hello world",
+    html: `<p>Nuevo lead de CORREDORA DE SEGUROS</p>
+    <p>Name: ${name}</p>
+    <p>Company: ${company}</p>
+    <p>Email: ${email}</p>
+    <p>Motive: ${motive}</p>
+    <p>Phone: ${phone}</p>
+    <p>Message: ${message}</p>`,
+  });
+  console.log("data", data);
   redirect("/corredores-de-seguros/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
