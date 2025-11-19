@@ -29,18 +29,17 @@ export function ContactFormTrabajaConNosotros() {
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
       <div
-        className="relative min-h-screen"
+        className="relative h-[800px] lg:h-[900px]"
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/contacto.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          minHeight: "100vh",
         }}
       >
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-16 lg:pt-22">
+        <div className="relative z-10 flex flex-col justify-start items-center  text-center px-4 pt-20 lg:pt-44">
           <h1 className="text-white text-5xl md:text-6xl font-bold mb-4">
             Oportunidades Laborales
           </h1>
@@ -51,7 +50,7 @@ export function ContactFormTrabajaConNosotros() {
         </div>
 
         {/* Floating Contact Form Card */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-6xl px-4">
+        <div className="absolute lg:bottom-0 -bottom-16 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-6xl px-4">
           <div className="bg-white rounded-xl shadow-2xl p-8 ">
             <div className="grid gap-12 items-start">
               {/* Right Panel - Contact Form */}
@@ -165,9 +164,7 @@ export function ContactFormTrabajaConNosotros() {
                       <option value="Comercial Seguros Vida y Salud">
                         Comercial Seguros Vida y Salud
                       </option>
-                      <option value="Control de Gestión">
-                        Control de Gestión
-                      </option>
+                      <option value="Recursos Humanos">Recursos Humanos</option>
                       <option value="Control de Gestión">
                         Control de Gestión
                       </option>
@@ -236,7 +233,7 @@ export function ContactFormTrabajaConNosotros() {
       </div>
 
       {/* Bottom Section to provide space for the floating form */}
-      <div className="bg-white pt-32 pb-16 h-[38rem]">
+      <div className="bg-white pt-32 pb-16 h-[48rem]">
         {/* Additional content can go here */}
       </div>
     </div>

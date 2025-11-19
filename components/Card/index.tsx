@@ -124,7 +124,7 @@ const Card = (props: CardT) => {
         )}
 
         <div
-          className={`h-64 w-full flex flex-col justify-between my-6 ${
+          className={`w-full flex flex-col justify-between my-6 ${
             props.btnLink ? "px-2 pb-4" : "px-6 py-4"
           } `}
         >

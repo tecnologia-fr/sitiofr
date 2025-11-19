@@ -41,18 +41,17 @@ export function ContactFormCorredora() {
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
       <div
-        className="relative min-h-screen"
+        className="relative h-[800px] lg:h-[900px]"
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/contacto.jpg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          minHeight: "100vh",
         }}
       >
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col justify-start items-center min-h-screen text-center px-4 pt-20 lg:pt-44">
+        <div className="relative z-10 flex flex-col justify-start items-center  text-center px-4 pt-20 lg:pt-44">
           <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
             Contáctanos
           </h1>
@@ -269,7 +268,7 @@ export function ContactFormCorredora() {
       </div>
 
       {/* Bottom Section to provide space for the floating form */}
-      <div className="bg-white pt-32 pb-16 h-[38rem]">
+      <div className="bg-white pt-32 pb-16 h-[48rem]">
         {/* Additional content can go here */}
       </div>
     </div>

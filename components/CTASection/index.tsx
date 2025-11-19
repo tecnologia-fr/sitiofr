@@ -81,11 +81,7 @@ const CTASection = (props: CTASectionT) => {
             }`}
           >
             <RenderIf condition={props.desc}>
-              <p
-                className={`mb-10 text-lg lg:text-left ${
-                  props.isHero ? `text-center` : `text-left`
-                }`}
-              >
+              <p className={`mb-10 text-lg text-justify `}>
                 {textHighlighter(props.desc || "")}
               </p>
             </RenderIf>

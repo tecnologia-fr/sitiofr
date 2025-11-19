@@ -23,7 +23,7 @@ const AccordionSection = (props: AccordionSectionT) => {
             </h2>
           </RenderIf>
           <RenderIf condition={props.desc}>
-            <p className="text-left text-lg w-full my-6">{props.desc}</p>
+            <p className="text-justify text-lg w-full my-6">{props.desc}</p>
           </RenderIf>
 
           <RenderIf condition={props.items}>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "../globals.css";
 import { ResponsiveNavigationMenu } from "@/components/NavigationMenuInvestment";
-import Footer from "@/components/Footer";
+import FooterInvestment from "@/components/Footer/footerInvestment";
 import Image from "next/image";
 import Link from "next/link";
 import GTM from "@/config/tracking/gtm";
@@ -44,7 +44,7 @@ export default function InvestmentLayout({
           </nav>
         </header>
         {children}
-        <Footer />
+        <FooterInvestment />
       </body>
     </html>
   );

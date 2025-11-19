@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "../globals.css";
 import { ResponsiveNavigationMenu } from "@/components/NavigationMenuCorredores";
-import Footer from "@/components/Footer";
+import FooterCorredora from "@/components/Footer/footerCorredora";
 import Image from "next/image";
 import Link from "next/link";
 import GTM from "@/config/tracking/gtm";
@@ -45,7 +45,7 @@ export default function CorredoresLayout({
           </nav>
         </header>
         {children}
-        <Footer />
+        <FooterCorredora />
       </body>
     </html>
   );
