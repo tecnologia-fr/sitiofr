@@ -66,8 +66,8 @@ const menuItems: MenuItem[] = [
       },
 
       {
-        title: "Siniestros",
-        href: "/corredores-de-seguros/seguros-siniestros",
+        title: "Gestión de Siniestros",
+        href: "/corredores-de-seguros/gestion-de-siniestros",
       },
       {
         title: "Consultoría y Análisis de Riesgos",
