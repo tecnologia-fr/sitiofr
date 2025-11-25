@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
+import { Resend } from "resend";
 
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
+  const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const last_name = formData.get("last_name") as string;
   const rut = formData.get("rut") as string;
@@ -12,13 +14,79 @@ async function createLeadCorredora(formData: FormData) {
   const interest_area = formData.get("interest_area") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
-  // const cv = formData.get("cv") as string;
+  const cv = formData.get("cv") as File;
+
+  // Convert File to Buffer for Resend
+  let cvBuffer: Buffer | null = null;
+  let cvFilename = "cv.pdf";
+
+  if (cv && cv.size > 0) {
+    const arrayBuffer = await cv.arrayBuffer();
+    cvBuffer = Buffer.from(arrayBuffer);
+    cvFilename = cv.name || "cv.pdf";
+  }
+
   // Here you would typically send the data to your backend
   // For now, we'll just log it
   await createLeadInSupabase(
     { name, last_name, rut, email, interest_area, phone, message },
     "leads-trabajo"
   );
+
+  const emailOptions: any = {
+    from: "informaciones@frgroup.cl",
+    to: "lfgonzalez@frgroup.cl",
+    subject: "Nuevo lead de TRABAJA CON NOSOTROS",
+    html: `
+      <h1>Nuevo lead de TRABAJA CON NOSOTROS</h1>
+      <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
+        <tr>
+          <td style="font-weight:bold;">Nombre:</td>
+          <td>${name ? name : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Apellido(s):</td>
+          <td>${last_name ? last_name : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">RUT:</td>
+          <td>${rut ? rut : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Email:</td>
+          <td>${email ? email : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Teléfono:</td>
+          <td>${phone ? phone : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Área de interés:</td>
+          <td>${interest_area ? interest_area : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Mensaje:</td>
+          <td>${message ? message : ""}</td>
+        </tr>
+      </table>
+    `,
+  };
+
+  // Only add attachment if file exists
+  if (cvBuffer) {
+    emailOptions.attachments = [
+      {
+        filename: cvFilename,
+        content: cvBuffer,
+      },
+    ];
+  }
+
+  const { data, error } = await resend.emails.send(emailOptions);
+  if (error) {
+    console.log("error", error);
+  }
+
   redirect("/corredores-de-seguros/trabaja-con-nosotros/gracias");
 
   // You could send to an API endpoint, database, or email service
@@ -55,7 +123,11 @@ export function ContactFormTrabajaConNosotros() {
             <div className="grid gap-12 items-start">
               {/* Right Panel - Contact Form */}
               <div>
-                <form className="space-y-6" action={createLeadCorredora}>
+                <form
+                  className="space-y-6"
+                  action={createLeadCorredora}
+                  encType="multipart/form-data"
+                >
                   {/* Name Field */}
                   <div>
                     <label
@@ -194,7 +266,7 @@ export function ContactFormTrabajaConNosotros() {
 
                   {/* CV Field */}
 
-                  {/* <div>
+                  <div>
                     <label
                       htmlFor="cv"
                       className="block text-gray-800 font-bold mb-2"
@@ -212,7 +284,7 @@ export function ContactFormTrabajaConNosotros() {
                     <span className="text-gray-500 text-xs block mt-1">
                       Solo archivos PDF. Tamaño máximo : 1MB.
                     </span>
-                  </div> */}
+                  </div>
 
                   {/* Submit Button */}
                   <div className="text-center pt-4">

@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
+import { Resend } from "resend";
 
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
-
+  const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
@@ -18,6 +19,40 @@ async function createLeadCorredora(formData: FormData) {
     { name, company, email, phone, message },
     "leads-investment"
   );
+  const { data, error } = await resend.emails.send({
+    from: "informaciones@frgroup.cl",
+    to: "lfgonzalez@frgroup.cl",
+    subject: "Nuevo lead de INVESTMENT",
+    html: `
+      <h1>Nuevo lead de INVESTMENT</h1>
+      <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
+        <tr>
+          <td style="font-weight:bold;">Nombre:</td>
+          <td>${name ? name : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Empresa:</td>
+          <td>${company ? company : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Email:</td>
+          <td>${email ? email : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Teléfono:</td>
+          <td>${phone ? phone : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Mensaje:</td>
+          <td>${message ? message : ""}</td>
+        </tr>
+      </table>
+    `,
+  });
+  if (error) {
+    console.log("error", error);
+  }
+
   redirect("/investment/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }

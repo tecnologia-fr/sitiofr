@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
+import { Resend } from "resend";
+
 // Server Action
 async function createLeadArriendo(formData: FormData) {
   "use server";
-
+  const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const propertyId = formData.get("propertyId") as string;
   const propertyAddress = formData.get("propertyAddress") as string;
@@ -29,6 +31,52 @@ async function createLeadArriendo(formData: FormData) {
     },
     "leads-cotizar"
   );
+  const { data, error } = await resend.emails.send({
+    from: "informaciones@frgroup.cl",
+    to: "lfgonzalez@frgroup.cl",
+    subject: "Nuevo lead de COTIZAR",
+    html: `
+      <h1>Nuevo lead de COTIZAR</h1>
+      <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
+        <tr>
+          <td style="font-weight:bold;">Nombre:</td>
+          <td>${name ? name : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">RUT:</td>
+          <td>${rut ? rut : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Email:</td>
+          <td>${email ? email : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Teléfono:</td>
+          <td>${phone ? phone : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Comuna:</td>
+          <td>${comuna ? comuna : ""}</td>
+        </tr>
+        ${propertyId ? `<tr>
+          <td style="font-weight:bold;">ID Propiedad:</td>
+          <td>${propertyId}</td>
+        </tr>` : ""}
+        ${propertyAddress ? `<tr>
+          <td style="font-weight:bold;">Dirección Propiedad:</td>
+          <td>${propertyAddress}</td>
+        </tr>` : ""}
+        ${propertyComuna ? `<tr>
+          <td style="font-weight:bold;">Comuna Propiedad:</td>
+          <td>${propertyComuna}</td>
+        </tr>` : ""}
+      </table>
+    `,
+  });
+  if (error) {
+    console.log("error", error);
+  }
+
   redirect("/administracion-de-activos/cotizar/gracias");
 }
 

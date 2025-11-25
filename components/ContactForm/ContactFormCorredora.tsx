@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
+import { EmailTemplate } from "@/components/email-template";
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
@@ -19,19 +20,44 @@ async function createLeadCorredora(formData: FormData) {
     { name, company, email, motive, phone, message },
     "leads-corredora"
   );
-  const { data } = await resend.emails.send({
-    from: "Acme <onboarding@resend.dev>",
-    to: "javier@sumaclientes.com",
-    subject: "hello world",
-    html: `<p>Nuevo lead de CORREDORA DE SEGUROS</p>
-    <p>Name: ${name}</p>
-    <p>Company: ${company}</p>
-    <p>Email: ${email}</p>
-    <p>Motive: ${motive}</p>
-    <p>Phone: ${phone}</p>
-    <p>Message: ${message}</p>`,
+  const { data, error } = await resend.emails.send({
+    from: "informaciones@frgroup.cl",
+    to: "lfgonzalez@frgroup.cl",
+    subject: "Nuevo lead de CORREDORA DE SEGUROS",
+    html: `
+      <h1>Nuevo lead de CORREDORA DE SEGUROS</h1>
+      <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
+        <tr>
+          <td style="font-weight:bold;">Nombre:</td>
+          <td>${name ? name : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Empresa:</td>
+          <td>${company ? company : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Email:</td>
+          <td>${email ? email : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Teléfono:</td>
+          <td>${phone ? phone : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Motivo:</td>
+          <td>${motive ? motive : ""}</td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold;">Mensaje:</td>
+          <td>${message ? message : ""}</td>
+        </tr>
+      </table>
+    `,
   });
-  console.log("data", data);
+  if (error) {
+    console.log("error", error);
+  }
+
   redirect("/corredores-de-seguros/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
