@@ -474,20 +474,6 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
             </p>
           </div>
         </RenderIf>
-        {/* Ubicación */}
-        <RenderIf condition={property.mapa}>
-          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12  text-primario">
-            <h3 className="text-2xl font-semibold mb-4">Ubicación</h3>
-            <p className=" leading-relaxed mb-4">{property.address}</p>
-            <ImageComponent
-              src={property?.mapa?.url || ""}
-              alt={property?.mapa?.description || ""}
-              className="w-full lg:w-4/5   h-full object-cover text-center mx-auto"
-              width={1200}
-              height={800}
-            />
-          </div>
-        </RenderIf>
 
         {/* Comodidades y equipamientos */}
         <RenderIf
@@ -511,6 +497,20 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                 </div>
               ))}
             </div>
+          </div>
+        </RenderIf>
+        {/* Ubicación */}
+        <RenderIf condition={property.mapa}>
+          <div className="bg-white py-6 border-t-2 border-0 w-full mt-12  text-primario">
+            <h3 className="text-2xl font-semibold mb-4">Ubicación</h3>
+            <p className=" leading-relaxed mb-4">{property.address}</p>
+            <ImageComponent
+              src={property?.mapa?.url || ""}
+              alt={property?.mapa?.description || ""}
+              className="w-full lg:w-4/5   h-full object-cover text-center mx-auto"
+              width={1200}
+              height={800}
+            />
           </div>
         </RenderIf>
         {/* Requirements */}

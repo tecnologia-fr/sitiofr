@@ -24,7 +24,66 @@ const Card = (props: CardT) => {
       }
     >
       <RenderIf condition={props.bgImage?.url}>
-        <Link href={props.btnLink || ""} className="w-full h-full">
+        {props.btnLink ? (
+          <Link href={props.btnLink} className="w-full h-full">
+            <div
+              className={`w-full h-full flex flex-col ${
+                props.icon ? "justify-around" : "justify-end"
+              } `}
+            >
+              <RenderIf condition={props.icon}>
+                <div className="h-full"></div>
+              </RenderIf>
+              <div className={`${props.icon ? "h-full" : " h-30"}`}>
+                <RenderIf condition={props.icon}>
+                  <div className="flex justify-center items-center">
+                    <ImageComponent
+                      src={props.icon?.url || ""}
+                      alt={props.icon?.description || ""}
+                      className="w-20 h-20 mb-4 border-b-2 border-white "
+                      width={64}
+                      height={90}
+                    />
+                  </div>
+                </RenderIf>
+                <div className=" px-2 py-4 pb-4 text-white">
+                  <RenderIf condition={props.title}>
+                    <h4 className="text-2xl font-semibold text-center ">
+                      {textHighlighter(props.title || "")}
+                    </h4>
+                  </RenderIf>
+                  <RenderIf condition={props.desc}>
+                    <span className="h-8 ">
+                      <p className="py-2 text-sm text-center ">
+                        {textHighlighter(props.desc || "")}
+                      </p>
+                    </span>
+                  </RenderIf>
+                </div>
+                <RenderIf
+                  condition={
+                    props.btnLink && props.btnText && !props.bgImage?.url
+                  }
+                >
+                  <div className="flex justify-center mt-3">
+                    <Link href={props.btnLink || ""}>
+                      <Button
+                        size="sm"
+                        className={`text-sm ${
+                          props.btnBgColor && props.btnBgColor
+                        } ${
+                          props.btnTextColor && props.btnTextColor
+                        } py-2 px-4 rounded-full font-bold hover:cursor-pointer`}
+                      >
+                        {props.btnText}
+                      </Button>
+                    </Link>
+                  </div>
+                </RenderIf>
+              </div>
+            </div>
+          </Link>
+        ) : (
           <div
             className={`w-full h-full flex flex-col ${
               props.icon ? "justify-around" : "justify-end"
@@ -81,7 +140,7 @@ const Card = (props: CardT) => {
               </RenderIf>
             </div>
           </div>
-        </Link>
+        )}
       </RenderIf>
 
       <RenderIf condition={!props.bgImage?.url}>

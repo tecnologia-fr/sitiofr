@@ -58,18 +58,30 @@ async function createLeadArriendo(formData: FormData) {
           <td style="font-weight:bold;">Comuna:</td>
           <td>${comuna ? comuna : ""}</td>
         </tr>
-        ${propertyId ? `<tr>
+        ${
+          propertyId
+            ? `<tr>
           <td style="font-weight:bold;">ID Propiedad:</td>
           <td>${propertyId}</td>
-        </tr>` : ""}
-        ${propertyAddress ? `<tr>
+        </tr>`
+            : ""
+        }
+        ${
+          propertyAddress
+            ? `<tr>
           <td style="font-weight:bold;">Dirección Propiedad:</td>
           <td>${propertyAddress}</td>
-        </tr>` : ""}
-        ${propertyComuna ? `<tr>
+        </tr>`
+            : ""
+        }
+        ${
+          propertyComuna
+            ? `<tr>
           <td style="font-weight:bold;">Comuna Propiedad:</td>
           <td>${propertyComuna}</td>
-        </tr>` : ""}
+        </tr>`
+            : ""
+        }
       </table>
     `,
   });
@@ -150,7 +162,7 @@ export function ContactFormCotizar({
                     </svg>
                     <span className="text-gray-700">
                       Email<br></br>{" "}
-                      <span className="font-bold">contacto@frgroup.cl</span>
+                      <span className="font-bold">corretaje@frgroup.cl</span>
                     </span>
                   </div>
 
@@ -170,7 +182,7 @@ export function ContactFormCotizar({
                     </svg>
                     <span className="text-gray-700">
                       Telefono: <br></br>
-                      <span className="font-bold">+56 2 2484 0000</span>
+                      <span className="font-bold">+56 9 5705 2983</span>
                     </span>
                   </div>
                 </div>

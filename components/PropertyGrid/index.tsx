@@ -213,7 +213,13 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
                 </span>
               </div>
               <p className="font-light ">
-                {property.propertyType} en {property.transactionType}
+                <span className="text-primario capitalize">
+                  {property.propertyType}
+                </span>{" "}
+                en{" "}
+                <span className="text-primario capitalize">
+                  {property.transactionType}
+                </span>
               </p>
               {/* Name */}
               <h3 className="text-xl font-extrabold text-primario mb-2 h-18">
