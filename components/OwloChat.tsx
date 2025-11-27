@@ -46,7 +46,7 @@ const OwloChat = ({
             >
               <div className="bg-white shadow-xl rounded-lg overflow-hidden border">
                 {/* Title bar */}
-                <div className="flex items-center justify-between px-4 py-2 bg-indigo-600 text-white">
+                <div className="flex items-center justify-between px-4 py-2 bg-primario text-white">
                   <div className="flex items-center gap-3">
                     <span className="font-medium">{title ?? "Owlo Chat"}</span>
                   </div>
@@ -105,7 +105,7 @@ const OwloChat = ({
             aria-expanded={open}
             aria-label={open ? "Cerrar chat" : "Abrir chat"}
             onClick={toggleOpen}
-            className="mt-3 ml-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white shadow-xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-3 ml-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-primario text-white shadow-xl hover:bg-primario focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <svg
               className="h-7 w-7"

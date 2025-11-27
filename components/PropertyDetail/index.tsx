@@ -625,7 +625,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
       <OwloChat
         partnerId=" jx770bhcea7qnh1fq61edx652h79sxfq"
         spaceId="k57a7w5bbqac8fgk905ycpsds979sr5r"
-        title="Owlo Chat 2"
+        title="Chat FR Group"
       />
     </div>
   );
