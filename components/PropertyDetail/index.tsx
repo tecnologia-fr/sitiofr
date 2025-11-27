@@ -15,6 +15,9 @@ import { comunas } from "@/config/comunas";
 import { Button } from "@/components/ui/button";
 import { textHighlighter } from "@/utils/TextHighlighter";
 
+import dynamic from "next/dynamic";
+const OwloChat = dynamic(() => import("@/components/OwloChat"), { ssr: false });
+
 interface PropertyDetailProps {
   property: PropertyT;
 }
@@ -619,6 +622,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
           )}
         </div>
       )}
+      <OwloChat
+        partnerId="jx76pz3z11801gtzxt9752m2fh7cen3t"
+        spaceId="k570xx7qbmh7gtk8f2sns2hpyd6tnpjq"
+        title="Owlo Chat 2"
+      />
     </div>
   );
 };
