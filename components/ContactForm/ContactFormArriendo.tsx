@@ -40,7 +40,7 @@ async function createLeadArriendo(formData: FormData) {
           <td>${phone ? phone : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Comuna:</td>
+          <td style="font-weight:bold;">Comuna de la Propiedad:</td>
           <td>${comuna ? comuna : ""}</td>
         </tr>
       </table>
@@ -216,7 +216,7 @@ export function ContactFormArriendo() {
                       htmlFor="comuna"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Comuna*
+                      Comuna de la Propiedad*
                     </label>
                     <input
                       type="text"
