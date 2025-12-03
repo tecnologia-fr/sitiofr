@@ -45,8 +45,8 @@ const menuItems: MenuItem[] = [
     href: "/administracion-de-activos/propietario-venta",
   },
   {
-    title: "Nosotros",
-    href: "/administracion-de-activos/nosotros",
+    title: "Conócenos",
+    href: "/administracion-de-activos/conocenos",
   },
 ];
 

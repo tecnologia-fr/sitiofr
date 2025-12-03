@@ -77,8 +77,8 @@ const menuItems: MenuItem[] = [
   },
 
   {
-    title: "Sobre Nosotros",
-    href: "/corredores-de-seguros/nosotros",
+    title: "Conócenos",
+    href: "/corredores-de-seguros/conocenos",
   },
   {
     title: "Trabaja con nosotros",

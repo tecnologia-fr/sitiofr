@@ -52,8 +52,8 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
-    title: "Sobre Nosotros",
-    href: "/investment/nosotros",
+    title: "Conócenos",
+    href: "/investment/conocenos",
   },
   {
     title: "Contacto",
