@@ -27,6 +27,8 @@ interface PropertyGridProps {
   currentPage?: number;
   totalPages?: number;
   basePath?: string;
+  sortBy?: string;
+  order?: string;
 }
 
 const PropertyGrid: React.FC<PropertyGridProps> = ({
@@ -35,10 +37,27 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
   currentPage,
   totalPages,
   basePath,
+  sortBy,
+  order,
 }) => {
   const getPageUrl = (page: number) => {
     if (!basePath) return "#";
-    return page === 1 ? basePath : `${basePath}?page=${page}`;
+    
+    const params = new URLSearchParams();
+    
+    // Add page if not page 1
+    if (page !== 1) {
+      params.set("page", page.toString());
+    }
+    
+    // Preserve sort parameters if they exist
+    if (sortBy && order) {
+      params.set("sortBy", sortBy);
+      params.set("order", order);
+    }
+    
+    const queryString = params.toString();
+    return queryString ? `${basePath}?${queryString}` : basePath;
   };
 
   const renderPageNumbers = () => {

@@ -3,7 +3,6 @@ import PropertyGrid from "@/components/PropertyGrid";
 import { fetchProperties } from "@/config/db";
 import { PropertyT } from "@/typings";
 import PropertySearchFormHorizontal from "@/components/PropertySearchFormHorizontal";
-
 import CTASection from "@/components/CTASection";
 import { CTASectionT } from "@/typings";
 

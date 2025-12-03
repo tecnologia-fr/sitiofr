@@ -268,10 +268,10 @@ export function ContactFormTrabajaConNosotros() {
 
                   <div>
                     <label
-                      htmlFor="cv"
+                      htmlFor=""
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Adjuntar CV (PDF o Word Max 1MB)*
+                      Adjuntar CV
                     </label>
                     <input
                       type="file"

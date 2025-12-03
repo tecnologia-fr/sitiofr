@@ -120,6 +120,7 @@ const PropertySchema = z.object({
   address: z.string(),
   price: z.string(),
   priceCurrency: z.string(), // UF, $
+  priceSort: z.number().optional(),
   description: z.string().optional(),
   totalArea: z.number(),
   usableArea: z.number(),

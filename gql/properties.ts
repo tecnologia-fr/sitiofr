@@ -50,6 +50,7 @@ query Properties(
   $comuna: String
   $limit: Int
   $skip: Int
+  $orderBy: [PropertyOrder]
 ) {
   propertyCollection(
     where: {
@@ -59,7 +60,7 @@ query Properties(
     }
     limit: $limit
     skip: $skip
-    order: [destacado_DESC, sys_publishedAt_DESC]
+    order: $orderBy
   ) {
     total
     items {
@@ -81,6 +82,7 @@ query Properties(
       address
       price
       priceCurrency
+      priceSort
       totalArea
       usableArea
       bedrooms
@@ -123,6 +125,7 @@ query PropertiesByPropertyId(
       address
       price
       priceCurrency
+      priceSort
       totalArea
       usableArea
       bedrooms

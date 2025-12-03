@@ -148,15 +148,33 @@ const fetchCarouselCTAById = async (id: string) => {
   return carousel;
 };
 
-const fetchProperties = async (page?: number) => {
+const buildOrderBy = (sortBy?: string, order?: string) => {
+  // Default order: destacado first, then by published date
+  const defaultOrder = ["destacado_DESC", "sys_publishedAt_DESC"];
+  
+  // If sorting by price using priceSort field
+  if (sortBy === "priceSort" && (order === "asc" || order === "desc")) {
+    const orderDirection = order.toUpperCase() === "ASC" ? "ASC" : "DESC";
+    // Sort by priceSort first - prioritize price sorting over destacado when sorting by price
+    // Use published date as secondary sort only for properties with same priceSort value
+    return [`priceSort_${orderDirection}`, "sys_publishedAt_DESC"];
+  }
+  
+  // Return default order if no valid sort specified
+  return defaultOrder;
+};
+
+const fetchProperties = async (page?: number, sortBy?: string, order?: string) => {
   const query = GQL_PROPERTIES_QUERY();
   const currentPage = page || 1;
   const limit = 21;
   const skip = (currentPage - 1) * limit;
+  const orderBy = buildOrderBy(sortBy, order);
 
   const variables = {
     limit,
     skip,
+    orderBy,
   };
 
   const res = await fetchContentful(query, variables);
@@ -170,18 +188,22 @@ const fetchPropertiesByFilters = async (
   transactionType: string,
   propertyType: string,
   comuna?: string,
-  page?: number
+  page?: number,
+  sortBy?: string,
+  order?: string
 ) => {
   const query = GQL_PROPERTIES_QUERY_BY_FILTERS();
   const currentPage = page || 1;
   const limit = 21;
   const skip = (currentPage - 1) * limit;
+  const orderBy = buildOrderBy(sortBy, order);
 
   const variables: any = {
     transactionType: transactionType,
     propertyType: propertyType,
     limit,
     skip,
+    orderBy,
   };
 
   if (comuna) {
