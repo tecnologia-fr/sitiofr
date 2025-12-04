@@ -96,12 +96,16 @@ interface ContactFormCotizarProps {
   propertyId?: string;
   propertyAddress?: string;
   propertyComuna?: string;
+  propertyType?: string;
+  transactionType?: string;
 }
 
 export function ContactFormCotizar({
   propertyId,
   propertyAddress,
   propertyComuna,
+  propertyType,
+  transactionType,
 }: ContactFormCotizarProps) {
   return (
     <div className="min-h-screen">
@@ -119,7 +123,7 @@ export function ContactFormCotizar({
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col justify-start items-center  text-center px-4 pt-20 lg:pt-44">
           <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
-            ¿Quiéres arrendar tu propiedad?
+            Cotiza {propertyType} en {transactionType}
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
             Completa el formulario y te contactaremos.

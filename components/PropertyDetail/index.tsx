@@ -429,7 +429,11 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
                     "&propertyAddress=" +
                     property.address +
                     "&propertyComuna=" +
-                    property.comuna
+                    property.comuna +
+                    "&propertyType=" +
+                    property.propertyType +
+                    "&transactionType=" +
+                    property.transactionType
                   }
                 >
                   Cotizar
