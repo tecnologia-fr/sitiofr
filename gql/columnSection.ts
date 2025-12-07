@@ -53,6 +53,7 @@ export const GQL_COLUMN_SECTION_QUERY = () => {
           btnTextColor
           btnText
           btnLink
+          flipText
         }
       }
     }

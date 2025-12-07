@@ -8,21 +8,10 @@ import { textHighlighter } from "@/utils/TextHighlighter";
 //? @desc: card component for making columns or cards
 
 const Card = (props: CardT) => {
-  return (
-    <div
-      className={`w-full max-w-sm  flex flex-col items-center relative ${
-        props.bgColor
-      } text-${props.textColor} p-0 m-0 text-center  ${
-        props.bgImage?.url &&
-        "bg-cover bg-center bg-no-repeat h-[30rem]  flex flex-col justify-end"
-      } ${props.bgImage?.url && props.btnLink && "cursor-pointer"}`}
-      id={props.name}
-      style={
-        props.bgImage?.url
-          ? { backgroundImage: `url(${props.bgImage.url})` }
-          : undefined
-      }
-    >
+  const hasFlipText = props.flipText && props.flipText.trim() !== "";
+
+  const cardContent = (
+    <>
       <RenderIf condition={props.bgImage?.url}>
         {props.btnLink ? (
           <Link href={props.btnLink} className="w-full h-full">
@@ -224,6 +213,67 @@ const Card = (props: CardT) => {
           </div>
         </div>
       </RenderIf>
+    </>
+  );
+
+  if (hasFlipText) {
+    return (
+      <div
+        className={`w-full max-w-sm perspective-1000 ${
+          props.bgImage?.url ? "h-[30rem]" : "min-h-[20rem]"
+        }`}
+        id={props.name}
+      >
+        <div className="relative w-full h-full preserve-3d transition-transform duration-700 flip-card-inner cursor-pointer">
+          {/* Front side */}
+          <div className="absolute w-full h-full backface-hidden">
+            <div
+              className={`w-full h-full flex flex-col items-center relative ${
+                props.bgColor
+              } text-${props.textColor} p-0 m-0 text-center ${
+                props.bgImage?.url &&
+                "bg-cover bg-center bg-no-repeat flex flex-col justify-end"
+              } ${props.bgImage?.url && props.btnLink && "cursor-pointer"}`}
+              style={
+                props.bgImage?.url
+                  ? { backgroundImage: `url(${props.bgImage.url})` }
+                  : undefined
+              }
+            >
+              {cardContent}
+            </div>
+          </div>
+          {/* Back side */}
+          <div className="absolute w-full h-full backface-hidden rotate-y-180">
+            <div className="w-full h-full flex flex-col items-center justify-center relative bg-primario text-blanco px-4 m-0">
+              <div className=" text-blanco">
+                <p className="text-lg text-justify whitespace-pre-line">
+                  {textHighlighter(props.flipText || "")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`w-full max-w-sm  flex flex-col items-center relative ${
+        props.bgColor
+      } text-${props.textColor} p-0 m-0 text-center  ${
+        props.bgImage?.url &&
+        "bg-cover bg-center bg-no-repeat h-[30rem]  flex flex-col justify-end"
+      } ${props.bgImage?.url && props.btnLink && "cursor-pointer"}`}
+      id={props.name}
+      style={
+        props.bgImage?.url
+          ? { backgroundImage: `url(${props.bgImage.url})` }
+          : undefined
+      }
+    >
+      {cardContent}
     </div>
   );
 };
