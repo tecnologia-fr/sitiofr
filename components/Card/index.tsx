@@ -247,7 +247,7 @@ const Card = (props: CardT) => {
           <div className="absolute w-full h-full backface-hidden rotate-y-180">
             <div className="w-full h-full flex flex-col items-center justify-center relative bg-primario text-blanco px-4 m-0">
               <div className=" text-blanco">
-                <p className="text-lg text-justify whitespace-pre-line">
+                <p className="text-lg text-center whitespace-pre-line">
                   {textHighlighter(props.flipText || "")}
                 </p>
               </div>
