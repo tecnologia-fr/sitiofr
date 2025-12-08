@@ -219,7 +219,7 @@ const Card = (props: CardT) => {
   if (hasFlipText) {
     return (
       <div
-        className={`w-full max-w-sm perspective-1000 ${
+        className={`w-full max-w-sm perspective-1000 flip-card-container ${
           props.bgImage?.url ? "h-[30rem]" : "min-h-[20rem]"
         }`}
         id={props.name}
