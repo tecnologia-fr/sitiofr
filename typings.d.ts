@@ -76,6 +76,7 @@ const CardSchema = z.object({
   btnText: z.string().min(5).max(30).optional(),
   btnLink: z.string().optional(),
   flipText: z.string().optional().nullable(),
+  customTextHeight: z.string().optional(),
 });
 
 const AccordionItemSchema = z.object({

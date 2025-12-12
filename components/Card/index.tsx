@@ -23,7 +23,15 @@ const Card = (props: CardT) => {
               <RenderIf condition={props.icon}>
                 <div className="h-full"></div>
               </RenderIf>
-              <div className={`${props.icon ? "h-full" : " h-30"}`}>
+              <div
+                className={`${
+                  props.icon
+                    ? "h-full"
+                    : props.customTextHeight
+                    ? props.customTextHeight
+                    : " h-30"
+                }`}
+              >
                 <RenderIf condition={props.icon}>
                   <div className="flex justify-center items-center">
                     <ImageComponent
@@ -81,7 +89,15 @@ const Card = (props: CardT) => {
             <RenderIf condition={props.icon}>
               <div className="h-full"></div>
             </RenderIf>
-            <div className={`${props.icon ? "h-full" : " h-30"}`}>
+            <div
+              className={`${
+                props.icon
+                  ? "h-full"
+                  : props.customTextHeight
+                  ? props.customTextHeight
+                  : " h-30"
+              }`}
+            >
               <RenderIf condition={props.icon}>
                 <div className="flex justify-center items-center">
                   <ImageComponent

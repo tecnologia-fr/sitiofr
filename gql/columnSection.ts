@@ -54,6 +54,7 @@ export const GQL_COLUMN_SECTION_QUERY = () => {
           btnText
           btnLink
           flipText
+          customTextHeight
         }
       }
     }
