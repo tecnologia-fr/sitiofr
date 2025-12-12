@@ -30,6 +30,7 @@
 /* Width utilities */
 @source inline("w-{1/2,1/3,2/3,1/4,3/4,4/6,5/6}");
 @source inline("lg:w-{1/2,1/3,2/3,1/4,3/4,4/6,5/6}");
+@source inline("h-36");
 
 /* Place items (for grid) */
 @source inline("place-items-{start,center,end,baseline,stretch}");
