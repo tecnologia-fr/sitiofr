@@ -45,6 +45,20 @@ const menuItems: MenuItem[] = [
     href: "/administracion-de-activos/propietario-venta",
   },
   {
+    title: "Usuarios",
+    href: "#",
+    children: [
+      {
+        title: "Portal Propietario",
+        href: "https://btg-8420.my.salesforce-sites.com/propietario",
+      },
+      {
+        title: "Portal Arrendatario",
+        href: "https://btg-8420.my.salesforce-sites.com/arrendatario",
+      },
+    ],
+  },
+  {
     title: "Conócenos",
     href: "/administracion-de-activos/conocenos",
   },
@@ -190,7 +204,7 @@ export function MainNavigationMenu({
 }: NavigationMenuProps) {
   return (
     <div className="hidden md:block">
-      <NavigationMenu className={cn("max-w-none", className)}>
+      <NavigationMenu className={cn("max-w-none", className)} viewport={false}>
         <NavigationMenuList className="text-white">
           {items.map((item, index) => (
             <NavigationMenuItem key={index}>
@@ -199,8 +213,8 @@ export function MainNavigationMenu({
                   <NavigationMenuTrigger className="text-white hover:text-destacado bg-transparent hover:bg-transparent focus:bg-transparent  ">
                     {item.title}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-9 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                  <NavigationMenuContent className="md:!left-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-2 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}
