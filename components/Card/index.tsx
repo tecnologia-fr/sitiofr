@@ -5,7 +5,7 @@ import Link from "next/link";
 import ImageComponent from "../ImageComponent";
 import RenderIf from "@/utils/RenderIf";
 import { textHighlighter } from "@/utils/TextHighlighter";
-//? @desc: card component for making columns or cards
+//? @desc: card component for making columns or cards.
 
 const Card = (props: CardT) => {
   const hasFlipText = props.flipText && props.flipText.trim() !== "";
