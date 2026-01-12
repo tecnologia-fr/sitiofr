@@ -35,7 +35,8 @@ async function createLeadCorredora(formData: FormData) {
 
   const emailOptions: any = {
     from: "informaciones@frgroup.cl",
-    to: "lfgonzalez@frgroup.cl",
+    to: "seleccion@frgroup.cl",
+    bcc: " tecnologia@frgroup.cl ",
     subject: "Nuevo lead de TRABAJA CON NOSOTROS",
     html: `
       <h1>Nuevo lead de TRABAJA CON NOSOTROS</h1>

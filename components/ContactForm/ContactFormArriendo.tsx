@@ -18,7 +18,8 @@ async function createLeadArriendo(formData: FormData) {
   );
   const { data, error } = await resend.emails.send({
     from: "informaciones@frgroup.cl",
-    to: "lfgonzalez@frgroup.cl",
+    to: "corretaje@frgroup.cl",
+    bcc: " tecnologia@frgroup.cl ",
     subject: "Nuevo lead de ARRIENDO",
     html: `
       <h1>Nuevo lead de ARRIENDO</h1>

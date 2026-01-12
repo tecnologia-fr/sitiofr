@@ -68,6 +68,7 @@ const PropertySearchFormHorizontal = () => {
     { value: "terreno", label: "Terreno" },
     { value: "estacionamiento", label: "Estacionamiento" },
     { value: "oficina", label: "Oficina" },
+    { value: "bodega", label: "Bodega" },
   ];
 
   const handleSearch = () => {

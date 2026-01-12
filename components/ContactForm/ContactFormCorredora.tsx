@@ -22,7 +22,8 @@ async function createLeadCorredora(formData: FormData) {
   );
   const { data, error } = await resend.emails.send({
     from: "informaciones@frgroup.cl",
-    to: "lfgonzalez@frgroup.cl",
+    to: "contacto@frgroup.cl",
+    bcc: " tecnologia@frgroup.cl ",
     subject: "Nuevo lead de CORREDORA DE SEGUROS",
     html: `
       <h1>Nuevo lead de CORREDORA DE SEGUROS</h1>

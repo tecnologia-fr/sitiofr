@@ -116,7 +116,7 @@ const PropertySchema = z.object({
     items: z.array(ImageSchema),
   }),
   destacado: z.boolean(),
-  propertyType: z.string(), // casa, apartamento, local, terreno
+  propertyType: z.string(), // casa, apartamento, local, terreno, oficina, estacionamiento, bodega
   transactionType: z.string(), // venta, arriendo
   comuna: z.string(),
   address: z.string(),
