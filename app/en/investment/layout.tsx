@@ -1,0 +1,51 @@
+import type { Metadata } from "next";
+import { Lato } from "next/font/google";
+import "../../globals.css";
+import { ResponsiveNavigationMenu } from "@/components/NavigationMenuInvestmentEN";
+import FooterInvestment from "@/components/Footer/footerInvestment";
+import Image from "next/image";
+import Link from "next/link";
+import GTM from "@/config/tracking/gtm";
+import { Suspense } from "react";
+
+const lato = Lato({
+  weight: ["100", "300", "400", "700", "900"],
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "FR Group - Investment",
+  description: "FR Group Investment - Financial and investment services",
+};
+
+export default function InvestmentLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${lato.className}`}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <GTM />
+        </Suspense>
+        <header className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16">
+          <nav className="container mx-auto px-4 py-4">
+            <Link href="/en">
+              <Image
+                src="/icons/logo-frgroup.png"
+                alt="FRGroup"
+                width={100}
+                height={100}
+                className="w-24 absolute top-2 left-4 m-0 p-0"
+              />
+            </Link>
+            <ResponsiveNavigationMenu />
+          </nav>
+        </header>
+        {children}
+        <FooterInvestment />
+      </body>
+    </html>
+  );
+}
