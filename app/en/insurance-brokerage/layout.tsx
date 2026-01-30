@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "../../globals.css";
 import { ResponsiveNavigationMenu } from "@/components/NavigationMenuCorredoresEN";
-import FooterCorredora from "@/components/Footer/footerCorredora";
+import FooterCorredoraEN from "@/components/Footer/footerCorredoraEN";
 import Image from "next/image";
 import Link from "next/link";
 import GTM from "@/config/tracking/gtm";
@@ -45,7 +45,7 @@ export default function InsuranceBrokerageLayout({
           </nav>
         </header>
         {children}
-        <FooterCorredora />
+        <FooterCorredoraEN />
       </body>
     </html>
   );
