@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "@/app/globals.css";
 import { ResponsiveNavigationMenu } from "@/components/NavigationMenu";
-import { LanguageSelector } from "@/components/LanguageSelector";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +30,7 @@ export default function RootLayout({
           <GTM />
         </Suspense>
         <header className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16">
-          <nav className="container mx-auto px-4 py-4 flex items-center justify-end gap-6">
+          <nav className="container mx-auto px-4 py-4">
             <Link href="/">
               <Image
                 src="/icons/logo-frgroup.png"
@@ -42,7 +41,6 @@ export default function RootLayout({
               />
             </Link>
             <ResponsiveNavigationMenu />
-            <LanguageSelector currentLang="es" />
           </nav>
         </header>
         {children}

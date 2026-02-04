@@ -43,6 +43,20 @@ const menuItems: MenuItem[] = [
     title: "Assets",
     href: "/administracion-de-activos",
   },
+  {
+    title: "Language",
+    href: "#",
+    children: [
+      {
+        title: "English",
+        href: "/en",
+      },
+      {
+        title: "Spanish",
+        href: "/",
+      },
+    ],
+  },
 ];
 
 // ListItem component for dropdown items
@@ -195,7 +209,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="md:!left-0">
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-6 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-2 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}

@@ -43,6 +43,20 @@ const menuItems: MenuItem[] = [
     title: "Activos",
     href: "/administracion-de-activos",
   },
+  {
+    title: "Idioma",
+    href: "#",
+    children: [
+      {
+        title: "Inglés",
+        href: "/en",
+      },
+      {
+        title: "Español",
+        href: "/",
+      },
+    ],
+  },
 ];
 
 // ListItem component for dropdown items
@@ -60,7 +74,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-destacado hover:text-white text-white text-3xl ",
-            className
+            className,
           )}
           {...props}
         >
@@ -86,7 +100,7 @@ interface NavigationMenuProps {
 function MobileMenu({ items = menuItems }: NavigationMenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   const toggleExpanded = (itemTitle: string) => {
@@ -195,7 +209,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="md:!left-0">
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-6 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-2 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}
