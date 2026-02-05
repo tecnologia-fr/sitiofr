@@ -3,9 +3,23 @@ import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
 import { EmailTemplate } from "@/components/email-template";
+import { verifyRecaptcha } from "@/utils/recaptcha";
+import { ReCaptchaProvider } from "@/components/ReCaptchaProvider";
+import { ReCaptchaFormWrapper } from "@/components/ContactForm/ReCaptchaFormWrapper";
+
 // Server Action
 async function createLeadCorredora(formData: FormData) {
   "use server";
+  
+  // Verify reCAPTCHA
+  const recaptchaToken = formData.get("recaptcha-token") as string;
+  const verification = await verifyRecaptcha(recaptchaToken);
+  
+  if (!verification.success || verification.score < 0.5) {
+    console.error("reCAPTCHA verification failed", verification.error);
+    return { error: "Verification failed. Please try again." };
+  }
+  
   const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
@@ -65,6 +79,7 @@ async function createLeadCorredora(formData: FormData) {
 
 export function ContactFormCorredora() {
   return (
+    <ReCaptchaProvider>
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
       <div
@@ -154,7 +169,7 @@ export function ContactFormCorredora() {
 
               {/* Right Panel - Contact Form */}
               <div>
-                <form className="space-y-6" action={createLeadCorredora}>
+                <ReCaptchaFormWrapper action={createLeadCorredora} className="space-y-6">
                   {/* Name Field */}
                   <div>
                     <label
@@ -287,7 +302,7 @@ export function ContactFormCorredora() {
                       Enviar Mensaje
                     </Button>
                   </div>
-                </form>
+                </ReCaptchaFormWrapper>
               </div>
             </div>
           </div>
@@ -299,5 +314,6 @@ export function ContactFormCorredora() {
         {/* Additional content can go here */}
       </div>
     </div>
+    </ReCaptchaProvider>
   );
 }

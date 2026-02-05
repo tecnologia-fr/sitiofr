@@ -2,10 +2,23 @@ import { Button } from "@/components/ui/button";
 import createLeadInSupabase from "@/utils/SupaBase/supabase";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
+import { verifyRecaptcha } from "@/utils/recaptcha";
+import { ReCaptchaProvider } from "@/components/ReCaptchaProvider";
+import { ReCaptchaFormWrapper } from "@/components/ContactForm/ReCaptchaFormWrapper";
 
 // Server Action
 async function createLeadArriendo(formData: FormData) {
   "use server";
+  
+  // Verify reCAPTCHA
+  const recaptchaToken = formData.get("recaptcha-token") as string;
+  const verification = await verifyRecaptcha(recaptchaToken);
+  
+  if (!verification.success || verification.score < 0.5) {
+    console.error("reCAPTCHA verification failed", verification.error);
+    return { error: "Verification failed. Please try again." };
+  }
+  
   const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
   const propertyId = formData.get("propertyId") as string;
@@ -109,6 +122,7 @@ export function ContactFormCotizar({
   transactionType,
 }: ContactFormCotizarProps) {
   return (
+    <ReCaptchaProvider>
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
       <div
@@ -195,7 +209,7 @@ export function ContactFormCotizar({
 
               {/* Right Panel - Contact Form */}
               <div>
-                <form className="space-y-6" action={createLeadArriendo}>
+                <ReCaptchaFormWrapper action={createLeadArriendo} className="space-y-6">
                   {/* Hidden propertyId field */}
                   {propertyId && (
                     <input type="hidden" name="propertyId" value={propertyId} />
@@ -312,7 +326,7 @@ export function ContactFormCotizar({
                       Enviar Mensaje
                     </Button>
                   </div>
-                </form>
+                </ReCaptchaFormWrapper>
               </div>
             </div>
           </div>
@@ -324,5 +338,6 @@ export function ContactFormCotizar({
         {/* Additional content can go here */}
       </div>
     </div>
+    </ReCaptchaProvider>
   );
 }
