@@ -59,6 +59,20 @@ const menuItems: MenuItem[] = [
     title: "Contacto",
     href: "/investment/contacto",
   },
+  {
+    title: "Idioma",
+    href: "#",
+    children: [
+      {
+        title: "Inglés",
+        href: "/en",
+      },
+      {
+        title: "Español",
+        href: "/",
+      },
+    ],
+  },
 ];
 
 // ListItem component for dropdown items
@@ -76,7 +90,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-destacado hover:text-white text-white text-3xl ",
-            className
+            className,
           )}
           {...props}
         >
@@ -102,7 +116,7 @@ interface NavigationMenuProps {
 function MobileMenu({ items = menuItems }: NavigationMenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
-    new Set()
+    new Set(),
   );
 
   const toggleExpanded = (itemTitle: string) => {
