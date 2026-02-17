@@ -60,7 +60,7 @@ const menuItems: MenuItem[] = [
         href: "/en/insurance-brokerage/financial-risk",
       },
       {
-        title: "Affinity Insurance",
+        title: "Affinity Groups",
         href: "/en/insurance-brokerage/affinity-insurance",
       },
       {
