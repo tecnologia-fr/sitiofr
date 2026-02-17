@@ -44,8 +44,8 @@ const menuItems: MenuItem[] = [
         href: "/en/insurance-brokerage/agricultural-insurance",
       },
       {
-        title: "Mercado Público",
-        href: "/en/insurance-brokerage/mercado-publico",
+        title: "Public Procurement",
+        href: "/en/insurance-brokerage/public-procurement",
       },
       {
         title: "Life and Health",
@@ -84,6 +84,20 @@ const menuItems: MenuItem[] = [
   {
     title: "Contact",
     href: "/en/insurance-brokerage/contact",
+  },
+  {
+    title: "Language",
+    href: "#",
+    children: [
+      {
+        title: "English",
+        href: "/en",
+      },
+      {
+        title: "Spanish",
+        href: "/",
+      },
+    ],
   },
 ];
 

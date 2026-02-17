@@ -23,7 +23,7 @@ const FooterInvestmentEN: React.FC = () => {
               <div className="space-y-6">
                 <div>
                   <h4 className="font-bold text-lg mb-2">
-                    Santiago (Casa Matriz)
+                    Santiago (Headquarters)
                   </h4>
                   <p className="text-sm mb-1">
                     La Concepción 141, Piso 8, Of. 801, Providencia
@@ -31,9 +31,7 @@ const FooterInvestmentEN: React.FC = () => {
                   <p className="text-sm">call us: 2 2482 1500 </p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">
-                    Santiago (Sucursal)
-                  </h4>
+                  <h4 className="font-bold text-lg mb-2">Santiago (Branch)</h4>
                   <p className="text-sm mb-1">
                     La Concepción 191, Piso 8, Of. 801, Providencia{" "}
                   </p>
