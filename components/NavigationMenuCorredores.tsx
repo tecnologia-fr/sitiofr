@@ -179,7 +179,7 @@ function MobileMenu({ items = menuItems }: NavigationMenuProps) {
       {isOpen && (
         <div
           className={
-            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-[100vh]"
+            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-screen overflow-y-auto"
           }
         >
           <nav className="text-white">
@@ -254,7 +254,7 @@ export function MainNavigationMenu({
                     {item.title}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="md:!left-0">
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-8 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                    <ul className="grid  p-4 m-0  w-max bg-secundario  rounded-lg  !bg-opacity-0 border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}

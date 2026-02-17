@@ -139,7 +139,7 @@ function MobileMenu({ items = menuItems }: NavigationMenuProps) {
       {isOpen && (
         <div
           className={
-            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-[100vh]"
+            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-screen overflow-y-auto"
           }
         >
           <nav className="text-white">
