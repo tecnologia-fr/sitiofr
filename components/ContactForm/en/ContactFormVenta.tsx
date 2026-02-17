@@ -7,7 +7,7 @@ import { ReCaptchaProvider } from "@/components/ReCaptchaProvider";
 import { ReCaptchaFormWrapper } from "@/components/ContactForm/ReCaptchaFormWrapper";
 
 // Server Action
-async function createLeadCorredora(formData: FormData) {
+async function createLeadVenta(formData: FormData) {
   "use server";
   
   // Verify reCAPTCHA
@@ -21,48 +21,43 @@ async function createLeadCorredora(formData: FormData) {
   
   const resend = new Resend(process.env.RESEND_KEY);
   const name = formData.get("name") as string;
-  const company = formData.get("company") as string;
+  const rut = formData.get("rut") as string;
   const email = formData.get("email") as string;
-  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
-  const message = formData.get("message") as string;
+  const comuna = formData.get("comuna") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
 
   await createLeadInSupabase(
-    { name, company, email, motive, phone, message },
-    "leads-corredora"
+    { name, rut, email, phone, comuna },
+    "leads-venta"
   );
   const { data, error } = await resend.emails.send({
     from: "informaciones@frgroup.cl",
     to: "lfgonzalez@frgroup.cl",
-    subject: "Nuevo lead de ADMINISTRACIÓN DE ACTIVOS",
+    subject: "New SALE lead",
     html: `
-      <h1>Nuevo lead de ADMINISTRACIÓN DE ACTIVOS</h1>
+      <h1>New SALE lead</h1>
       <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
         <tr>
-          <td style="font-weight:bold;">Nombre:</td>
+          <td style="font-weight:bold;">Name:</td>
           <td>${name ? name : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Empresa:</td>
-          <td>${company ? company : ""}</td>
+          <td style="font-weight:bold;">ID Number:</td>
+          <td>${rut ? rut : ""}</td>
         </tr>
         <tr>
           <td style="font-weight:bold;">Email:</td>
           <td>${email ? email : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Teléfono:</td>
+          <td style="font-weight:bold;">Phone:</td>
           <td>${phone ? phone : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Motivo:</td>
-          <td>${motive ? motive : ""}</td>
-        </tr>
-        <tr>
-          <td style="font-weight:bold;">Mensaje:</td>
-          <td>${message ? message : ""}</td>
+          <td style="font-weight:bold;">Property District:</td>
+          <td>${comuna ? comuna : ""}</td>
         </tr>
       </table>
     `,
@@ -70,10 +65,12 @@ async function createLeadCorredora(formData: FormData) {
   if (error) {
     console.log("error", error);
   }
+
+  redirect("/administracion-de-activos/propietario-venta/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
 
-export function ContactFormCorredora() {
+export function ContactFormVenta() {
   return (
     <ReCaptchaProvider>
     <div className="min-h-screen">
@@ -90,14 +87,11 @@ export function ContactFormCorredora() {
       >
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col justify-start items-center  text-center px-4 pt-20 lg:pt-44">
-          <h1 className="text-white text-5xl md:text-6xl font-bold mb-4">
-            Contáctanos
+          <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
+            Want to sell your property?
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
-            Estamos listos para ofrecerte la mejor solución acorde a{" "}
-            <span className="underline decoration-destacado decoration-4 underline-offset-8 font-bold">
-              tus necesidades
-            </span>
+            Fill out the form and we'll contact you.
           </p>
         </div>
 
@@ -109,14 +103,14 @@ export function ContactFormCorredora() {
               <div className="space-y-6 lg:mt-12 mt-4">
                 <div>
                   <p className="text-destacado text-sm font-bold uppercase tracking-wide mb-2">
-                    ESTAMOS AQUÍ PARA AYUDARTE
+                    WE ARE HERE TO HELP YOU
                   </p>
                   <h2 className="text-primary lg:text-4xl text-2xl font-light mb-2">
-                    ¿Necesitas más información?
+                    Need more information?
                   </h2>
                   <p className="text-gray-600 text-xl lg:text-4xl font-normal ">
-                    No dudes en
-                    <span className="font-bold"> escribirnos</span>
+                    Don't hesitate to
+                    <span className="font-bold"> contact us</span>
                   </p>
                 </div>
 
@@ -156,7 +150,7 @@ export function ContactFormCorredora() {
                       />
                     </svg>
                     <span className="text-gray-700">
-                      Telefono: <br></br>
+                      Phone: <br></br>
                       <span className="font-bold">+56 9 5705 2983</span>
                     </span>
                   </div>
@@ -165,40 +159,57 @@ export function ContactFormCorredora() {
 
               {/* Right Panel - Contact Form */}
               <div>
-                <ReCaptchaFormWrapper action={createLeadCorredora} className="space-y-6">
+                <ReCaptchaFormWrapper action={createLeadVenta} className="space-y-6">
                   {/* Name Field */}
                   <div>
                     <label
                       htmlFor="name"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre*
+                      Name*
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Inserta tu nombre"
+                      placeholder="Enter your name"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <div>
                     <label
-                      htmlFor="company"
+                      htmlFor="rut"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre de la empresa
+                      ID Number*
                     </label>
                     <input
                       type="text"
-                      id="company"
-                      name="company"
-                      placeholder="Ej: Falabella"
+                      id="rut"
+                      name="rut"
+                      placeholder="E.g.: 12345678-9"
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
 
+                  {/* Phone Field */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-primarui font-bold mb-2"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+569 1234 5678"
+                      required
+                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
                   {/* Email Field */}
                   <div>
                     <label
@@ -211,79 +222,27 @@ export function ContactFormCorredora() {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="Ej: juan.rodriguez@falabella.com"
+                      placeholder="E.g.: juan.rodriguez@falabella.com"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
 
-                  {/* Motive Field */}
+                  {/* Name Field */}
                   <div>
                     <label
-                      htmlFor="motive"
+                      htmlFor="comuna"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Motivo del contacto
-                    </label>
-                    <select
-                      id="motive"
-                      name="motive"
-                      required
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      <option value="">Seleccionar...</option>
-                      <option value="Consulta sobre Productos/Servicios">
-                        Consulta sobre Productos/Servicios
-                      </option>
-                      <option value="Consulta sobre Producto/Servicio Contratado">
-                        Consulta sobre Producto/Servicio Contratado
-                      </option>
-                      <option
-                        value="Solicitud de Cotización
-"
-                      >
-                        Solicitud de Cotización
-                      </option>
-                      <option value="Solicitud sobre Producto/Servicio Contratado">
-                        Solicitud sobre Producto/Servicio Contratado
-                      </option>
-                      <option value="Reclamo">Reclamo</option>
-                      <option value="Felicitaciones">Felicitaciones</option>
-                    </select>
-                  </div>
-
-                  {/* Phone Field */}
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-primarui font-bold mb-2"
-                    >
-                      Teléfono
+                      Property District*
                     </label>
                     <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="+569 1234 5678"
+                      type="text"
+                      id="comuna"
+                      name="comuna"
+                      placeholder="Providencia"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Message Field */}
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-gray-800 font-bold mb-2"
-                    >
-                      Mensaje
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      placeholder="Escribe tu mensaje..."
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     />
                   </div>
 
@@ -295,7 +254,7 @@ export function ContactFormCorredora() {
                       size="lg"
                       className={`cursor-pointer text-lg bg-destacado text-white p-0 my-2 btn-light  lg:text-base py-6 pl-8 pr-0 rounded-full font-bold hover:text-white  w-fit`}
                     >
-                      Enviar Mensaje
+                      Send Message
                     </Button>
                   </div>
                 </ReCaptchaFormWrapper>

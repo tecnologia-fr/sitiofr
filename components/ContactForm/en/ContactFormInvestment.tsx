@@ -23,29 +23,29 @@ async function createLeadCorredora(formData: FormData) {
   const name = formData.get("name") as string;
   const company = formData.get("company") as string;
   const email = formData.get("email") as string;
-  const motive = formData.get("motive") as string;
   const phone = formData.get("phone") as string;
   const message = formData.get("message") as string;
   // Here you would typically send the data to your backend
   // For now, we'll just log it
 
   await createLeadInSupabase(
-    { name, company, email, motive, phone, message },
-    "leads-corredora"
+    { name, company, email, phone, message },
+    "leads-investment"
   );
   const { data, error } = await resend.emails.send({
     from: "informaciones@frgroup.cl",
-    to: "lfgonzalez@frgroup.cl",
-    subject: "Nuevo lead de ADMINISTRACIÓN DE ACTIVOS",
+    to: "contacto@frgroup.cl",
+    bcc: " tecnologia@frgroup.cl ",
+    subject: "New INVESTMENT lead",
     html: `
-      <h1>Nuevo lead de ADMINISTRACIÓN DE ACTIVOS</h1>
+      <h1>New INVESTMENT lead</h1>
       <table cellpadding="6" cellspacing="0" border="0" style="font-family:sans-serif; font-size:16px; color:#232323;">
         <tr>
-          <td style="font-weight:bold;">Nombre:</td>
+          <td style="font-weight:bold;">Name:</td>
           <td>${name ? name : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Empresa:</td>
+          <td style="font-weight:bold;">Company:</td>
           <td>${company ? company : ""}</td>
         </tr>
         <tr>
@@ -53,15 +53,11 @@ async function createLeadCorredora(formData: FormData) {
           <td>${email ? email : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Teléfono:</td>
+          <td style="font-weight:bold;">Phone:</td>
           <td>${phone ? phone : ""}</td>
         </tr>
         <tr>
-          <td style="font-weight:bold;">Motivo:</td>
-          <td>${motive ? motive : ""}</td>
-        </tr>
-        <tr>
-          <td style="font-weight:bold;">Mensaje:</td>
+          <td style="font-weight:bold;">Message:</td>
           <td>${message ? message : ""}</td>
         </tr>
       </table>
@@ -70,10 +66,12 @@ async function createLeadCorredora(formData: FormData) {
   if (error) {
     console.log("error", error);
   }
+
+  redirect("/investment/contacto/gracias");
   // You could send to an API endpoint, database, or email service
 }
 
-export function ContactFormCorredora() {
+export function ContactFormInvestment() {
   return (
     <ReCaptchaProvider>
     <div className="min-h-screen">
@@ -90,13 +88,13 @@ export function ContactFormCorredora() {
       >
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col justify-start items-center  text-center px-4 pt-20 lg:pt-44">
-          <h1 className="text-white text-5xl md:text-6xl font-bold mb-4">
-            Contáctanos
+          <h1 className="text-white text-3xl lg:text-5xl md:text-6xl font-bold mb-4">
+            Contact Us
           </h1>
           <p className="text-white lg:text-3xl text-xl  mb-8 font-light">
-            Estamos listos para ofrecerte la mejor solución acorde a{" "}
+            We are ready to offer you the best solution according to{" "}
             <span className="underline decoration-destacado decoration-4 underline-offset-8 font-bold">
-              tus necesidades
+              your needs
             </span>
           </p>
         </div>
@@ -109,14 +107,14 @@ export function ContactFormCorredora() {
               <div className="space-y-6 lg:mt-12 mt-4">
                 <div>
                   <p className="text-destacado text-sm font-bold uppercase tracking-wide mb-2">
-                    ESTAMOS AQUÍ PARA AYUDARTE
+                    WE ARE HERE TO HELP YOU
                   </p>
                   <h2 className="text-primary lg:text-4xl text-2xl font-light mb-2">
-                    ¿Necesitas más información?
+                    Need more information?
                   </h2>
                   <p className="text-gray-600 text-xl lg:text-4xl font-normal ">
-                    No dudes en
-                    <span className="font-bold"> escribirnos</span>
+                    Don't hesitate to
+                    <span className="font-bold"> contact us</span>
                   </p>
                 </div>
 
@@ -137,7 +135,7 @@ export function ContactFormCorredora() {
                     </svg>
                     <span className="text-gray-700">
                       Email<br></br>{" "}
-                      <span className="font-bold">corretaje@frgroup.cl</span>
+                      <span className="font-bold">contacto@frgroup.cl</span>
                     </span>
                   </div>
 
@@ -156,8 +154,8 @@ export function ContactFormCorredora() {
                       />
                     </svg>
                     <span className="text-gray-700">
-                      Telefono: <br></br>
-                      <span className="font-bold">+56 9 5705 2983</span>
+                      Phone: <br></br>
+                      <span className="font-bold">+569 123 44 56</span>
                     </span>
                   </div>
                 </div>
@@ -172,13 +170,13 @@ export function ContactFormCorredora() {
                       htmlFor="name"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre*
+                      Name*
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="Inserta tu nombre"
+                      placeholder="Jane Smith"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -188,17 +186,16 @@ export function ContactFormCorredora() {
                       htmlFor="company"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Nombre de la empresa
+                      Company Name
                     </label>
                     <input
                       type="text"
                       id="company"
                       name="company"
-                      placeholder="Ej: Falabella"
+                      placeholder="E.g.: Falabella"
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
-
                   {/* Email Field */}
                   <div>
                     <label
@@ -211,45 +208,10 @@ export function ContactFormCorredora() {
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="Ej: juan.rodriguez@falabella.com"
+                      placeholder="janesmith@gmail.com"
                       required
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
-                  </div>
-
-                  {/* Motive Field */}
-                  <div>
-                    <label
-                      htmlFor="motive"
-                      className="block text-gray-800 font-bold mb-2"
-                    >
-                      Motivo del contacto
-                    </label>
-                    <select
-                      id="motive"
-                      name="motive"
-                      required
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      <option value="">Seleccionar...</option>
-                      <option value="Consulta sobre Productos/Servicios">
-                        Consulta sobre Productos/Servicios
-                      </option>
-                      <option value="Consulta sobre Producto/Servicio Contratado">
-                        Consulta sobre Producto/Servicio Contratado
-                      </option>
-                      <option
-                        value="Solicitud de Cotización
-"
-                      >
-                        Solicitud de Cotización
-                      </option>
-                      <option value="Solicitud sobre Producto/Servicio Contratado">
-                        Solicitud sobre Producto/Servicio Contratado
-                      </option>
-                      <option value="Reclamo">Reclamo</option>
-                      <option value="Felicitaciones">Felicitaciones</option>
-                    </select>
                   </div>
 
                   {/* Phone Field */}
@@ -258,7 +220,7 @@ export function ContactFormCorredora() {
                       htmlFor="phone"
                       className="block text-primarui font-bold mb-2"
                     >
-                      Teléfono
+                      Phone*
                     </label>
                     <input
                       type="tel"
@@ -276,13 +238,13 @@ export function ContactFormCorredora() {
                       htmlFor="message"
                       className="block text-gray-800 font-bold mb-2"
                     >
-                      Mensaje
+                      Message
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={4}
-                      placeholder="Escribe tu mensaje..."
+                      placeholder="Write your message..."
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                     />
                   </div>
@@ -295,7 +257,7 @@ export function ContactFormCorredora() {
                       size="lg"
                       className={`cursor-pointer text-lg bg-destacado text-white p-0 my-2 btn-light  lg:text-base py-6 pl-8 pr-0 rounded-full font-bold hover:text-white  w-fit`}
                     >
-                      Enviar Mensaje
+                      Send Message
                     </Button>
                   </div>
                 </ReCaptchaFormWrapper>

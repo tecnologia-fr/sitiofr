@@ -22,40 +22,68 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-// Sample menu data - you can customize this
+// English menu data for Insurance Brokerage
 const menuItems: MenuItem[] = [
   {
-    title: "Inicio",
-    href: "/",
-    description: "Inicio",
+    title: "Home",
+    href: "/en",
+    description: "Home",
   },
   {
-    title: "Corredores de Seguros",
-    href: "/corredores-de-seguros",
+    title: "Insurance Brokerage",
+    href: "/en/insurance-brokerage",
     description: "Learn more about our company",
   },
   {
-    title: "Investment",
-    href: "/investment",
-    description: "Learn more about our company",
-  },
-  {
-    title: "Activos",
-    href: "/administracion-de-activos",
-  },
-  {
-    title: "Idioma",
+    title: "Products and Services",
     href: "#",
+    description: "Learn more about our company",
     children: [
       {
-        title: "Inglés",
-        href: "/en",
+        title: "Agricultural Insurance",
+        href: "/en/insurance-brokerage/agricultural-insurance",
       },
       {
-        title: "Español",
-        href: "/",
+        title: "Mercado Público",
+        href: "/en/insurance-brokerage/mercado-publico",
+      },
+      {
+        title: "Life and Health",
+        href: "/en/insurance-brokerage/life-and-health",
+      },
+      {
+        title: "Mobility and Electromobility",
+        href: "/en/insurance-brokerage/mobility-and-electromobility",
+      },
+      {
+        title: "Financial Risk",
+        href: "/en/insurance-brokerage/financial-risk",
+      },
+      {
+        title: "Affinity Insurance",
+        href: "/en/insurance-brokerage/affinity-insurance",
+      },
+      {
+        title: "Claims Management",
+        href: "/en/insurance-brokerage/claims-management",
+      },
+      {
+        title: "Risk Consulting and Analysis",
+        href: "/en/insurance-brokerage/risk-and-consulting",
       },
     ],
+  },
+  {
+    title: "About Us",
+    href: "/en/insurance-brokerage/about-us",
+  },
+  {
+    title: "Join Our Team",
+    href: "/en/insurance-brokerage/join-our-team",
+  },
+  {
+    title: "Contact",
+    href: "/en/insurance-brokerage/contact",
   },
 ];
 
@@ -134,7 +162,7 @@ function MobileMenu({ items = menuItems }: NavigationMenuProps) {
       {isOpen && (
         <div
           className={
-            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-[100vh]"
+            "absolute top-full left-0 right-0  bg-primario w-full max-w-full! p-5 h-screen"
           }
         >
           <nav className="text-white">
@@ -208,8 +236,8 @@ export function MainNavigationMenu({
                   <NavigationMenuTrigger className="text-white hover:text-destacado bg-transparent hover:bg-transparent focus:bg-transparent  ">
                     {item.title}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="md:!left-0">
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-2 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                  <NavigationMenuContent className="md:left-0!">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-8 bg-secundario  rounded-lg  bg-opacity-0! border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}

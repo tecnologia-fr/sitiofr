@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "@/app/globals.css";
-import { ResponsiveNavigationMenu } from "@/components/NavigationMenu";
-import Footer from "@/components/Footer";
+import { ResponsiveNavigationMenu as ResponsiveNavigationMenuEN } from "@/components/NavigationMenuEN";
+import Footer from "@/components/Footer/index-en";
 import Image from "next/image";
 import Link from "next/link";
 import GTM from "@/config/tracking/gtm";
@@ -24,14 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className={`${lato.className}  `}>
         <Suspense fallback={<div>Loading...</div>}>
           <GTM />
         </Suspense>
         <header className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16">
           <nav className="container mx-auto px-4 py-4">
-            <Link href="/">
+            <Link href="/en">
               <Image
                 src="/icons/logo-frgroup.png"
                 alt="FRGroup"
@@ -40,7 +40,7 @@ export default function RootLayout({
                 className="w-24  absolute top-2 left-4 m-0 p-0"
               />
             </Link>
-            <ResponsiveNavigationMenu />
+            <ResponsiveNavigationMenuEN />
           </nav>
         </header>
         {children}

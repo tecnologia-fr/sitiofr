@@ -25,34 +25,34 @@ interface MenuItem {
 // Sample menu data - you can customize this
 const menuItems: MenuItem[] = [
   {
-    title: "Inicio",
-    href: "/",
-    description: "Inicio",
+    title: "Home",
+    href: "/en",
+    description: "Home",
   },
   {
-    title: "Corredores de Seguros",
-    href: "/corredores-de-seguros",
+    title: "Insurance Brokerage",
+    href: "/en/insurance-brokerage",
     description: "Learn more about our company",
   },
   {
     title: "Investment",
-    href: "/investment",
+    href: "/en/investment",
     description: "Learn more about our company",
   },
   {
-    title: "Activos",
+    title: "Assets",
     href: "/administracion-de-activos",
   },
   {
-    title: "Idioma",
+    title: "Language",
     href: "#",
     children: [
       {
-        title: "Inglés",
+        title: "English",
         href: "/en",
       },
       {
-        title: "Español",
+        title: "Spanish",
         href: "/",
       },
     ],

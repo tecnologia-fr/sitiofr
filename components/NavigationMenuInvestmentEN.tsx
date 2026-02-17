@@ -22,40 +22,42 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-// Sample menu data - you can customize this
+// English menu data
 const menuItems: MenuItem[] = [
   {
-    title: "Inicio",
-    href: "/",
-    description: "Inicio",
-  },
-  {
-    title: "Corredores de Seguros",
-    href: "/corredores-de-seguros",
-    description: "Learn more about our company",
+    title: "Home",
+    href: "/en",
+    description: "Home",
   },
   {
     title: "Investment",
-    href: "/investment",
-    description: "Learn more about our company",
+    href: "/en/investment",
   },
   {
-    title: "Activos",
-    href: "/administracion-de-activos",
-  },
-  {
-    title: "Idioma",
+    title: "Products and Services",
     href: "#",
     children: [
       {
-        title: "Inglés",
-        href: "/en",
+        title: "Financial Consulting",
+        href: "/en/investment/financial-consulting",
       },
       {
-        title: "Español",
-        href: "/",
+        title: "Debt Restructuring",
+        href: "/en/investment/debt-restructuring",
+      },
+      {
+        title: "Financing",
+        href: "/en/investment/financing",
       },
     ],
+  },
+  {
+    title: "About Us",
+    href: "/en/investment/about-us",
+  },
+  {
+    title: "Contact",
+    href: "/en/investment/contact",
   },
 ];
 
@@ -74,7 +76,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-destacado hover:text-white text-white text-3xl ",
-            className,
+            className
           )}
           {...props}
         >
@@ -100,7 +102,7 @@ interface NavigationMenuProps {
 function MobileMenu({ items = menuItems }: NavigationMenuProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
-    new Set(),
+    new Set()
   );
 
   const toggleExpanded = (itemTitle: string) => {
@@ -134,7 +136,7 @@ function MobileMenu({ items = menuItems }: NavigationMenuProps) {
       {isOpen && (
         <div
           className={
-            "absolute top-full left-0 right-0  bg-primario w-full !max-w-full p-5 h-[100vh]"
+            "absolute top-full left-0 right-0  bg-primario w-full max-w-full! p-5 h-screen"
           }
         >
           <nav className="text-white">
@@ -208,8 +210,8 @@ export function MainNavigationMenu({
                   <NavigationMenuTrigger className="text-white hover:text-destacado bg-transparent hover:bg-transparent focus:bg-transparent  ">
                     {item.title}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="md:!left-0">
-                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-2 bg-secundario  rounded-lg  !bg-opacity-0 border-0">
+                  <NavigationMenuContent className="md:left-0!">
+                    <ul className="grid  p-4 m-0  w-max grid-flow-col grid-rows-3 bg-secundario  rounded-lg  bg-opacity-0! border-0">
                       {item.children.map((child, childIndex) => (
                         <ListItem
                           key={childIndex}
