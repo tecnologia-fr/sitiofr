@@ -40,8 +40,8 @@ const menuItems: MenuItem[] = [
     description: "Learn more about our company",
     children: [
       {
-        title: "Corporate Services",
-        href: "/en/insurance-brokerage/corporate-services",
+        title: "Corporate Business",
+        href: "/en/insurance-brokerage/corporate-business",
       },
       {
         title: "Public Procurement",
@@ -56,12 +56,12 @@ const menuItems: MenuItem[] = [
         href: "/en/insurance-brokerage/mobility-and-electromobility",
       },
       {
-        title: "Financial Risk",
-        href: "/en/insurance-brokerage/financial-risk",
+        title: "Financial Risks",
+        href: "/en/insurance-brokerage/financial-risks",
       },
       {
         title: "Affinity Groups",
-        href: "/en/insurance-brokerage/affinity-insurance",
+        href: "/en/insurance-brokerage/affinity-groups",
       },
       {
         title: "Claims Management",
