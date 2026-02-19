@@ -37,7 +37,7 @@ const FooterInvestment: React.FC = () => {
                   <p className="text-sm mb-1">
                     La Concepción 191, Piso 8, Of. 801, Providencia{" "}
                   </p>
-                  <p className="text-sm">Tel.: 2 2482 1500 </p>
+                  <p className="text-sm">Tel.: +56 2 2482 1500 </p>
                 </div>
 
                 <div>
@@ -52,7 +52,7 @@ const FooterInvestment: React.FC = () => {
                 <div>
                   <h4 className="font-bold text-lg mb-2">Antofagasta</h4>
                   <p className="text-sm mb-1">Uribe 636, Piso 8, Of. 802</p>
-                  <p className="text-sm">Tel.: 55 2466 220</p>
+                  <p className="text-sm">Tel.: +56 55 2466 220</p>
                 </div>
 
                 <div>
@@ -60,7 +60,7 @@ const FooterInvestment: React.FC = () => {
                   <p className="text-sm mb-1">
                     Av. Arturo Prat 199, Torre B, Piso 9, Of. 905
                   </p>
-                  <p className="text-sm">Tel.: 41 3800 080</p>
+                  <p className="text-sm">Tel.: +56 41 3800 080</p>
                 </div>
               </div>
             </div>
