@@ -55,11 +55,9 @@ export function ReCaptchaProvider({ children }: ReCaptchaProviderProps) {
     script.defer = true;
     
     script.onload = () => {
-      if (window.grecaptcha) {
-        window.grecaptcha.ready(() => {
-          setIsReady(true);
-        });
-      }
+      window.grecaptcha?.ready(() => {
+        setIsReady(true);
+      });
     };
 
     script.onerror = () => {
@@ -67,16 +65,6 @@ export function ReCaptchaProvider({ children }: ReCaptchaProviderProps) {
     };
 
     document.head.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector(
-        `script[src^="https://www.google.com/recaptcha/api.js"]`
-      );
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
   }, [siteKey]);
 
   const executeRecaptcha = async (action: string): Promise<string> => {
@@ -84,17 +72,18 @@ export function ReCaptchaProvider({ children }: ReCaptchaProviderProps) {
       throw new Error("NEXT_PUBLIC_RECAPTCHA_SITE_KEY is not defined");
     }
 
-    if (!isReady) {
-      throw new Error("reCAPTCHA is not ready yet");
-    }
-
-    try {
-      const token = await window.grecaptcha.execute(siteKey, { action });
-      return token;
-    } catch (error) {
-      console.error("Error executing reCAPTCHA:", error);
-      throw error;
-    }
+    return new Promise((resolve, reject) => {
+      window.grecaptcha.ready(async () => {
+        try {
+          const token = await window.grecaptcha.execute(siteKey, { action });
+          setIsReady(true);
+          resolve(token);
+        } catch (error) {
+          console.error("Error executing reCAPTCHA:", error);
+          reject(error);
+        }
+      });
+    });
   };
 
   return (

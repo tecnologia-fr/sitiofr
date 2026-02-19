@@ -14,7 +14,7 @@ export function ReCaptchaFormWrapper({
   action,
   className,
 }: ReCaptchaFormWrapperProps) {
-  const { executeRecaptcha, isReady } = useReCaptcha();
+  const { executeRecaptcha } = useReCaptcha();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -22,11 +22,6 @@ export function ReCaptchaFormWrapper({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
-    if (!isReady) {
-      setError("reCAPTCHA is not ready. Please try again.");
-      return;
-    }
-
     if (isSubmitting) {
       return;
     }
