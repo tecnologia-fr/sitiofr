@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
                   <p className="text-sm mb-1">
                     La Concepción 141, Piso 8, Of. 801, Providencia
                   </p>
-                  <p className="text-sm">call us: 2 2482 1500 </p>
+                  <p className="text-sm">call us: +56 2 2482 0000 </p>
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-2">Santiago (Branch)</h4>
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
                 <div>
                   <h4 className="font-bold text-lg mb-2">Viña del Mar</h4>
                   <p className="text-sm mb-1">7 Norte 645, Piso 9, Of. 914</p>
-                  <p className="text-sm">call us: 32 2235 320 / 32 2353 010</p>
+                  <p className="text-sm">call us: +56 32 2353 010</p>
                 </div>
               </div>
 
