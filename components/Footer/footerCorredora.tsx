@@ -28,7 +28,7 @@ const FooterCorredora: React.FC = () => {
                   <p className="text-sm mb-1">
                     La Concepción 141, Piso 8, Of. 801, Providencia
                   </p>
-                  <p className="text-sm">Tel.: +56 2 2482 0000 </p>
+                  <p className="text-sm">Tel.: +56 2 2484 0000 </p>
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-2">
