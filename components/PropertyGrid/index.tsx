@@ -146,7 +146,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
                     }}
                   >
                     <CarouselContent className="-ml-0">
-                      {property.imagesCollection.items.map((image, index) => (
+                      {property.imagesCollection.items.filter((image) => image !== null && image?.url).map((image, index) => (
                         <CarouselItem key={index} className="pl-0 w-full h-64">
                           <Link
                             href={`/administracion-de-activos/${property.transactionType.toLowerCase()}/${property.propertyType.toLowerCase()}/${
@@ -158,7 +158,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
                             }/${property.propertyId}`}
                           >
                             <ImageComponent
-                              src={image.url}
+                              src={image.url ?? ""}
                               alt={`${property.address} - Imagen ${index + 1}`}
                               className="w-full h-full object-cover"
                               width={400}
@@ -186,7 +186,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({
                     }/${property.propertyId}`}
                   >
                     <ImageComponent
-                      src={property.imagesCollection.items[0].url}
+                      src={property.imagesCollection.items[0]?.url ?? ""}
                       alt={property.address}
                       className="w-full h-full object-cover"
                       width={400}
