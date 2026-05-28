@@ -153,8 +153,8 @@ const Card = (props: CardT) => {
           <Link href={props.btnLink}>
             {props.image && (
               <ImageComponent
-                src={props.image.url}
-                alt={props.image.description}
+                src={props.image?.url ?? ""}
+                alt={props.image?.description ?? ""}
                 className={`  ${
                   props.isImageFull
                     ? "object-cover w-sm h-64"
