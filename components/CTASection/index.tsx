@@ -39,8 +39,8 @@ const CTASection = (props: CTASectionT) => {
         {props.isHero
           ? props.image && (
               <ImageComponent
-                src={props.image.url}
-                alt={props.image.description}
+                src={props.image?.url ?? ""}
+                alt={props.image?.description ?? ""}
                 className={imageStyle}
                 width={450}
                 height={450}
@@ -50,8 +50,8 @@ const CTASection = (props: CTASectionT) => {
             )
           : props.image && (
               <ImageComponent
-                src={props.image.url}
-                alt={props.image.description}
+                src={props.image?.url ?? ""}
+                alt={props.image?.description ?? ""}
                 className={imageStyle}
                 width={450}
                 height={450}
