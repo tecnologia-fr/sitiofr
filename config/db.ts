@@ -27,17 +27,20 @@ const fetchPageComponents = async (pathname: string) => {
   }
   const pageComponents = await res.json();
 
-  const componentsToFetch =
-    pageComponents.data.pageCollection.items[0].componentsCollection.items.map(
-      (item: { sys: { id: string }; __typename: string }) => {
-        return {
-          id: item.sys?.id,
-          __typename: item.__typename,
-        };
-      }
-    );
+const page = pageComponents.data.pageCollection.items[0];
 
-  return componentsToFetch;
+if (!page || !page.componentsCollection) {
+  return [];
+}
+
+const componentsToFetch = page.componentsCollection.items.map(
+  (item: { sys: { id: string }; __typename: string }) => ({
+    id: item.sys?.id,
+    __typename: item.__typename,
+  })
+);
+
+return componentsToFetch;
 };
 
 const fetchMetaTagsFromContentful = async (pathname: string) => {
