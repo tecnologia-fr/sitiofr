@@ -15,32 +15,33 @@ import { PropertyT } from "@/typings";
 
 const fetchPageComponents = async (pathname: string) => {
   const query = GQL_PAGE_COMPONENTS_QUERY();
+  const variables = { pathname };
 
-  const variables = {
-    pathname: pathname,
-  };
+  console.log("fetchPageComponents called with:", pathname);
+
   const res = await fetchContentful(query, variables);
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
+    console.log("fetch failed:", res.status, res.statusText);
     throw new Error("Failed to fetch page components");
   }
+
   const pageComponents = await res.json();
+  console.log("pageComponents:", JSON.stringify(pageComponents));
 
-const page = pageComponents.data.pageCollection.items[0];
+  const page = pageComponents.data.pageCollection.items[0];
 
-if (!page || !page.componentsCollection) {
-  return [];
-}
+  if (!page || !page.componentsCollection) {
+    console.log("page not found or no components");
+    return [];
+  }
 
-const componentsToFetch = page.componentsCollection.items.map(
-  (item: { sys: { id: string }; __typename: string }) => ({
-    id: item.sys?.id,
-    __typename: item.__typename,
-  })
-);
-
-return componentsToFetch;
+  return page.componentsCollection.items.map(
+    (item: { sys: { id: string }; __typename: string }) => ({
+      id: item.sys?.id,
+      __typename: item.__typename,
+    })
+  );
 };
 
 const fetchMetaTagsFromContentful = async (pathname: string) => {
