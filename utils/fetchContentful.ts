@@ -15,6 +15,6 @@ export const fetchContentful = async (
     method: "POST",
     headers: headerConfig,
     body: JSON.stringify({ query, variables }),
-    cache: "no-store",
+    next: { revalidate: 3600 },
   });
 };
