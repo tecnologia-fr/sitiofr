@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -22,7 +23,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-// Sample menu data - you can customize this
+// Menu items - opciones visibles según lo solicitado
 const menuItems: MenuItem[] = [
   {
     title: "Inicio",
@@ -35,32 +36,8 @@ const menuItems: MenuItem[] = [
     description: "Learn more about our company",
   },
   {
-    title: "Publicar para Arriendo",
-    href: "/administracion-de-activos/propietario-arriendo",
-    description: "Learn more about our company",
-  },
-
-  {
     title: "Publicar para Venta",
     href: "/administracion-de-activos/propietario-venta",
-  },
-  {
-    title: "Usuarios",
-    href: "#",
-    children: [
-      {
-        title: "Portal Propietario",
-        href: "https://btg-8420.my.salesforce-sites.com/propietario",
-      },
-      {
-        title: "Portal Arrendatario",
-        href: "https://btg-8420.my.salesforce-sites.com/arrendatario",
-      },
-    ],
-  },
-  {
-    title: "Conócenos",
-    href: "/administracion-de-activos/conocenos",
   },
 ];
 
