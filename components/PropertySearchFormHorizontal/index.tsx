@@ -204,10 +204,6 @@ const PropertySearchFormHorizontal = () => {
         <h1 className="text-white text-5xl font-light mb-12">
           Buscar propiedades en{" "}
           <span className="font-bold underline decoration-destacado">
-            arriendo
-          </span>{" "}
-          o{" "}
-          <span className="font-bold underline decoration-destacado">
             venta
           </span>
         </h1>

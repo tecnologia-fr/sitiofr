@@ -137,7 +137,7 @@ export function ContactFormCorredora() {
                     </svg>
                     <span className="text-gray-700">
                       Email<br></br>{" "}
-                      <span className="font-bold">corretaje@frgroup.cl</span>
+                      <span className="font-bold">ventas@frgroup.cl</span>
                     </span>
                   </div>
 
@@ -157,7 +157,7 @@ export function ContactFormCorredora() {
                     </svg>
                     <span className="text-gray-700">
                       Telefono: <br></br>
-                      <span className="font-bold">+56 9 5705 2983</span>
+                      <span className="font-bold">+56 9 8837 4135</span>
                     </span>
                   </div>
                 </div>
